@@ -63,10 +63,13 @@ html, body {
 /* <---DROPDOWN MENU -----------> */
 .dropdown {
     position: absolute;
-    top: calc(100% + 0.5rem);
+    top: calc(100% - 0.5rem);
+    /* top: 12%; */
     left: 50%;
     transform: translateX(-50%);
-    width: 100vw;
+    width: 90vw;
+      min-height: 60vh;
+
     max-width: 1400px;
     background-color: #fff;
     padding: 4rem 6rem;
@@ -89,7 +92,7 @@ html, body {
     left: 0;
     right: 0;
     height: 0.5rem; 
-    background: transparent;
+    background: #ff0000;
 }
 
 /* Dropdown Inner Layout ======> */
@@ -99,6 +102,7 @@ html, body {
     gap: 6rem;
     list-style: none;
     width: 85%;
+    border: 2px solid red;
 }
 
 .drop-down_items {
