@@ -92,7 +92,7 @@ html, body {
     left: 0;
     right: 0;
     height: 0.5rem; 
-    background: #ff0000;
+    /* background: #ff0000; */
 }
 
 /* Dropdown Inner Layout ======> */
@@ -102,7 +102,7 @@ html, body {
     gap: 6rem;
     list-style: none;
     width: 85%;
-    border: 2px solid red;
+    /* border: 2px solid red; */
 }
 
 .drop-down_items {
