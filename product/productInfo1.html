@@ -1,0 +1,964 @@
+<div class="dripspaceProduct-component">
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Cormorant+Garamond:ital,wght@0,300;0,400;0,500;0,600;0,700;1,300;1,400;1,500&family=Manrope:wght@200;300;400;500;600;700;800&display=swap" rel="stylesheet">
+    
+    <style>
+        :root {
+            --ds-bg-primary: #FDFBF8;
+            --ds-bg-white: #FFFFFF;
+            --ds-text-primary: #38302C;
+            --ds-text-secondary: #8A7F79;
+            --ds-accent-gold: #AE9A7F;
+            --ds-accent-gold-light: #D4C4B0;
+            --ds-border-light: #EFEBE8;
+            --ds-shadow-subtle: rgba(56, 48, 44, 0.08);
+            --ds-shadow-medium: rgba(56, 48, 44, 0.12);
+            --ds-gradient-gold: linear-gradient(135deg, #AE9A7F 0%, #8A7F79 100%);
+            --ds-border-radius: 16px;
+            --ds-border-radius-sm: 12px;
+            --ds-transition: all 0.3s cubic-bezier(0.4, 0, 0.2, 1);
+            --ds-font-brand: 'Cormorant Garamond', serif;
+            --ds-font-ui: 'Manrope', sans-serif;
+        }
+
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+        }
+
+        .dripspaceProduct-component {
+            font-family: var(--ds-font-ui);
+            background: var(--ds-bg-primary);
+            color: var(--ds-text-primary);
+            line-height: 1.6;
+            min-height: 100vh;
+        }
+
+        /* Container */
+        .dripspaceProduct-container {
+            max-width: 1400px;
+            margin: 0 auto;
+            padding: 2rem 1rem;
+        }
+
+        /* Breadcrumb */
+        .dripspaceProduct-breadcrumb {
+            display: flex;
+            align-items: center;
+            gap: 0.5rem;
+            margin-bottom: 2rem;
+            font-size: 0.9rem;
+            color: var(--ds-text-secondary);
+        }
+
+        .dripspaceProduct-breadcrumb a {
+            color: var(--ds-text-secondary);
+            text-decoration: none;
+            transition: var(--ds-transition);
+        }
+
+        .dripspaceProduct-breadcrumb a:hover {
+            color: var(--ds-accent-gold);
+        }
+
+        .dripspaceProduct-breadcrumb-separator {
+            color: var(--ds-accent-gold);
+        }
+
+        /* Main Product Section */
+        .dripspaceProduct-main {
+            display: grid;
+            grid-template-columns: 1fr 1fr;
+            gap: 4rem;
+            margin-bottom: 4rem;
+        }
+
+        /* Product Images */
+        .dripspaceProduct-images {
+            position: sticky;
+            top: 2rem;
+            height: fit-content;
+        }
+
+        .dripspaceProduct-main-image {
+            width: 100%;
+            aspect-ratio: 3/4;
+            object-fit: cover;
+            border-radius: var(--ds-border-radius);
+            box-shadow: 0 20px 60px var(--ds-shadow-medium);
+            margin-bottom: 1rem;
+        }
+
+        .dripspaceProduct-thumbnails {
+            display: grid;
+            grid-template-columns: repeat(4, 1fr);
+            gap: 0.75rem;
+        }
+
+        .dripspaceProduct-thumbnail {
+            width: 100%;
+            aspect-ratio: 1;
+            object-fit: cover;
+            border-radius: 8px;
+            cursor: pointer;
+            transition: var(--ds-transition);
+            border: 2px solid transparent;
+        }
+
+        .dripspaceProduct-thumbnail:hover,
+        .dripspaceProduct-thumbnail.active {
+            border-color: var(--ds-accent-gold);
+            transform: scale(1.05);
+        }
+
+        /* Product Info */
+        .dripspaceProduct-info {
+            padding: 1rem 0;
+        }
+
+        .dripspaceProduct-title {
+            font-family: var(--ds-font-brand);
+            font-size: 2.5rem;
+            font-weight: 500;
+            color: var(--ds-text-primary);
+            margin-bottom: 0.5rem;
+        }
+
+        .dripspaceProduct-subtitle {
+            font-size: 1.1rem;
+            color: var(--ds-text-secondary);
+            margin-bottom: 2rem;
+            font-weight: 300;
+        }
+
+        .dripspaceProduct-price {
+            font-size: 1.8rem;
+            font-weight: 600;
+            color: var(--ds-text-primary);
+            margin-bottom: 2rem;
+        }
+
+        .dripspaceProduct-price-original {
+            text-decoration: line-through;
+            color: var(--ds-text-secondary);
+            font-size: 1.3rem;
+            margin-right: 1rem;
+        }
+
+        .dripspaceProduct-price-sale {
+            color: #E53E3E;
+        }
+
+        /* Rating */
+        .dripspaceProduct-rating {
+            display: flex;
+            align-items: center;
+            gap: 0.5rem;
+            margin-bottom: 2rem;
+        }
+
+        .dripspaceProduct-stars {
+            display: flex;
+            gap: 0.25rem;
+        }
+
+        .dripspaceProduct-star {
+            width: 16px;
+            height: 16px;
+            fill: var(--ds-accent-gold);
+        }
+
+        .dripspaceProduct-star.empty {
+            fill: var(--ds-border-light);
+        }
+
+        .dripspaceProduct-reviews-link {
+            color: var(--ds-accent-gold);
+            text-decoration: none;
+            font-weight: 500;
+            transition: var(--ds-transition);
+        }
+
+        .dripspaceProduct-reviews-link:hover {
+            text-decoration: underline;
+        }
+
+        /* Color Selection */
+        .dripspaceProduct-section {
+            margin-bottom: 2.5rem;
+        }
+
+        .dripspaceProduct-section-title {
+            font-weight: 600;
+            color: var(--ds-text-primary);
+            margin-bottom: 1rem;
+            font-size: 1.1rem;
+        }
+
+        .dripspaceProduct-color-options {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(80px, 1fr));
+            gap: 1rem;
+        }
+
+        .dripspaceProduct-color-option {
+            text-align: center;
+            cursor: pointer;
+            transition: var(--ds-transition);
+        }
+
+        .dripspaceProduct-color-option:hover {
+            transform: translateY(-2px);
+        }
+
+        .dripspaceProduct-color-image {
+            width: 100%;
+            aspect-ratio: 1;
+            object-fit: cover;
+            border-radius: var(--ds-border-radius-sm);
+            margin-bottom: 0.5rem;
+            border: 2px solid var(--ds-border-light);
+            transition: var(--ds-transition);
+        }
+
+        .dripspaceProduct-color-option.active .dripspaceProduct-color-image {
+            border-color: var(--ds-accent-gold);
+        }
+
+        .dripspaceProduct-color-name {
+            font-size: 0.9rem;
+            color: var(--ds-text-secondary);
+        }
+
+        /* Size Selection */
+        .dripspaceProduct-size-options {
+            display: flex;
+            flex-wrap: wrap;
+            gap: 0.75rem;
+            margin-bottom: 1rem;
+        }
+
+        .dripspaceProduct-size-btn {
+            padding: 0.75rem 1.25rem;
+            border: 2px solid var(--ds-border-light);
+            background: var(--ds-bg-white);
+            border-radius: var(--ds-border-radius-sm);
+            font-size: 0.9rem;
+            font-weight: 500;
+            cursor: pointer;
+            transition: var(--ds-transition);
+            color: var(--ds-text-primary);
+        }
+
+        .dripspaceProduct-size-btn:hover {
+            border-color: var(--ds-accent-gold);
+        }
+
+        .dripspaceProduct-size-btn.selected {
+            background: var(--ds-accent-gold);
+            border-color: var(--ds-accent-gold);
+            color: white;
+        }
+
+        .dripspaceProduct-size-btn:disabled {
+            opacity: 0.5;
+            cursor: not-allowed;
+        }
+
+        .dripspaceProduct-size-guide {
+            color: var(--ds-accent-gold);
+            text-decoration: none;
+            font-size: 0.9rem;
+            font-weight: 500;
+            transition: var(--ds-transition);
+        }
+
+        .dripspaceProduct-size-guide:hover {
+            text-decoration: underline;
+        }
+
+        /* Add to Cart */
+        .dripspaceProduct-add-section {
+            margin: 3rem 0;
+        }
+
+        .dripspaceProduct-add-btn {
+            width: 100%;
+            padding: 1.25rem 2rem;
+            background: var(--ds-gradient-gold);
+            color: white;
+            border: none;
+            border-radius: var(--ds-border-radius-sm);
+            font-size: 1.1rem;
+            font-weight: 600;
+            cursor: pointer;
+            transition: var(--ds-transition);
+            position: relative;
+            overflow: hidden;
+            margin-bottom: 1rem;
+        }
+
+        .dripspaceProduct-add-btn::before {
+            content: '';
+            position: absolute;
+            top: 0;
+            left: -100%;
+            width: 100%;
+            height: 100%;
+            background: linear-gradient(90deg, transparent, rgba(255, 255, 255, 0.2), transparent);
+            transition: left 0.5s;
+        }
+
+        .dripspaceProduct-add-btn:hover::before {
+            left: 100%;
+        }
+
+        .dripspaceProduct-add-btn:hover {
+            transform: translateY(-2px);
+            box-shadow: 0 12px 30px rgba(174, 154, 127, 0.3);
+        }
+
+        .dripspaceProduct-add-btn:disabled {
+            opacity: 0.6;
+            cursor: not-allowed;
+            transform: none;
+        }
+
+        .dripspaceProduct-stock-info {
+            text-align: center;
+            color: var(--ds-text-secondary);
+            font-size: 0.9rem;
+        }
+
+        /* Expandable Sections */
+        .dripspaceProduct-expandable {
+            border-top: 1px solid var(--ds-border-light);
+        }
+
+        .dripspaceProduct-expandable-item {
+            border-bottom: 1px solid var(--ds-border-light);
+        }
+
+        .dripspaceProduct-expandable-header {
+            display: flex;
+            align-items: center;
+            justify-content: space-between;
+            padding: 1.5rem 0;
+            cursor: pointer;
+            transition: var(--ds-transition);
+        }
+
+        .dripspaceProduct-expandable-header:hover {
+            color: var(--ds-accent-gold);
+        }
+
+        .dripspaceProduct-expandable-title {
+            font-weight: 600;
+            font-size: 1.1rem;
+        }
+
+        .dripspaceProduct-expandable-icon {
+            width: 24px;
+            height: 24px;
+            transition: transform 0.3s ease;
+            color: var(--ds-accent-gold);
+        }
+
+        .dripspaceProduct-expandable-icon.rotated {
+            transform: rotate(45deg);
+        }
+
+        .dripspaceProduct-expandable-content {
+            max-height: 0;
+            overflow: hidden;
+            transition: max-height 0.3s ease;
+        }
+
+        .dripspaceProduct-expandable-content.active {
+            max-height: 500px;
+            padding-bottom: 1.5rem;
+        }
+
+        .dripspaceProduct-expandable-text {
+            color: var(--ds-text-secondary);
+            line-height: 1.7;
+        }
+
+        /* Related Products */
+        .dripspaceProduct-related {
+            margin-top: 4rem;
+        }
+
+        .dripspaceProduct-related-title {
+            font-family: var(--ds-font-brand);
+            font-size: 2rem;
+            font-weight: 500;
+            color: var(--ds-text-primary);
+            text-align: center;
+            margin-bottom: 3rem;
+        }
+
+        .dripspaceProduct-related-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(280px, 1fr));
+            gap: 2rem;
+        }
+
+        .dripspaceProduct-related-item {
+            background: var(--ds-bg-white);
+            border-radius: var(--ds-border-radius);
+            overflow: hidden;
+            transition: var(--ds-transition);
+            box-shadow: 0 10px 30px var(--ds-shadow-subtle);
+        }
+
+        .dripspaceProduct-related-item:hover {
+            transform: translateY(-8px);
+            box-shadow: 0 20px 60px var(--ds-shadow-medium);
+        }
+
+        .dripspaceProduct-related-image {
+            width: 100%;
+            aspect-ratio: 3/4;
+            object-fit: cover;
+        }
+
+        .dripspaceProduct-related-info {
+            padding: 1.5rem;
+        }
+
+        .dripspaceProduct-related-name {
+            font-weight: 600;
+            color: var(--ds-text-primary);
+            margin-bottom: 0.5rem;
+        }
+
+        .dripspaceProduct-related-price {
+            font-weight: 600;
+            color: var(--ds-accent-gold);
+        }
+
+        /* Mobile Responsive */
+        @media (max-width: 1024px) {
+            .dripspaceProduct-main {
+                grid-template-columns: 1fr;
+                gap: 2rem;
+            }
+
+            .dripspaceProduct-images {
+                position: static;
+            }
+
+            .dripspaceProduct-title {
+                font-size: 2rem;
+            }
+        }
+
+        @media (max-width: 768px) {
+            .dripspaceProduct-container {
+                padding: 1rem 0.5rem;
+            }
+
+            .dripspaceProduct-breadcrumb {
+                margin-bottom: 1.5rem;
+                overflow-x: auto;
+                white-space: nowrap;
+            }
+
+            .dripspaceProduct-thumbnails {
+                grid-template-columns: repeat(3, 1fr);
+            }
+
+            .dripspaceProduct-color-options {
+                grid-template-columns: repeat(3, 1fr);
+            }
+
+            .dripspaceProduct-size-options {
+                gap: 0.5rem;
+            }
+
+            .dripspaceProduct-size-btn {
+                padding: 0.5rem 1rem;
+                font-size: 0.8rem;
+            }
+
+            .dripspaceProduct-related-grid {
+                grid-template-columns: repeat(auto-fit, minmax(250px, 1fr));
+                gap: 1.5rem;
+            }
+        }
+
+        @media (max-width: 480px) {
+            .dripspaceProduct-title {
+                font-size: 1.8rem;
+            }
+
+            .dripspaceProduct-price {
+                font-size: 1.5rem;
+            }
+
+            .dripspaceProduct-related-grid {
+                grid-template-columns: 1fr;
+            }
+        }
+
+        /* Loading State */
+        .dripspaceProduct-loading {
+            display: none;
+            text-align: center;
+            padding: 1rem;
+        }
+
+        .dripspaceProduct-spinner {
+            width: 20px;
+            height: 20px;
+            border: 2px solid var(--ds-border-light);
+            border-top: 2px solid var(--ds-accent-gold);
+            border-radius: 50%;
+            animation: dripspaceProduct-spin 1s linear infinite;
+            margin: 0 auto;
+        }
+
+        @keyframes dripspaceProduct-spin {
+            0% { transform: rotate(0deg); }
+            100% { transform: rotate(360deg); }
+        }
+
+        /* Success Animation */
+        .dripspaceProduct-success {
+            display: none;
+            background: #38A169;
+            color: white;
+            padding: 1rem;
+            border-radius: var(--ds-border-radius-sm);
+            text-align: center;
+            margin-top: 1rem;
+        }
+
+        /* Accessibility */
+        @media (prefers-reduced-motion: reduce) {
+            *, *::before, *::after {
+                animation-duration: 0.01ms !important;
+                animation-iteration-count: 1 !important;
+                transition-duration: 0.01ms !important;
+            }
+        }
+
+        .dripspaceProduct-add-btn:focus,
+        .dripspaceProduct-size-btn:focus,
+        .dripspaceProduct-color-option:focus,
+        .dripspaceProduct-thumbnail:focus {
+            outline: 2px solid var(--ds-accent-gold);
+            outline-offset: 2px;
+        }
+    </style>
+
+    <div class="dripspaceProduct-container">
+        <!-- Breadcrumb -->
+        <nav class="dripspaceProduct-breadcrumb">
+            <a href="#">Home</a>
+            <span class="dripspaceProduct-breadcrumb-separator">/</span>
+            <a href="#">Clothing</a>
+            <span class="dripspaceProduct-breadcrumb-separator">/</span>
+            <a href="#">Dresses</a>
+            <span class="dripspaceProduct-breadcrumb-separator">/</span>
+            <span>Silk Evening Dress</span>
+        </nav>
+
+        <div class="dripspaceProduct-main">
+            <!-- Product Images -->
+            <div class="dripspaceProduct-images">
+                <img src="https://images.unsplash.com/photo-1515372039744-b8f02a3ae446?w=600&h=800&fit=crop&crop=center" 
+                     alt="Silk Evening Dress - Main View" 
+                     class="dripspaceProduct-main-image" 
+                     id="mainImage">
+                
+                <div class="dripspaceProduct-thumbnails">
+                    <img src="https://images.unsplash.com/photo-1515372039744-b8f02a3ae446?w=100&h=100&fit=crop" 
+                         alt="Main view" 
+                         class="dripspaceProduct-thumbnail active"
+                         onclick="changeImage(this)">
+                    <img src="https://images.unsplash.com/photo-1594223274512-ad4803739b7c?w=100&h=100&fit=crop" 
+                         alt="Side view" 
+                         class="dripspaceProduct-thumbnail"
+                         onclick="changeImage(this)">
+                    <img src="https://images.unsplash.com/photo-1469334031218-e382a71b716b?w=100&h=100&fit=crop" 
+                         alt="Back view" 
+                         class="dripspaceProduct-thumbnail"
+                         onclick="changeImage(this)">
+                    <img src="https://images.unsplash.com/photo-1515372039744-b8f02a3ae446?w=100&h=100&fit=crop" 
+                         alt="Detail view" 
+                         class="dripspaceProduct-thumbnail"
+                         onclick="changeImage(this)">
+                </div>
+            </div>
+
+            <!-- Product Information -->
+            <div class="dripspaceProduct-info">
+                <h1 class="dripspaceProduct-title">Silk Evening Dress</h1>
+                <p class="dripspaceProduct-subtitle">Luxury Collection 2025</p>
+                
+                <div class="dripspaceProduct-price">
+                    <span class="dripspaceProduct-price-original">$899</span>
+                    <span class="dripspaceProduct-price-sale">$649</span>
+                </div>
+
+                <div class="dripspaceProduct-rating">
+                    <div class="dripspaceProduct-stars">
+                        <svg class="dripspaceProduct-star" viewBox="0 0 24 24">
+                            <path d="M12 2l3.09 6.26L22 9.27l-5 4.87 1.18 6.88L12 17.77l-6.18 3.25L7 14.14 2 9.27l6.91-1.01L12 2z"/>
+                        </svg>
+                        <svg class="dripspaceProduct-star" viewBox="0 0 24 24">
+                            <path d="M12 2l3.09 6.26L22 9.27l-5 4.87 1.18 6.88L12 17.77l-6.18 3.25L7 14.14 2 9.27l6.91-1.01L12 2z"/>
+                        </svg>
+                        <svg class="dripspaceProduct-star" viewBox="0 0 24 24">
+                            <path d="M12 2l3.09 6.26L22 9.27l-5 4.87 1.18 6.88L12 17.77l-6.18 3.25L7 14.14 2 9.27l6.91-1.01L12 2z"/>
+                        </svg>
+                        <svg class="dripspaceProduct-star" viewBox="0 0 24 24">
+                            <path d="M12 2l3.09 6.26L22 9.27l-5 4.87 1.18 6.88L12 17.77l-6.18 3.25L7 14.14 2 9.27l6.91-1.01L12 2z"/>
+                        </svg>
+                        <svg class="dripspaceProduct-star empty" viewBox="0 0 24 24">
+                            <path d="M12 2l3.09 6.26L22 9.27l-5 4.87 1.18 6.88L12 17.77l-6.18 3.25L7 14.14 2 9.27l6.91-1.01L12 2z"/>
+                        </svg>
+                    </div>
+                    <a href="#reviews" class="dripspaceProduct-reviews-link">(47 reviews)</a>
+                </div>
+
+                <!-- Color Selection -->
+                <div class="dripspaceProduct-section">
+                    <h3 class="dripspaceProduct-section-title">Color: <span id="selectedColor">Champagne</span></h3>
+                    <div class="dripspaceProduct-color-options">
+                        <div class="dripspaceProduct-color-option active" onclick="selectColor('Champagne', this)">
+                            <img src="https://images.unsplash.com/photo-1515372039744-b8f02a3ae446?w=80&h=80&fit=crop" 
+                                 alt="Champagne" 
+                                 class="dripspaceProduct-color-image">
+                            <div class="dripspaceProduct-color-name">Champagne</div>
+                        </div>
+                        <div class="dripspaceProduct-color-option" onclick="selectColor('Black', this)">
+                            <img src="https://images.unsplash.com/photo-1594223274512-ad4803739b7c?w=80&h=80&fit=crop" 
+                                 alt="Black" 
+                                 class="dripspaceProduct-color-image">
+                            <div class="dripspaceProduct-color-name">Black</div>
+                        </div>
+                        <div class="dripspaceProduct-color-option" onclick="selectColor('Navy', this)">
+                            <img src="https://images.unsplash.com/photo-1469334031218-e382a71b716b?w=80&h=80&fit=crop" 
+                                 alt="Navy" 
+                                 class="dripspaceProduct-color-image">
+                            <div class="dripspaceProduct-color-name">Navy</div>
+                        </div>
+                        <div class="dripspaceProduct-color-option" onclick="selectColor('Burgundy', this)">
+                            <img src="https://images.unsplash.com/photo-1515372039744-b8f02a3ae446?w=80&h=80&fit=crop" 
+                                 alt="Burgundy" 
+                                 class="dripspaceProduct-color-image">
+                            <div class="dripspaceProduct-color-name">Burgundy</div>
+                        </div>
+                    </div>
+                </div>
+
+                <!-- Size Selection -->
+                <div class="dripspaceProduct-section">
+                    <h3 class="dripspaceProduct-section-title">Size</h3>
+                    <div class="dripspaceProduct-size-options">
+                        <button class="dripspaceProduct-size-btn" onclick="selectSize('XS', this)">XS</button>
+                        <button class="dripspaceProduct-size-btn" onclick="selectSize('S', this)">S</button>
+                        <button class="dripspaceProduct-size-btn" onclick="selectSize('M', this)">M</button>
+                        <button class="dripspaceProduct-size-btn selected" onclick="selectSize('L', this)">L</button>
+                        <button class="dripspaceProduct-size-btn" onclick="selectSize('XL', this)">XL</button>
+                        <button class="dripspaceProduct-size-btn" onclick="selectSize('XXL', this)" disabled>XXL</button>
+                    </div>
+                    <a href="#" class="dripspaceProduct-size-guide" onclick="showSizeGuide()">Size Guide</a>
+                </div>
+
+                <!-- Add to Cart -->
+                <div class="dripspaceProduct-add-section">
+                    <button class="dripspaceProduct-add-btn" onclick="addToCart()">
+                        ADD TO CART
+                    </button>
+                    <div class="dripspaceProduct-loading" id="loadingState">
+                        <div class="dripspaceProduct-spinner"></div>
+                        <p>Adding to cart...</p>
+                    </div>
+                    <div class="dripspaceProduct-success" id="successState">
+                        <p>✓ Added to cart successfully!</p>
+                    </div>
+                    <p class="dripspaceProduct-stock-info">Only 3 left in stock</p>
+                </div>
+
+                <!-- Expandable Sections -->
+                <div class="dripspaceProduct-expandable">
+                    <div class="dripspaceProduct-expandable-item">
+                        <div class="dripspaceProduct-expandable-header" onclick="toggleExpandable('description')">
+                            <h3 class="dripspaceProduct-expandable-title">Description</h3>
+                            <svg class="dripspaceProduct-expandable-icon" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
+                                <line x1="12" y1="5" x2="12" y2="19"></line>
+                                <line x1="5" y1="12" x2="19" y2="12"></line>
+                            </svg>
+                        </div>
+                        <div class="dripspaceProduct-expandable-content" id="description">
+                            <p class="dripspaceProduct-expandable-text">
+                                Exquisite silk evening dress crafted from the finest Italian silk. This elegant piece features a timeless silhouette that flatters all body types, with delicate draping and a sophisticated neckline. Perfect for formal events, galas, and special occasions. The luxurious fabric drapes beautifully and feels incredibly soft against the skin.
+                            </p>
+                        </div>
+                    </div>
+
+                    <div class="dripspaceProduct-expandable-item">
+                        <div class="dripspaceProduct-expandable-header" onclick="toggleExpandable('delivery')">
+                            <h3 class="dripspaceProduct-expandable-title">Delivery & Returns</h3>
+                            <svg class="dripspaceProduct-expandable-icon" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
+                                <line x1="12" y1="5" x2="12" y2="19"></line>
+                                <line x1="5" y1="12" x2="19" y2="12"></line>
+                            </svg>
+                        </div>
+                        <div class="dripspaceProduct-expandable-content" id="delivery">
+                            <p class="dripspaceProduct-expandable-text">
+                                <strong>Free Standard Shipping</strong> on orders over $200<br>
+                                <strong>Express Delivery:</strong> 1-2 business days ($15)<br>
+                                <strong>Standard Delivery:</strong> 3-5 business days ($8)<br><br>
+                                <strong>Returns:</strong> 30-day return policy. Items must be in original condition with tags attached. Free returns for store credit, $8.99 for refund to original payment method.
+                            </p>
+                        </div>
+                    </div>
+
+                    <div class="dripspaceProduct-expandable-item">
+                        <div class="dripspaceProduct-expandable-header" onclick="toggleExpandable('payment')">
+                            <h3 class="dripspaceProduct-expandable-title">Payment & Returns</h3>
+                            <svg class="dripspaceProduct-expandable-icon" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
+                                <line x1="12" y1="5" x2="12" y2="19"></line>
+                                <line x1="5" y1="12" x2="19" y2="12"></line>
+                            </svg>
+                        </div>
+                        <div class="dripspaceProduct-expandable-content" id="payment">
+                            <p class="dripspaceProduct-expandable-text">
+                                <strong>Payment Methods:</strong> Visa, MasterCard, American Express, PayPal, Apple Pay<br>
+                                <strong>Security:</strong> All transactions are encrypted and secure<br><br>
+                                <strong>Return Policy:</strong> Easy 30-day returns. Pre-paid return labels provided. Refunds processed within 3-5 business days after receiving returned items.
+                            </p>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+
+        <!-- Related Products -->
+        <div class="dripspaceProduct-related">
+            <h2 class="dripspaceProduct-related-title">In the Same Set</h2>
+            <div class="dripspaceProduct-related-grid">
+                <div class="dripspaceProduct-related-item">
+                    <img src="https://images.unsplash.com/photo-1596755094514-f87e34085b2c?w=280&h=373&fit=crop" 
+                         alt="Silk Scarf" 
+                         class="dripspaceProduct-related-image">
+                    <div class="dripspaceProduct-related-info">
+                        <h3 class="dripspaceProduct-related-name">Silk Evening Scarf</h3>
+                        <p class="dripspaceProduct-related-price">$129</p>
+                    </div>
+                </div>
+                <div class="dripspaceProduct-related-item">
+                    <img src="https://images.unsplash.com/photo-1544966503-7cc5ac882d5f?w=280&h=373&fit=crop" 
+                         alt="Heels" 
+                         class="dripspaceProduct-related-image">
+                    <div class="dripspaceProduct-related-info">
+                        <h3 class="dripspaceProduct-related-name">Satin Heels</h3>
+                        <p class="dripspaceProduct-related-price">$249</p>
+                    </div>
+                </div>
+                <div class="dripspaceProduct-related-item">
+                    <img src="https://images.unsplash.com/photo-1553062407-98eeb64c6a62?w=280&h=373&fit=crop" 
+                         alt="Clutch" 
+                         class="dripspaceProduct-related-image">
+                    <div class="dripspaceProduct-related-info">
+                        <h3 class="dripspaceProduct-related-name">Evening Clutch</h3>
+                        <p class="dripspaceProduct-related-price">$189</p>
+                    </div>
+                </div>
+                <div class="dripspaceProduct-related-item">
+                    <img src="https://images.unsplash.com/photo-1572635196237-14b3f281503f?w=280&h=373&fit=crop" 
+                         alt="Jewelry" 
+                         class="dripspaceProduct-related-image">
+                    <div class="dripspaceProduct-related-info">
+                        <h3 class="dripspaceProduct-related-name">Pearl Jewelry Set</h3>
+                        <p class="dripspaceProduct-related-price">$299</p>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <script>
+        // Image Gallery
+        function changeImage(thumbnail) {
+            const mainImage = document.getElementById('mainImage');
+            const thumbnails = document.querySelectorAll('.dripspaceProduct-thumbnail');
+            
+            // Remove active class from all thumbnails
+            thumbnails.forEach(thumb => thumb.classList.remove('active'));
+            
+            // Add active class to clicked thumbnail
+            thumbnail.classList.add('active');
+            
+            // Update main image
+            mainImage.src = thumbnail.src.replace('w=100&h=100', 'w=600&h=800');
+        }
+
+        // Color Selection
+        function selectColor(color, element) {
+            // Remove active class from all color options
+            document.querySelectorAll('.dripspaceProduct-color-option').forEach(option => {
+                option.classList.remove('active');
+            });
+            
+            // Add active class to selected color
+            element.classList.add('active');
+            
+            // Update selected color display
+            document.getElementById('selectedColor').textContent = color;
+        }
+
+        // Size Selection
+        function selectSize(size, element) {
+            // Remove selected class from all size buttons
+            document.querySelectorAll('.dripspaceProduct-size-btn').forEach(btn => {
+                btn.classList.remove('selected');
+            });
+            
+            // Add selected class to clicked size
+            element.classList.add('selected');
+        }
+
+        // Size Guide
+        function showSizeGuide() {
+            alert('Size Guide:\n\nXS: 0-2\nS: 4-6\nM: 8-10\nL: 12-14\nXL: 16-18\nXXL: 20-22\n\nFor the perfect fit, we recommend measuring yourself and comparing to our size chart.');
+        }
+
+        // Add to Cart
+        function addToCart() {
+            const addBtn = document.querySelector('.dripspaceProduct-add-btn');
+            const loadingState = document.getElementById('loadingState');
+            const successState = document.getElementById('successState');
+            
+            // Show loading state
+            addBtn.style.display = 'none';
+            loadingState.style.display = 'block';
+            
+            // Simulate API call
+            setTimeout(() => {
+                // Hide loading, show success
+                loadingState.style.display = 'none';
+                successState.style.display = 'block';
+                
+                // Reset after 3 seconds
+                setTimeout(() => {
+                    successState.style.display = 'none';
+                    addBtn.style.display = 'block';
+                }, 3000);
+            }, 1500);
+        }
+
+        // Expandable Sections
+        function toggleExpandable(sectionId) {
+            const content = document.getElementById(sectionId);
+            const icon = content.previousElementSibling.querySelector('.dripspaceProduct-expandable-icon');
+            
+            // Toggle content
+            if (content.classList.contains('active')) {
+                content.classList.remove('active');
+                icon.classList.remove('rotated');
+            } else {
+                // Close all other sections
+                document.querySelectorAll('.dripspaceProduct-expandable-content').forEach(item => {
+                    item.classList.remove('active');
+                });
+                document.querySelectorAll('.dripspaceProduct-expandable-icon').forEach(icon => {
+                    icon.classList.remove('rotated');
+                });
+                
+                // Open selected section
+                content.classList.add('active');
+                icon.classList.add('rotated');
+            }
+        }
+
+        // Smooth scroll for navigation
+        document.addEventListener('DOMContentLoaded', function() {
+            // Add smooth scrolling to breadcrumb links
+            document.querySelectorAll('.dripspaceProduct-breadcrumb a').forEach(link => {
+                link.addEventListener('click', function(e) {
+                    e.preventDefault();
+                    // In a real app, this would navigate to the appropriate page
+                    console.log('Navigation to:', this.textContent);
+                });
+            });
+
+            // Add hover effects to related products
+            document.querySelectorAll('.dripspaceProduct-related-item').forEach(item => {
+                item.addEventListener('click', function() {
+                    // In a real app, this would navigate to the product page
+                    console.log('Navigate to product:', this.querySelector('.dripspaceProduct-related-name').textContent);
+                });
+            });
+
+            // Lazy loading for images
+            const images = document.querySelectorAll('img[src]');
+            const imageObserver = new IntersectionObserver((entries, observer) => {
+                entries.forEach(entry => {
+                    if (entry.isIntersecting) {
+                        const img = entry.target;
+                        img.style.opacity = '1';
+                        observer.unobserve(img);
+                    }
+                });
+            });
+
+            images.forEach(img => {
+                img.style.opacity = '0';
+                img.style.transition = 'opacity 0.3s ease';
+                imageObserver.observe(img);
+                
+                img.addEventListener('load', function() {
+                    this.style.opacity = '1';
+                });
+            });
+        });
+
+        // Keyboard navigation
+        document.addEventListener('keydown', function(e) {
+            if (e.key === 'Enter' && e.target.classList.contains('dripspaceProduct-expandable-header')) {
+                e.target.click();
+            }
+        });
+
+        // Touch gestures for mobile image gallery
+        let startX = 0;
+        let endX = 0;
+        
+        document.querySelector('.dripspaceProduct-main-image').addEventListener('touchstart', function(e) {
+            startX = e.touches[0].clientX;
+        });
+        
+        document.querySelector('.dripspaceProduct-main-image').addEventListener('touchend', function(e) {
+            endX = e.changedTouches[0].clientX;
+            handleSwipe();
+        });
+        
+        function handleSwipe() {
+            const threshold = 50;
+            const diff = startX - endX;
+            
+            if (Math.abs(diff) > threshold) {
+                const thumbnails = document.querySelectorAll('.dripspaceProduct-thumbnail');
+                const activeIndex = Array.from(thumbnails).findIndex(thumb => 
+                    thumb.classList.contains('active')
+                );
+                
+                if (diff > 0 && activeIndex < thumbnails.length - 1) {
+                    // Swipe left - next image
+                    changeImage(thumbnails[activeIndex + 1]);
+                } else if (diff < 0 && activeIndex > 0) {
+                    // Swipe right - previous image
+                    changeImage(thumbnails[activeIndex - 1]);
+                }
+            }
+        }
+    </script>
+</div>
