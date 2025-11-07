@@ -16,12 +16,16 @@ html, body {
     width: 100%;
     font-family: klein, sans-serif;
     background-color: #111;
+    color: #111;
 }
 
+/* -------Header & Nav ---------> */
 #header {
     width: 100%;
     background-color: #fff;
     padding: 1.5rem 2rem;
+    position: relative;
+    z-index: 1000;
 }
 
 #nav {
@@ -42,29 +46,28 @@ html, body {
     gap: 2rem;
 }
 
-#nav ul li {
+#nav > ul > li {
     position: relative;
     font-size: 1rem;
     color: #111;
     cursor: pointer;
     font-weight: 500;
     transition: color 0.3s ease;
+    padding: 0.5rem 0; 
 }
 
-#nav ul li:hover {
+#nav > ul > li:hover {
     color: #c56b1f;
 }
 
-/* --------------- DROPDOWN MENU --------> */
-
-/* <---------- DROPDOWN MENU -----------> */
-
+/* <---DROPDOWN MENU -----------> */
 .dropdown {
-    position: fixed;
-    top: 10%;
-    left: 0;
-    width: 100%;
-    height: 0vh;
+    position: absolute;
+    top: calc(100% + 0.5rem);
+    left: 50%;
+    transform: translateX(-50%);
+    width: 100vw;
+    max-width: 1400px;
     background-color: #fff;
     padding: 4rem 6rem;
     display: flex;
@@ -72,13 +75,24 @@ html, body {
     align-items: flex-start;
     opacity: 0;
     visibility: hidden;
-    transform: translateY(-20px);
-    transition: all 0.4s ease;
+    transition: opacity 0.3s ease, visibility 0.3s ease;
     z-index: 999;
     box-shadow: 0 10px 40px rgba(0, 0, 0, 0.15);
+    pointer-events: none;
 }
 
-/* Dropdown Inner Layout -------> */
+
+#nav > ul > li::after {
+    content: '';
+    position: absolute;
+    top: 100%;
+    left: 0;
+    right: 0;
+    height: 0.5rem; 
+    background: transparent;
+}
+
+/* Dropdown Inner Layout ======> */
 .drop-down_menu {
     display: flex;
     justify-content: space-between;
@@ -105,17 +119,23 @@ html, body {
     font-size: 1.2rem;
     color: #111;
     cursor: pointer;
-    transition: color 0.3s ease;
+    transition: color 0.3s ease, transform 0.3s ease;
 }
 
 .drop-down_items h3:hover {
     color: #c56b1f;
+    transform: translateX(5px);
 }
 
-/* <----------- Hover --- */
-#nav ul li:hover .dropdown {
+/* Filckering issue */
+#nav > ul > li:hover .dropdown {
     opacity: 1;
     visibility: visible;
-    transform: translateY(0);
-    height: 80vh;
+    pointer-events: auto;
+}
+
+.dropdown:hover {
+    opacity: 1;
+    visibility: visible;
+    pointer-events: auto;
 }
