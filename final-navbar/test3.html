@@ -288,67 +288,6 @@
     </div>
     </header>
 
-    <main id="main">
-
-        <div class="form">
-            <a href="#" class="x-mark"><i class="fa-solid fa-xmark"></i></a>
-            <div class="brand-header">
-              <h1 class="brand-name">DRIPSPACE</h1>
-              <p class="brand-tagline">Timeless Elegance</p>
-            </div>
- <div class="login-container">
-    <form class="login-form">
-        <input type="text" id="email" class="form-input" placeholder="Usename" required>    
-
-        <div class="mail">
-        <input type="email" id="email" class="form-input" placeholder="Enter Email" required>    
-        <input type="password" id="password" class="form-input" placeholder="Password" required>            
-        </div>  
-
-      
-      <button type="submit" class="btn-login">Sign up</button>
-      
-      <div class="form-footer">
-        <a href="#" class="link-forgot">Forgot Password?</a>
-      </div>
-    </form>
-  </div>
-        </div>
-
-        <!-- Log in form -->
-        <div class="form" id="form">
-            <a href="#" class="x-mark2"><i class="fa-solid fa-xmark"></i></a>
-            <div class="brand-header">
-              <h1 class="brand-name">DRIPSPACE</h1>
-              <p class="brand-tagline">Timeless Elegance</p>
-            </div>
- <div class="login-container">
-    <form class="login-form">
-        <div class="mail">
-        <input type="email" id="email" class="form-input" placeholder="Enter Email" required>    
-        <input type="password" id="password" class="form-input" placeholder="Password" required>            
-        </div>  
-
-      
-      <button type="submit" class="btn-login">Login</button>
-      
-      <div class="form-footer">
-        <a href="#" class="link-forgot">Forgot Password?</a>
-      </div>
-
-      <div class="divider">
-        <span>or</span>
-      </div>
-      
-      <div class="create-account">
-        <p>New to DripSpace?</p>
-        <a href="#" class="link-create">Create an Account</a>
-      </div>
-    </form>
-  </div>
-        </div>
-    </main>
-
     <script>
    // ---- Mega Menu Logic ----
 let currentMenu = null;
@@ -376,39 +315,6 @@ const accountBox = document.querySelector('.account');
 accountBtn.addEventListener('click', () => {
     accountBox.classList.toggle('open');
 });
-
-// ---- Form Slide (Sign In / Sign Up Popup) ----
-const slide = document.querySelector('.js-slide');
-const form = document.querySelector('.form');
-const cross = document.querySelector('.x-mark');
-const cross2 = document.querySelector('.x-mark2');
-const signUp = document.querySelector('.js-sign-up');
-const formSignUp = document.getElementById('form');
-
-
-slide.addEventListener('click', () => {
-    form.classList.add('open-form');
-
-    accountBox.classList.remove('open');
-});
-
-cross.addEventListener('click', () => {
-    form.classList.remove('open-form');
-
-    accountBox.classList.remove('open');
-});
-
-cross2.addEventListener('click', () => {
-    formSignUp.classList.remove('open-form2');
-
-    accountBox.classList.remove('open');
-});
-
-signUp.addEventListener('click', () => {
-    formSignUp.classList.add('open-form2');
-
-    accountBox.classList.remove('open');
-})
 
     </script>
 </body>
