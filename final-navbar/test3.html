@@ -47,7 +47,7 @@
                 </svg>
             </button>
             <div class="account">
-                <a href="#">Sign In</a>
+                <a class="js-sign-up" href="#">Sign In</a>
                 <a class="js-slide" href="#">Create Account</a>
                 <a href="#">Track Order</a>
             </div>
@@ -293,18 +293,33 @@
               <p class="brand-tagline">Timeless Elegance</p>
             </div>
  <div class="login-container">
-    <div class="choose">
-        <div class="line">
-        <a href="#">Sign In</a>
-        <a href="#">Sign Up</a>            
+    <form class="login-form">
+        <input type="text" id="email" class="form-input" placeholder="Usename" required>    
+
+        <div class="mail">
+        <input type="email" id="email" class="form-input" placeholder="Enter Email" required>    
+        <input type="password" id="password" class="form-input" placeholder="Password" required>            
+        </div>  
+
+      
+      <button type="submit" class="btn-login">Sign up</button>
+      
+      <div class="form-footer">
+        <a href="#" class="link-forgot">Forgot Password?</a>
+      </div>
+    </form>
+  </div>
         </div>
 
-    </div>
+        <!-- Log in form -->
+        <div class="form" id="form">
+            <a href="#" class="x-mark2"><i class="fa-solid fa-xmark"></i></a>
+            <div class="brand-header">
+              <h1 class="brand-name">DRIPSPACE</h1>
+              <p class="brand-tagline">Timeless Elegance</p>
+            </div>
+ <div class="login-container">
     <form class="login-form">
-        <div class="name">
-        <input type="text" id="email" class="form-input" placeholder="First Name" required>    
-        <input type="text" id="email" class="form-input" placeholder="Last Name" required> 
-        </div> 
         <div class="mail">
         <input type="email" id="email" class="form-input" placeholder="Enter Email" required>    
         <input type="password" id="password" class="form-input" placeholder="Password" required>            
@@ -316,33 +331,19 @@
       <div class="form-footer">
         <a href="#" class="link-forgot">Forgot Password?</a>
       </div>
+
+      <div class="divider">
+        <span>or</span>
+      </div>
+      
+      <div class="create-account">
+        <p>New to DripSpace?</p>
+        <a href="#" class="link-create">Create an Account</a>
+      </div>
     </form>
   </div>
         </div>
-        <div class="container">
-            <div class="texts">
-                <h1>Winter '25 Collection</h1>
-                <p>Stay warm. Stay stylish.</p>
-                <div class="buttons">
-                <button>Shop Women</button>
-                <button>Shop Men</button>
-                </div>
-                <a class="shiping" href="#">#Free Shipping on all orders above ₹999</a>
-            </div>
-            <!-- <div class="right">
-                <img src="girl-1.jpg" alt="">
-            </div> -->
-        </div>
     </main>
-
-    <section id="gifts">
-        <div class="gift-items">
-        <h1>Get Into <br> the Mood.</h1>
-        <h4>New fits made to turn heads</h4>
-        <button><a href="#">Explore Gifts</a></button>            
-        </div>
-
-    </section>
 
     <script>
    // ---- Mega Menu Logic ----
@@ -376,18 +377,34 @@ accountBtn.addEventListener('click', () => {
 const slide = document.querySelector('.js-slide');
 const form = document.querySelector('.form');
 const cross = document.querySelector('.x-mark');
+const cross2 = document.querySelector('.x-mark2');
+const signUp = document.querySelector('.js-sign-up');
+const formSignUp = document.getElementById('form');
+
 
 slide.addEventListener('click', () => {
     form.classList.add('open-form');
-    // Close account dropdown when opening form
+
     accountBox.classList.remove('open');
 });
 
 cross.addEventListener('click', () => {
     form.classList.remove('open-form');
-    // Close account dropdown when closing form
+
     accountBox.classList.remove('open');
 });
+
+cross2.addEventListener('click', () => {
+    formSignUp.classList.remove('open-form2');
+
+    accountBox.classList.remove('open');
+});
+
+signUp.addEventListener('click', () => {
+    formSignUp.classList.add('open-form2');
+
+    accountBox.classList.remove('open');
+})
 
     </script>
 </body>

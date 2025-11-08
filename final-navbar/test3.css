@@ -1,9 +1,7 @@
-/* @font-face {
-    font-family: klein;
-    src: url("fonts/Klein-75Bold-Web.ttf");
-    src: url("fonts/Klein-65Medium-Web.ttf");
-    src: url("fonts/Klein-55Regular-Web.ttf");
-} */
+@font-face {
+    font-family: punjabi;
+    src: url(HMSlussenVariable[TITL\,wdth\,wght].ttf);
+}
 
 * {
     margin: 0;
@@ -15,8 +13,7 @@ html,
 body {
     height: 100%;
     width: 100%;
-    /* font-family: klein, sans-serif; */
-    font-family: -apple-system, BlinkMacSystemFont, 'Segoe UI', Arial, sans-serif;
+    font-family: punjabi, sans-serif;
     background-color: #000000;
     color: #111;
 }
@@ -74,10 +71,12 @@ ul{
 .nav-links a {
     text-decoration: none;
     color: #ff1313;
-    font-size: 14px;
+    font-size: 12px;
+    letter-spacing: 1.2px;
     font-weight: 400;
     transition: color 0.3s;
     position: relative;
+    text-transform: uppercase;
 }
 
 .nav-links a:hover {
@@ -194,6 +193,7 @@ ul{
     font-size: 14px;
     transition: all 0.3s ease-in-out;
     display: inline-block;
+    letter-spacing: 1.2px;
 }
 
 
@@ -324,6 +324,10 @@ main{
     transform: translateX(0px);
 
 }
+.form.open-form2{
+    transform: translateX(0px);
+
+}
 
   .login-container {
     background: #ffffff;
@@ -340,7 +344,7 @@ main{
     left: 0;
     right: 0;
     height: 1px;
-    background: linear-gradient(90deg, transparent, #d4af37, transparent);
+    background: linear-gradient(90deg, transparent, #d44c37, transparent);
   }
   
   .brand-header {
@@ -411,7 +415,7 @@ main{
     font-size: clamp(14px, 3.5vw, 15px);
     color: #1a1a1a;
     transition: all 0.3s ease;
-    font-family: 'Cormorant Garamond', serif;
+    font-family: sans-serif;
     border-radius: 1px;
     -webkit-appearance: none;
     appearance: none;
@@ -419,7 +423,7 @@ main{
   
   .form-input:focus {
     outline: none;
-    border-color: #d4af37;
+    border-color: #ffffff;
     background: #ffffff;
     box-shadow: 0 0 0 3px rgba(212, 175, 55, 0.08);
   }
@@ -455,7 +459,7 @@ main{
     left: -100%;
     width: 100%;
     height: 100%;
-    background: linear-gradient(90deg, transparent, rgba(212, 175, 55, 0.3), transparent);
+    background: linear-gradient(90deg, transparent, rgba(212, 55, 55, 0.3), transparent);
     transition: left 0.6s ease;
   }
   
@@ -488,14 +492,14 @@ main{
   }
   
   .link-forgot:hover {
-    color: #d4af37;
-    border-bottom-color: #d4af37;
+    color: #f62f0c;
+    border-bottom-color: #f8100c;
   }
   
   .divider {
     position: relative;
     text-align: center;
-    margin: clamp(30px, 6vw, 40px) 0;
+    margin: clamp(10px, 2vw, 14px) 0;
   }
   
   .divider::before {
@@ -534,7 +538,7 @@ main{
     font-size: clamp(13px, 3.2vw, 14px);
     text-decoration: none;
     letter-spacing: clamp(1.5px, 0.4vw, 2px);
-    border-bottom: 2px solid #d4af37;
+    border-bottom: 2px solid #f82b0f;
     padding-bottom: 2px;
     transition: all 0.3s ease;
     font-weight: 500;
@@ -543,8 +547,8 @@ main{
   }
   
   .link-create:hover {
-    color: #d4af37;
-    border-bottom-color: #1a1a1a;
+    color: #f71f0c;
+    border-bottom-color: #f2f2f2;
   }
   
   /* Enhanced mobile responsiveness */
