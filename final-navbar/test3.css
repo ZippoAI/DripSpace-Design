@@ -1,5 +1,5 @@
 @font-face {
-    font-family: punjabi;
+    font-family: baba-sukranu;
     src: url(HMSlussenVariable[TITL\,wdth\,wght].ttf);
 }
 
@@ -13,7 +13,7 @@ html,
 body {
     height: 100%;
     width: 100%;
-    font-family: punjabi, sans-serif;
+    font-family: baba-sukranu, sans-serif;
     background-color: #000000;
     color: #111;
 }
@@ -550,9 +550,22 @@ main{
     color: #f71f0c;
     border-bottom-color: #f2f2f2;
   }
+
+  .hamburger-menu{
+    display: none;
+    color: #fff;
+  }
+
   
   /* Enhanced mobile responsiveness */
   @media (max-width: 768px) {
+
+    nav{
+      display: none;
+    }
+    .hamburger-menu{
+      display: block;
+    }
     .dripspace-login {
       align-items: flex-start;
       padding-top: max(40px, 8vh);
@@ -561,6 +574,10 @@ main{
     .login-container {
       margin: 0 auto;
     }
+  }
+
+  header:hover{
+    background: none;
   }
   
   @media (max-width: 480px) {
