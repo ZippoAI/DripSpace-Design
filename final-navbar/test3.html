@@ -3,319 +3,371 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/7.0.1/css/all.min.css" integrity="sha512-2SwdPD6INVrV/lHTZbO2nodKhrnDdJK9/kg2XD1r9uGqPo1cUbujc+IYdlYdEErWNu69gVcYgdxlmVmzTWnetw==" crossorigin="anonymous" referrerpolicy="no-referrer" />
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.1/css/all.min.css">
     <link rel="stylesheet" href="test3.css">
     <title>Punjabi Clothes</title>
 </head>
 <body>
     <header>
-    <div class="top-banner">
-        Free shipping on orders over $50
-    </div>
+        <div class="top-banner">
+            Free shipping on orders over $50
+        </div>
 
-    <nav>
-        <a href="#home" class="logo">Branding</a>
-
-        <ul class="nav-links">
-            <li><a href="#home" onmouseenter="showMenu('home')">Home</a></li>
-            <li><a href="#new" onmouseenter="showMenu('new')">FootWear</a></li>
-            <li><a href="#men" onmouseenter="showMenu('men')">Men</a></li>
-            <li><a href="#underwear" onmouseenter="showMenu('underwear')">Accesories</a></li>
-            <li><a href="#collection" onmouseenter="showMenu('collection')">New Arrivals</a></li>
-            <li><a href="#sale"onmouseenter="showMenu('sale')">Sale</a></li>
-        </ul>
-
-        <div class="nav-icons">
-            <button aria-label="Search">
-                <svg viewBox="0 0 24 24">
-                    <circle cx="11" cy="11" r="8"/>
-                    <path d="m21 21-4.35-4.35"/>
-                </svg>
-            </button>
-            <button class="js-open" aria-label="Account">
-                <svg viewBox="0 0 24 24">
-                    <path d="M20 21v-2a4 4 0 0 0-4-4H8a4 4 0 0 0-4 4v2"/>
-                    <circle cx="12" cy="7" r="4"/>
-                </svg>
+        <nav>
+            <!-- Hamburger Menu Button -->
+            <button class="hamburger-menu-btn" aria-label="Open Menu">
+                <i class="fa-solid fa-bars"></i>
             </button>
 
-            <button aria-label="Cart">
-                <svg viewBox="0 0 24 24">
-                    <path d="M6 2L3 6v14a2 2 0 0 0 2 2h14a2 2 0 0 0 2-2V6l-3-4z"/>
-                    <line x1="3" y1="6" x2="21" y2="6"/>
-                    <path d="M16 10a4 4 0 0 1-8 0"/>
-                </svg>
-            </button>
-            <div class="account">
-                <a class="js-sign-up" href="#">Sign In</a>
-                <a class="js-slide" href="#">Create Account</a>
-                <a href="#">Track Order</a>
-            </div>
-        </div>
-        <div class="mega-menu" id="gifts-menu" onmouseleave="hideMenu()">
-            <div class="mega-column">
-                <h3>Shop By Price</h3>
-                <ul>
-                    <li><a href="#">Under $50</a></li>
-                    <li><a href="#">$50 - $100</a></li>
-                    <li><a href="#">$100 - $200</a></li>
-                    <li><a href="#">Over $200</a></li>
-                </ul>
-            </div>
-            <div class="mega-column">
-                <h3>Shop By Price</h3>
-                <ul>
-                    <li><a href="#">Under $50</a></li>
-                    <li><a href="#">$50 - $100</a></li>
-                    <li><a href="#">$100 - $200</a></li>
-                    <li><a href="#">Over $200</a></li>
-                </ul>
-            </div>
-            <div class="mega-column">
-                <h3>Shop By Price</h3>
-                <ul>
-                    <li><a href="#">Under $50</a></li>
-                    <li><a href="#">$50 - $100</a></li>
-                    <li><a href="#">$100 - $200</a></li>
-                    <li><a href="#">Over $200</a></li>
-                </ul>
-            </div>
-        </div>
-        <div class="mega-menu" id="new-menu" onmouseleave="hideMenu()">
-            <div class="mega-column">
-                <h3>New Arrivals</h3>
-                <ul>
-                    <li><a href="#">Shop All New</a></li>
-                    <li><a href="#">Women's New</a></li>
-                    <li><a href="#">Men's New</a></li>
-                    <li><a href="#">Kids' New</a></li>
-                    <li><a href="#">Underwear New</a></li>
-                    <li><a href="#">Underwear New</a></li>
-                    <li><a href="#">Underwear New</a></li>
-                    <li><a href="#">Underwear New</a></li>
-                </ul>
-            </div>
-            <div class="mega-column">
-                <h3>New Arrivals</h3>
-                <ul>
-                    <li><a href="#">Shop All New</a></li>
-                    <li><a href="#">Women's New</a></li>
-                    <li><a href="#">Men's New</a></li>
-                    <li><a href="#">Kids' New</a></li>
-                    <li><a href="#">Underwear New</a></li>
-                </ul>
-            </div>
-            <div class="mega-column">
-                <h3>New Arrivals</h3>
-                <ul>
-                    <li><a href="#">Shop All New</a></li>
-                    <li><a href="#">Women's New</a></li>
-                    <li><a href="#">Men's New</a></li>
-                    <li><a href="#">Kids' New</a></li>
-                    <li><a href="#">Underwear New</a></li>
-                    <li><a href="#">Underwear New</a></li>
-                    <li><a href="#">Underwear New</a></li>
-                </ul>
-            </div>
-        </div>
+            <a href="#home" class="logo">Branding</a>
 
-        <div class="mega-menu" id="women-menu" onmouseleave="hideMenu()">
-            <div class="mega-column">
-                <h3>New Arrivals</h3>
-                <ul>
-                    <li><a href="#">Shop All New</a></li>
-                    <li><a href="#">Women's New</a></li>
-                    <li><a href="#">Men's New</a></li>
-                    <li><a href="#">Kids' New</a></li>
-                    <li><a href="#">Underwear New</a></li>
-                </ul>
-            </div>
-            <div class="mega-column">
-                <h3>New Arrivals</h3>
-                <ul>
-                    <li><a href="#">Shop All New</a></li>
-                    <li><a href="#">Women's New</a></li>
-                    <li><a href="#">Men's New</a></li>
-                    <li><a href="#">Kids' New</a></li>
-                    <li><a href="#">Underwear New</a></li>
-                </ul>
-            </div>
-            <div class="mega-column">
-                <h3>New Arrivals</h3>
-                <ul>
-                    <li><a href="#">Shop All New</a></li>
-                    <li><a href="#">Women's New</a></li>
-                    <li><a href="#">Men's New</a></li>
-                    <li><a href="#">Kids' New</a></li>
-                    <li><a href="#">Underwear New</a></li>
-                </ul>
-            </div>
-        </div>
-        <div class="mega-menu" id="men-menu" onmouseleave="hideMenu()">
-            <div class="mega-column">
-                <h3>New Arrivals</h3>
-                <ul>
-                    <li><a href="#">Shop All New</a></li>
-                    <li><a href="#">Women's New</a></li>
-                    <li><a href="#">Men's New</a></li>
-                    <li><a href="#">Kids' New</a></li>
-                    <li><a href="#">Underwear New</a></li>
-                </ul>
-            </div>
-            <div class="mega-column">
-                <h3>New Arrivals</h3>
-                <ul>
-                    <li><a href="#">Shop All New</a></li>
-                    <li><a href="#">Women's New</a></li>
-                    <li><a href="#">Men's New</a></li>
-                    <li><a href="#">Kids' New</a></li>
-                    <li><a href="#">Underwear New</a></li>
-                </ul>
-            </div>
-            <div class="mega-column">
-                <h3>New Arrivals</h3>
-                <ul>
-                    <li><a href="#">Shop All New</a></li>
-                    <li><a href="#">Women's New</a></li>
-                    <li><a href="#">Men's New</a></li>
-                    <li><a href="#">Kids' New</a></li>
-                    <li><a href="#">Underwear New</a></li>
-                </ul>
-            </div>
-        </div>
+            <ul class="nav-links">
+                <li><a href="#home" onmouseenter="showMenu('home')">Home</a></li>
+                <li><a href="#footwear" onmouseenter="showMenu('footwear')">FootWear</a></li>
+                <li><a href="#men" onmouseenter="showMenu('men')">Men</a></li>
+                <li><a href="#accessories" onmouseenter="showMenu('accessories')">Accessories</a></li>
+                <li><a href="#new" onmouseenter="showMenu('new')">New Arrivals</a></li>
+                <li><a href="#sale" onmouseenter="showMenu('sale')">Sale</a></li>
+            </ul>
 
-        <div class="mega-menu" id="collection-menu" onmouseleave="hideMenu()">
-            <div class="mega-column">
-                <h3>New Arrivals</h3>
-                <ul>
-                    <li><a href="#">Shop All New</a></li>
-                    <li><a href="#">Women's New</a></li>
-                    <li><a href="#">Men's New</a></li>
-                    <li><a href="#">Kids' New</a></li>
-                    <li><a href="#">Underwear New</a></li>
-                </ul>
+            <div class="nav-icons">
+                <button aria-label="Search">
+                    <svg viewBox="0 0 24 24">
+                        <circle cx="11" cy="11" r="8"/>
+                        <path d="m21 21-4.35-4.35"/>
+                    </svg>
+                </button>
+                <button class="js-open" aria-label="Account">
+                    <svg viewBox="0 0 24 24">
+                        <path d="M20 21v-2a4 4 0 0 0-4-4H8a4 4 0 0 0-4 4v2"/>
+                        <circle cx="12" cy="7" r="4"/>
+                    </svg>
+                </button>
+                <button aria-label="Cart">
+                    <svg viewBox="0 0 24 24">
+                        <path d="M6 2L3 6v14a2 2 0 0 0 2 2h14a2 2 0 0 0 2-2V6l-3-4z"/>
+                        <line x1="3" y1="6" x2="21" y2="6"/>
+                        <path d="M16 10a4 4 0 0 1-8 0"/>
+                    </svg>
+                </button>
+                <div class="account">
+                    <a class="js-sign-up" href="#">Sign In</a>
+                    <a class="js-slide" href="#">Create Account</a>
+                    <a href="#">Track Order</a>
+                </div>
             </div>
-            <div class="mega-column">
-                <h3>New Arrivals</h3>
-                <ul>
-                    <li><a href="#">Shop All New</a></li>
-                    <li><a href="#">Women's New</a></li>
-                    <li><a href="#">Men's New</a></li>
-                    <li><a href="#">Kids' New</a></li>
-                    <li><a href="#">Underwear New</a></li>
-                </ul>
-            </div>
-            <div class="mega-column">
-                <h3>New Arrivals</h3>
-                <ul>
-                    <li><a href="#">Shop All New</a></li>
-                    <li><a href="#">Women's New</a></li>
-                    <li><a href="#">Men's New</a></li>
-                    <li><a href="#">Kids' New</a></li>
-                    <li><a href="#">Underwear New</a></li>
-                </ul>
-            </div>
-        </div>
-        <div class="mega-menu" id="underwear-menu" onmouseleave="hideMenu()">
-            <div class="mega-column">
-                <h3>New Arrivals</h3>
-                <ul>
-                    <li><a href="#">Shop All New</a></li>
-                    <li><a href="#">Women's New</a></li>
-                    <li><a href="#">Men's New</a></li>
-                    <li><a href="#">Kids' New</a></li>
-                    <li><a href="#">Underwear New</a></li>
-                </ul>
-            </div>
-            <div class="mega-column">
-                <h3>New Arrivals</h3>
-                <ul>
-                    <li><a href="#">Shop All New</a></li>
-                    <li><a href="#">Women's New</a></li>
-                    <li><a href="#">Men's New</a></li>
-                    <li><a href="#">Kids' New</a></li>
-                    <li><a href="#">Underwear New</a></li>
-                </ul>
-            </div>
-            <div class="mega-column">
-                <h3>New Arrivals</h3>
-                <ul>
-                    <li><a href="#">Shop All New</a></li>
-                    <li><a href="#">Women's New</a></li>
-                    <li><a href="#">Men's New</a></li>
-                    <li><a href="#">Kids' New</a></li>
-                    <li><a href="#">Underwear New</a></li>
-                </ul>
-            </div>
-        </div>
-        <div class="mega-menu" id="sale-menu" onmouseleave="hideMenu()">
-            <div class="mega-column">
-                <h3>New Arrivals</h3>
-                <ul>
-                    <li><a href="#">Shop All New</a></li>
-                    <li><a href="#">Women's New</a></li>
-                    <li><a href="#">Men's New</a></li>
-                    <li><a href="#">Kids' New</a></li>
-                    <li><a href="#">Underwear New</a></li>
-                </ul>
-            </div>
-            <div class="mega-column">
-                <h3>New Arrivals</h3>
-                <ul>
-                    <li><a href="#">Shop All New</a></li>
-                    <li><a href="#">Women's New</a></li>
-                    <li><a href="#">Men's New</a></li>
-                    <li><a href="#">Kids' New</a></li>
-                    <li><a href="#">Underwear New</a></li>
-                </ul>
-            </div>
-            <div class="mega-column">
-                <h3>New Arrivals</h3>
-                <ul>
-                    <li><a href="#">Shop All New</a></li>
-                    <li><a href="#">Women's New</a></li>
-                    <li><a href="#">Men's New</a></li>
-                    <li><a href="#">Kids' New</a></li>
-                    <li><a href="#">Underwear New</a></li>
-                </ul>
-            </div>
-        </div>
 
-    </nav>
+            <!-- Mega Menus -->
+            <div class="mega-menu" id="home-menu" onmouseleave="hideMenu()">
+                <div class="mega-column">
+                    <h3>Shop By Price</h3>
+                    <ul>
+                        <li><a href="#">Under $50</a></li>
+                        <li><a href="#">$50 - $100</a></li>
+                        <li><a href="#">$100 - $200</a></li>
+                        <li><a href="#">Over $200</a></li>
+                    </ul>
+                </div>
+                <div class="mega-column">
+                    <h3>Featured</h3>
+                    <ul>
+                        <li><a href="#">Best Sellers</a></li>
+                        <li><a href="#">New Arrivals</a></li>
+                        <li><a href="#">Sale Items</a></li>
+                        <li><a href="#">Gift Cards</a></li>
+                    </ul>
+                </div>
+            </div>
 
-    <div class="hamburger-menu">
-        <i class="fa-solid fa-bars"></i>
-    </div>
+            <div class="mega-menu" id="footwear-menu" onmouseleave="hideMenu()">
+                <div class="mega-column">
+                    <h3>Men's Footwear</h3>
+                    <ul>
+                        <li><a href="#">Punjabi Jutti</a></li>
+                        <li><a href="#">Mojari</a></li>
+                        <li><a href="#">Sandals</a></li>
+                        <li><a href="#">Formal Shoes</a></li>
+                    </ul>
+                </div>
+                <div class="mega-column">
+                    <h3>Women's Footwear</h3>
+                    <ul>
+                        <li><a href="#">Designer Jutti</a></li>
+                        <li><a href="#">Embroidered</a></li>
+                        <li><a href="#">Kolhapuri</a></li>
+                        <li><a href="#">Heels</a></li>
+                    </ul>
+                </div>
+            </div>
+
+            <div class="mega-menu" id="men-menu" onmouseleave="hideMenu()">
+                <div class="mega-column">
+                    <h3>Traditional Wear</h3>
+                    <ul>
+                        <li><a href="#">Kurta Pajama</a></li>
+                        <li><a href="#">Sherwani</a></li>
+                        <li><a href="#">Pathani Suit</a></li>
+                        <li><a href="#">Nehru Jacket</a></li>
+                    </ul>
+                </div>
+                <div class="mega-column">
+                    <h3>Casual Wear</h3>
+                    <ul>
+                        <li><a href="#">Shirts</a></li>
+                        <li><a href="#">T-Shirts</a></li>
+                        <li><a href="#">Jeans</a></li>
+                        <li><a href="#">Jackets</a></li>
+                    </ul>
+                </div>
+            </div>
+
+            <div class="mega-menu" id="accessories-menu" onmouseleave="hideMenu()">
+                <div class="mega-column">
+                    <h3>Accessories</h3>
+                    <ul>
+                        <li><a href="#">Turbans</a></li>
+                        <li><a href="#">Stoles</a></li>
+                        <li><a href="#">Belts</a></li>
+                        <li><a href="#">Wallets</a></li>
+                    </ul>
+                </div>
+                <div class="mega-column">
+                    <h3>Jewelry</h3>
+                    <ul>
+                        <li><a href="#">Kada</a></li>
+                        <li><a href="#">Rings</a></li>
+                        <li><a href="#">Chains</a></li>
+                        <li><a href="#">Earrings</a></li>
+                    </ul>
+                </div>
+            </div>
+
+            <div class="mega-menu" id="new-menu" onmouseleave="hideMenu()">
+                <div class="mega-column">
+                    <h3>New Arrivals</h3>
+                    <ul>
+                        <li><a href="#">Shop All New</a></li>
+                        <li><a href="#">Women's New</a></li>
+                        <li><a href="#">Men's New</a></li>
+                        <li><a href="#">Kids' New</a></li>
+                    </ul>
+                </div>
+            </div>
+
+            <div class="mega-menu" id="sale-menu" onmouseleave="hideMenu()">
+                <div class="mega-column">
+                    <h3>Sale Items</h3>
+                    <ul>
+                        <li><a href="#">Up to 50% Off</a></li>
+                        <li><a href="#">Clearance</a></li>
+                        <li><a href="#">End of Season</a></li>
+                        <li><a href="#">Limited Time</a></li>
+                    </ul>
+                </div>
+            </div>
+        </nav>
     </header>
 
+    <!-- Hamburger Sidebar -->
+    <div class="hamburger-overlay"></div>
+    <div class="hamburger-sidebar">
+        <div class="hamburger-header">
+            <h2>Menu</h2>
+            <button class="close-btn" aria-label="Close Menu">
+                <i class="fa-solid fa-times"></i>
+            </button>
+        </div>
+
+        <div class="hamburger-content">
+            <div class="hamburger-section">
+                <div class="hamburger-section-title">
+                    Home
+                    <i class="fa-solid fa-chevron-down"></i>
+                </div>
+                <div class="hamburger-submenu">
+                    <ul>
+                        <li><a href="#">Under $50</a></li>
+                        <li><a href="#">$50 - $100</a></li>
+                        <li><a href="#">$100 - $200</a></li>
+                        <li><a href="#">Over $200</a></li>
+                    </ul>
+                </div>
+            </div>
+
+            <div class="hamburger-section">
+                <div class="hamburger-section-title">
+                    FootWear
+                    <i class="fa-solid fa-chevron-down"></i>
+                </div>
+                <div class="hamburger-submenu">
+                    <ul>
+                        <li><a href="#">Punjabi Jutti</a></li>
+                        <li><a href="#">Mojari</a></li>
+                        <li><a href="#">Sandals</a></li>
+                        <li><a href="#">Designer Jutti</a></li>
+                        <li><a href="#">Embroidered</a></li>
+                    </ul>
+                </div>
+            </div>
+
+            <div class="hamburger-section">
+                <div class="hamburger-section-title">
+                    Men
+                    <i class="fa-solid fa-chevron-down"></i>
+                </div>
+                <div class="hamburger-submenu">
+                    <ul>
+                        <li><a href="#">Kurta Pajama</a></li>
+                        <li><a href="#">Sherwani</a></li>
+                        <li><a href="#">Pathani Suit</a></li>
+                        <li><a href="#">Nehru Jacket</a></li>
+                        <li><a href="#">Shirts</a></li>
+                    </ul>
+                </div>
+            </div>
+
+            <div class="hamburger-section">
+                <div class="hamburger-section-title">
+                    Accessories
+                    <i class="fa-solid fa-chevron-down"></i>
+                </div>
+                <div class="hamburger-submenu">
+                    <ul>
+                        <li><a href="#">Turbans</a></li>
+                        <li><a href="#">Stoles</a></li>
+                        <li><a href="#">Belts</a></li>
+                        <li><a href="#">Kada</a></li>
+                        <li><a href="#">Jewelry</a></li>
+                    </ul>
+                </div>
+            </div>
+
+            <div class="hamburger-section">
+                <div class="hamburger-section-title">
+                    New Arrivals
+                    <i class="fa-solid fa-chevron-down"></i>
+                </div>
+                <div class="hamburger-submenu">
+                    <ul>
+                        <li><a href="#">Shop All New</a></li>
+                        <li><a href="#">Women's New</a></li>
+                        <li><a href="#">Men's New</a></li>
+                        <li><a href="#">Kids' New</a></li>
+                    </ul>
+                </div>
+            </div>
+
+            <div class="hamburger-section">
+                <div class="hamburger-section-title">
+                    Sale
+                    <i class="fa-solid fa-chevron-down"></i>
+                </div>
+                <div class="hamburger-submenu">
+                    <ul>
+                        <li><a href="#">Up to 50% Off</a></li>
+                        <li><a href="#">Clearance</a></li>
+                        <li><a href="#">End of Season</a></li>
+                        <li><a href="#">Limited Time</a></li>
+                    </ul>
+                </div>
+            </div>
+        </div>
+
+        <div class="hamburger-footer">
+            <a href="#"><i class="fa-solid fa-user"></i> Sign In</a>
+            <a href="#"><i class="fa-solid fa-user-plus"></i> Create Account</a>
+            <a href="#"><i class="fa-solid fa-truck"></i> Track Order</a>
+        </div>
+    </div>
+
+    <!-- Demo Content -->
+    <main>
+        <div class="container">
+            <h1>Authentic Punjabi Fashion</h1>
+            <p>Discover traditional and modern Punjabi clothing</p>
+        </div>
+    </main>
+
     <script>
-   // ---- Mega Menu Logic ----
-let currentMenu = null;
+        // Mega Menu Logic
+        let currentMenu = null;
 
-function showMenu(menu) {
-    hideMenu();
-    const menuElm = document.getElementById(menu + '-menu');
-    if (menuElm) {
-        menuElm.classList.add('active');
-        currentMenu = menuElm;
-    }
-}
+        function showMenu(menu) {
+            hideMenu();
+            const menuElm = document.getElementById(menu + '-menu');
+            if (menuElm) {
+                menuElm.classList.add('active');
+                currentMenu = menuElm;
+            }
+        }
 
-function hideMenu() {
-    if (currentMenu) {
-        currentMenu.classList.remove('active');
-        currentMenu = null;
-    }
-}
+        function hideMenu() {
+            if (currentMenu) {
+                currentMenu.classList.remove('active');
+                currentMenu = null;
+            }
+        }
 
-// ---- Account Dropdown (Create Account) ----
-const accountBtn = document.querySelector('.js-open');
-const accountBox = document.querySelector('.account');
+        // Account Dropdown
+        const accountBtn = document.querySelector('.js-open');
+        const accountBox = document.querySelector('.account');
 
-accountBtn.addEventListener('click', () => {
-    accountBox.classList.toggle('open');
-});
+        accountBtn.addEventListener('click', () => {
+            accountBox.classList.toggle('open');
+        });
 
+        // Hamburger Menu Logic
+        const hamburgerBtn = document.querySelector('.hamburger-menu-btn');
+        const closeBtn = document.querySelector('.close-btn');
+        const hamburgerSidebar = document.querySelector('.hamburger-sidebar');
+        const hamburgerOverlay = document.querySelector('.hamburger-overlay');
+        const sectionTitles = document.querySelectorAll('.hamburger-section-title');
+
+        // Open hamburger menu
+        hamburgerBtn.addEventListener('click', () => {
+            hamburgerSidebar.classList.add('open');
+            hamburgerOverlay.classList.add('active');
+            document.body.style.overflow = 'hidden';
+        });
+
+        // Close hamburger menu
+        function closeHamburgerMenu() {
+            hamburgerSidebar.classList.remove('open');
+            hamburgerOverlay.classList.remove('active');
+            document.body.style.overflow = '';
+        }
+
+        closeBtn.addEventListener('click', closeHamburgerMenu);
+        hamburgerOverlay.addEventListener('click', closeHamburgerMenu);
+
+        // Toggle submenu in hamburger
+        sectionTitles.forEach(title => {
+            title.addEventListener('click', () => {
+                const submenu = title.nextElementSibling;
+                const isOpen = submenu.classList.contains('open');
+
+                // Close all submenus
+                document.querySelectorAll('.hamburger-submenu').forEach(menu => {
+                    menu.classList.remove('open');
+                });
+                document.querySelectorAll('.hamburger-section-title').forEach(t => {
+                    t.classList.remove('active');
+                });
+
+                // Toggle current submenu
+                if (!isOpen) {
+                    submenu.classList.add('open');
+                    title.classList.add('active');
+                }
+            });
+        });
+
+        // Close hamburger on ESC key
+        document.addEventListener('keydown', (e) => {
+            if (e.key === 'Escape' && hamburgerSidebar.classList.contains('open')) {
+                closeHamburgerMenu();
+            }
+        });
     </script>
 </body>
 </html>
