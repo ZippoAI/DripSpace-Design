@@ -1,0 +1,965 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>DripSpace | DripBook</title>
+    <style>
+        :root {
+            --drip-red: #E4002B;
+            --drip-dark-red: #C10022;
+            --fb-light-gray: #f0f2f5;
+            --fb-gray: #e4e6eb;
+            --fb-dark-gray: #65676b;
+            --fb-white: #ffffff;
+            --fb-text: #050505;
+            --shadow: 0 1px 2px rgba(0, 0, 0, 0.1);
+            --shadow-lg: 0 2px 8px rgba(0, 0, 0, 0.15);
+        }
+
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+            font-family: -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, Helvetica, Arial, sans-serif;
+        }
+
+        body {
+            background-color: var(--fb-light-gray);
+            color: var(--fb-text);
+            line-height: 1.4;
+        }
+
+        .dripspace-fb-container {
+            max-width: 1200px;
+            margin: 0 auto;
+            padding-top: 56px;
+        }
+
+        /* Top Navigation Bar */
+        .dripbook-navbar {
+            position: fixed;
+            top: 0;
+            left: 0;
+            right: 0;
+            height: 56px;
+            background-color: var(--fb-white);
+            display: flex;
+            align-items: center;
+            justify-content: space-between;
+            padding: 0 16px;
+            box-shadow: var(--shadow);
+            z-index: 1000;
+        }
+
+        .dripbook-navbar-left {
+            display: flex;
+            align-items: center;
+            gap: 10px;
+        }
+
+        .dripbook-logo {
+            font-size: 24px;
+            font-weight: 700;
+            color: var(--drip-red);
+            cursor: pointer;
+        }
+
+        .dripbook-search {
+            background-color: var(--fb-light-gray);
+            border-radius: 20px;
+            padding: 8px 12px;
+            display: flex;
+            align-items: center;
+            margin-left: 10px;
+        }
+
+        .dripbook-search input {
+            background: transparent;
+            border: none;
+            outline: none;
+            width: 200px;
+            font-size: 15px;
+        }
+
+        .dripbook-navbar-center {
+            display: flex;
+            align-items: center;
+            gap: 8px;
+        }
+
+        .nav-icon {
+            padding: 10px 40px;
+            border-radius: 8px;
+            cursor: pointer;
+            transition: background-color 0.2s;
+        }
+
+        .nav-icon:hover {
+            background-color: var(--fb-gray);
+        }
+
+        .nav-icon.active {
+            border-bottom: 3px solid var(--drip-red);
+            border-radius: 0;
+        }
+
+        .dripbook-navbar-right {
+            display: flex;
+            align-items: center;
+            gap: 10px;
+        }
+
+        .profile-icon {
+            width: 36px;
+            height: 36px;
+            border-radius: 50%;
+            background-color: var(--fb-gray);
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            cursor: pointer;
+        }
+
+        /* Cover and Profile Section */
+        .fb-cover-photo {
+            height: 350px;
+            background-color: #333;
+            background-image: url('https://images.unsplash.com/photo-1558769132-cb25dcc3b0fd?ixlib=rb-1.2.1&auto=format&fit=crop&w=1200&q=80');
+            background-size: cover;
+            background-position: center;
+            position: relative;
+            border-bottom-left-radius: 8px;
+            border-bottom-right-radius: 8px;
+        }
+
+        .profile-section {
+            padding: 0 16px;
+            position: relative;
+            margin-top: -80px;
+        }
+
+        .profile-info {
+            display: flex;
+            align-items: flex-end;
+            margin-bottom: 16px;
+        }
+
+        .profile-pic {
+            width: 168px;
+            height: 168px;
+            border-radius: 50%;
+            border: 4px solid var(--fb-white);
+            background-color: var(--fb-white);
+            overflow: hidden;
+            margin-right: 16px;
+        }
+
+        .profile-pic img {
+            width: 100%;
+            height: 100%;
+            object-fit: cover;
+        }
+
+        .profile-details {
+            flex: 1;
+            padding-bottom: 16px;
+        }
+
+        .profile-title {
+            font-size: 32px;
+            font-weight: 700;
+            margin-bottom: 4px;
+        }
+
+        .profile-handle {
+            color: var(--fb-dark-gray);
+            margin-bottom: 12px;
+        }
+
+        .profile-stats {
+            color: var(--fb-dark-gray);
+            margin-bottom: 16px;
+        }
+
+        .profile-tagline {
+            font-size: 15px;
+            max-width: 500px;
+        }
+
+        .profile-actions {
+            display: flex;
+            gap: 8px;
+            margin-top: 16px;
+        }
+
+        .profile-btn {
+            padding: 8px 12px;
+            border-radius: 6px;
+            font-weight: 600;
+            cursor: pointer;
+            transition: all 0.2s;
+        }
+
+        .btn-primary {
+            background-color: var(--drip-red);
+            color: white;
+            border: none;
+        }
+
+        .btn-primary:hover {
+            background-color: var(--drip-dark-red);
+        }
+
+        .btn-secondary {
+            background-color: var(--fb-gray);
+            color: var(--fb-text);
+            border: none;
+        }
+
+        .btn-secondary:hover {
+            background-color: #d8dadf;
+        }
+
+        /* Page Tabs */
+        .page-tabs {
+            display: flex;
+            border-bottom: 1px solid var(--fb-gray);
+            padding: 0 16px;
+            background-color: var(--fb-white);
+            overflow-x: auto;
+        }
+
+        .page-tab {
+            padding: 16px;
+            font-weight: 600;
+            cursor: pointer;
+            white-space: nowrap;
+        }
+
+        .page-tab.active {
+            color: var(--drip-red);
+            border-bottom: 3px solid var(--drip-red);
+        }
+
+        /* Main Content */
+        .main-content {
+            display: grid;
+            grid-template-columns: 1fr 360px;
+            gap: 16px;
+            padding: 16px;
+        }
+
+        /* About Section */
+        .about-section {
+            background-color: var(--fb-white);
+            border-radius: 8px;
+            padding: 16px;
+            margin-bottom: 16px;
+            box-shadow: var(--shadow);
+        }
+
+        .section-title {
+            font-size: 20px;
+            font-weight: 700;
+            margin-bottom: 16px;
+        }
+
+        .about-item {
+            margin-bottom: 16px;
+        }
+
+        .about-label {
+            font-weight: 600;
+            margin-bottom: 4px;
+        }
+
+        .about-value {
+            color: var(--fb-dark-gray);
+        }
+
+        .about-link {
+            color: var(--drip-red);
+            text-decoration: none;
+        }
+
+        .about-link:hover {
+            text-decoration: underline;
+        }
+
+        /* Posts Feed */
+        .posts-feed {
+            display: flex;
+            flex-direction: column;
+            gap: 16px;
+        }
+
+        .dripspace-post-card {
+            background-color: var(--fb-white);
+            border-radius: 8px;
+            padding: 16px;
+            box-shadow: var(--shadow);
+        }
+
+        .post-header {
+            display: flex;
+            align-items: center;
+            margin-bottom: 12px;
+        }
+
+        .post-profile-pic {
+            width: 40px;
+            height: 40px;
+            border-radius: 50%;
+            margin-right: 8px;
+            background-color: var(--fb-gray);
+        }
+
+        .post-profile-info {
+            flex: 1;
+        }
+
+        .post-profile-name {
+            font-weight: 600;
+        }
+
+        .post-time {
+            color: var(--fb-dark-gray);
+            font-size: 13px;
+        }
+
+        .post-content {
+            margin-bottom: 12px;
+        }
+
+        .post-image {
+            width: 100%;
+            border-radius: 8px;
+            margin-bottom: 12px;
+            cursor: pointer;
+            transition: transform 0.2s;
+        }
+
+        .post-image:hover {
+            transform: scale(1.01);
+        }
+
+        .post-actions {
+            display: flex;
+            justify-content: space-around;
+            border-top: 1px solid var(--fb-gray);
+            padding-top: 8px;
+        }
+
+        .post-action {
+            display: flex;
+            align-items: center;
+            gap: 6px;
+            padding: 6px 12px;
+            border-radius: 4px;
+            cursor: pointer;
+            transition: background-color 0.2s;
+            font-weight: 600;
+            color: var(--fb-dark-gray);
+        }
+
+        .post-action:hover {
+            background-color: var(--fb-gray);
+        }
+
+        /* Sidebar */
+        .sidebar {
+            display: flex;
+            flex-direction: column;
+            gap: 16px;
+        }
+
+        .sidebar-section {
+            background-color: var(--fb-white);
+            border-radius: 8px;
+            padding: 16px;
+            box-shadow: var(--shadow);
+        }
+
+        .sidebar-title {
+            font-size: 17px;
+            font-weight: 600;
+            margin-bottom: 12px;
+        }
+
+        .sidebar-links {
+            display: flex;
+            flex-direction: column;
+            gap: 8px;
+        }
+
+        .sidebar-link {
+            display: flex;
+            align-items: center;
+            gap: 8px;
+            padding: 8px;
+            border-radius: 6px;
+            cursor: pointer;
+            transition: background-color 0.2s;
+        }
+
+        .sidebar-link:hover {
+            background-color: var(--fb-gray);
+        }
+
+        /* Modal */
+        .fb-modal-view {
+            position: fixed;
+            top: 0;
+            left: 0;
+            right: 0;
+            bottom: 0;
+            background-color: rgba(0, 0, 0, 0.8);
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            z-index: 2000;
+            opacity: 0;
+            visibility: hidden;
+            transition: opacity 0.3s, visibility 0.3s;
+        }
+
+        .fb-modal-view.active {
+            opacity: 1;
+            visibility: visible;
+        }
+
+        .modal-content {
+            position: relative;
+            max-width: 90%;
+            max-height: 90%;
+        }
+
+        .modal-image {
+            max-width: 100%;
+            max-height: 80vh;
+            border-radius: 8px;
+        }
+
+        .fb-close-btn {
+            position: absolute;
+            top: -40px;
+            right: 0;
+            background-color: var(--fb-white);
+            width: 36px;
+            height: 36px;
+            border-radius: 50%;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            font-size: 20px;
+            cursor: pointer;
+            transition: background-color 0.2s;
+        }
+
+        .fb-close-btn:hover {
+            background-color: var(--fb-gray);
+        }
+
+        /* Mobile Styles */
+        @media (max-width: 900px) {
+            .main-content {
+                grid-template-columns: 1fr;
+            }
+            
+            .sidebar {
+                display: none;
+            }
+            
+            .mobile-sidebar-toggle {
+                display: block;
+            }
+            
+            .dripbook-search input {
+                width: 150px;
+            }
+            
+            .nav-icon {
+                padding: 10px 20px;
+            }
+        }
+
+        @media (max-width: 700px) {
+            .profile-info {
+                flex-direction: column;
+                align-items: flex-start;
+            }
+            
+            .profile-pic {
+                margin-bottom: 16px;
+            }
+            
+            .profile-actions {
+                flex-wrap: wrap;
+            }
+            
+            .dripbook-navbar-center {
+                display: none;
+            }
+            
+            .dripbook-search input {
+                width: 120px;
+            }
+        }
+
+        @media (max-width: 500px) {
+            .fb-cover-photo {
+                height: 250px;
+            }
+            
+            .profile-section {
+                margin-top: -60px;
+            }
+            
+            .profile-pic {
+                width: 120px;
+                height: 120px;
+            }
+            
+            .profile-title {
+                font-size: 24px;
+            }
+            
+            .dripbook-search {
+                display: none;
+            }
+        }
+    </style>
+</head>
+<body>
+    <div class="dripspace-fb-container">
+        <!-- Top Navigation Bar -->
+        <div class="dripbook-navbar">
+            <div class="dripbook-navbar-left">
+                <div class="dripbook-logo">DripBook</div>
+                <div class="dripbook-search">
+                    <input type="text" placeholder="Search DripBook">
+                </div>
+            </div>
+            
+            <div class="dripbook-navbar-center">
+                <div class="nav-icon active">Home</div>
+                <div class="nav-icon">Videos</div>
+                <div class="nav-icon">Photos</div>
+                <div class="nav-icon">Events</div>
+            </div>
+            
+            <div class="dripbook-navbar-right">
+                <div class="profile-icon">DS</div>
+            </div>
+        </div>
+        
+        <!-- Cover and Profile Section -->
+        <div class="fb-cover-photo"></div>
+        
+        <div class="profile-section">
+            <div class="profile-info">
+                <div class="profile-pic">
+                    <img src="https://via.placeholder.com/168x168/ffffff/E4002B?text=DS" alt="DripSpace Logo">
+                </div>
+                
+                <div class="profile-details">
+                    <h1 class="profile-title">DripSpace</h1>
+                    <div class="profile-handle">@dripspace.official</div>
+                    <div class="profile-stats">128K followers • 245 posts</div>
+                    <div class="profile-tagline">Redefining modern minimal fashion. Premium. Simple. Timeless.</div>
+                    
+                    <div class="profile-actions">
+                        <button class="profile-btn btn-primary">Like</button>
+                        <button class="profile-btn btn-secondary">Follow</button>
+                        <button class="profile-btn btn-secondary">Message</button>
+                        <button class="profile-btn btn-secondary">Share</button>
+                    </div>
+                </div>
+            </div>
+        </div>
+        
+        <!-- Page Tabs -->
+        <div class="page-tabs">
+            <div class="page-tab active">Posts</div>
+            <div class="page-tab">About</div>
+            <div class="page-tab">Photos</div>
+            <div class="page-tab">Videos</div>
+            <div class="page-tab">Events</div>
+            <div class="page-tab">Community</div>
+        </div>
+        
+        <!-- Main Content -->
+        <div class="main-content">
+            <div class="left-column">
+                <!-- About Section -->
+                <div class="about-section">
+                    <h2 class="section-title">About</h2>
+                    
+                    <div class="about-item">
+                        <div class="about-label">Description</div>
+                        <div class="about-value">DripSpace is a premium fashion brand specializing in minimalist, timeless apparel for the modern individual. Our collections blend quality craftsmanship with contemporary design.</div>
+                    </div>
+                    
+                    <div class="about-item">
+                        <div class="about-label">Website</div>
+                        <div class="about-value">
+                            <a href="#" class="about-link">www.dripspace.com</a>
+                        </div>
+                    </div>
+                    
+                    <div class="about-item">
+                        <div class="about-label">Email</div>
+                        <div class="about-value">support@dripspace.com</div>
+                    </div>
+                    
+                    <div class="about-item">
+                        <div class="about-label">Location</div>
+                        <div class="about-value">Guwahati, Assam, India</div>
+                    </div>
+                </div>
+                
+                <!-- Posts Feed -->
+                <div class="posts-feed">
+                    <!-- Post 1 -->
+                    <div class="dripspace-post-card">
+                        <div class="post-header">
+                            <div class="post-profile-pic">
+                                <img src="https://via.placeholder.com/40x40/ffffff/E4002B?text=DS" alt="DripSpace">
+                            </div>
+                            <div class="post-profile-info">
+                                <div class="post-profile-name">DripSpace</div>
+                                <div class="post-time">2 hrs ago</div>
+                            </div>
+                        </div>
+                        
+                        <div class="post-content">
+                            <p>Introducing our latest collection: "Urban Minimalism". Clean lines, premium fabrics, and timeless design. Available now in stores and online.</p>
+                        </div>
+                        
+                        <img src="https://images.unsplash.com/photo-1552374196-c4e7ffc6e126?ixlib=rb-1.2.1&auto=format&fit=crop&w=800&q=80" alt="New Collection" class="post-image" data-modal="modal1">
+                        
+                        <div class="post-actions">
+                            <div class="post-action">Like</div>
+                            <div class="post-action">Comment</div>
+                            <div class="post-action">Share</div>
+                        </div>
+                    </div>
+                    
+                    <!-- Post 2 -->
+                    <div class="dripspace-post-card">
+                        <div class="post-header">
+                            <div class="post-profile-pic">
+                                <img src="https://via.placeholder.com/40x40/ffffff/E4002B?text=DS" alt="DripSpace">
+                            </div>
+                            <div class="post-profile-info">
+                                <div class="post-profile-name">DripSpace</div>
+                                <div class="post-time">Yesterday at 3:45 PM</div>
+                            </div>
+                        </div>
+                        
+                        <div class="post-content">
+                            <p>Behind the scenes at our latest photoshoot. Our team working hard to bring you the best in minimalist fashion.</p>
+                        </div>
+                        
+                        <img src="https://images.unsplash.com/photo-1515886657613-9f3515b0c78f?ixlib=rb-1.2.1&auto=format&fit=crop&w=800&q=80" alt="Photoshoot" class="post-image" data-modal="modal2">
+                        
+                        <div class="post-actions">
+                            <div class="post-action">Like</div>
+                            <div class="post-action">Comment</div>
+                            <div class="post-action">Share</div>
+                        </div>
+                    </div>
+                    
+                    <!-- Post 3 -->
+                    <div class="dripspace-post-card">
+                        <div class="post-header">
+                            <div class="post-profile-pic">
+                                <img src="https://via.placeholder.com/40x40/ffffff/E4002B?text=DS" alt="DripSpace">
+                            </div>
+                            <div class="post-profile-info">
+                                <div class="post-profile-name">DripSpace</div>
+                                <div class="post-time">2 days ago</div>
+                            </div>
+                        </div>
+                        
+                        <div class="post-content">
+                            <p>Customer spotlight: @stylebymarcus wearing our classic trench coat. Tag us in your DripSpace outfits for a chance to be featured!</p>
+                        </div>
+                        
+                        <img src="https://images.unsplash.com/photo-1539109136881-3be0616acf4b?ixlib=rb-1.2.1&auto=format&fit=crop&w=800&q=80" alt="Customer Spotlight" class="post-image" data-modal="modal3">
+                        
+                        <div class="post-actions">
+                            <div class="post-action">Like</div>
+                            <div class="post-action">Comment</div>
+                            <div class="post-action">Share</div>
+                        </div>
+                    </div>
+                    
+                    <!-- Post 4 -->
+                    <div class="dripspace-post-card">
+                        <div class="post-header">
+                            <div class="post-profile-pic">
+                                <img src="https://via.placeholder.com/40x40/ffffff/E4002B?text=DS" alt="DripSpace">
+                            </div>
+                            <div class="post-profile-info">
+                                <div class="post-profile-name">DripSpace</div>
+                                <div class="post-time">3 days ago</div>
+                            </div>
+                        </div>
+                        
+                        <div class="post-content">
+                            <p>Our new flagship store is now open in Mumbai! Come visit us for an exclusive shopping experience and personalized styling sessions.</p>
+                        </div>
+                        
+                        <img src="https://images.unsplash.com/photo-1441986300917-64674bd600d8?ixlib=rb-1.2.1&auto=format&fit=crop&w=800&q=80" alt="New Store" class="post-image" data-modal="modal4">
+                        
+                        <div class="post-actions">
+                            <div class="post-action">Like</div>
+                            <div class="post-action">Comment</div>
+                            <div class="post-action">Share</div>
+                        </div>
+                    </div>
+                    
+                    <!-- Post 5 -->
+                    <div class="dripspace-post-card">
+                        <div class="post-header">
+                            <div class="post-profile-pic">
+                                <img src="https://via.placeholder.com/40x40/ffffff/E4002B?text=DS" alt="DripSpace">
+                            </div>
+                            <div class="post-profile-info">
+                                <div class="post-profile-name">DripSpace</div>
+                                <div class="post-time">4 days ago</div>
+                            </div>
+                        </div>
+                        
+                        <div class="post-content">
+                            <p>Outfit of the day: Monochrome elegance. Our premium wool blend sweater paired with tailored trousers.</p>
+                        </div>
+                        
+                        <img src="https://images.unsplash.com/photo-1507003211169-0a1dd7228f2d?ixlib=rb-1.2.1&auto=format&fit=crop&w=800&q=80" alt="OOTD" class="post-image" data-modal="modal5">
+                        
+                        <div class="post-actions">
+                            <div class="post-action">Like</div>
+                            <div class="post-action">Comment</div>
+                            <div class="post-action">Share</div>
+                        </div>
+                    </div>
+                    
+                    <!-- Post 6 -->
+                    <div class="dripspace-post-card">
+                        <div class="post-header">
+                            <div class="post-profile-pic">
+                                <img src="https://via.placeholder.com/40x40/ffffff/E4002B?text=DS" alt="DripSpace">
+                            </div>
+                            <div class="post-profile-info">
+                                <div class="post-profile-name">DripSpace</div>
+                                <div class="post-time">5 days ago</div>
+                            </div>
+                        </div>
+                        
+                        <div class="post-content">
+                            <p>Limited time offer: Get 20% off on all accessories this weekend. Use code: DRIP20 at checkout.</p>
+                        </div>
+                        
+                        <img src="https://images.unsplash.com/photo-1584917865442-de89df76afd3?ixlib=rb-1.2.1&auto=format&fit=crop&w=800&q=80" alt="Sale" class="post-image" data-modal="modal6">
+                        
+                        <div class="post-actions">
+                            <div class="post-action">Like</div>
+                            <div class="post-action">Comment</div>
+                            <div class="post-action">Share</div>
+                        </div>
+                    </div>
+                    
+                    <!-- Post 7 -->
+                    <div class="dripspace-post-card">
+                        <div class="post-header">
+                            <div class="post-profile-pic">
+                                <img src="https://via.placeholder.com/40x40/ffffff/E4002B?text=DS" alt="DripSpace">
+                            </div>
+                            <div class="post-profile-info">
+                                <div class="post-profile-name">DripSpace</div>
+                                <div class="post-time">1 week ago</div>
+                            </div>
+                        </div>
+                        
+                        <div class="post-content">
+                            <p>Fabric focus: Our signature cotton-linen blend. Breathable, durable, and perfect for all seasons.</p>
+                        </div>
+                        
+                        <img src="https://images.unsplash.com/photo-1523381294917-34496271c8e5?ixlib=rb-1.2.1&auto=format&fit=crop&w=800&q=80" alt="Fabric" class="post-image" data-modal="modal7">
+                        
+                        <div class="post-actions">
+                            <div class="post-action">Like</div>
+                            <div class="post-action">Comment</div>
+                            <div class="post-action">Share</div>
+                        </div>
+                    </div>
+                    
+                    <!-- Post 8 -->
+                    <div class="dripspace-post-card">
+                        <div class="post-header">
+                            <div class="post-profile-pic">
+                                <img src="https://via.placeholder.com/40x40/ffffff/E4002B?text=DS" alt="DripSpace">
+                            </div>
+                            <div class="post-profile-info">
+                                <div class="post-profile-name">DripSpace</div>
+                                <div class="post-time">1 week ago</div>
+                            </div>
+                        </div>
+                        
+                        <div class="post-content">
+                            <p>Meet our design team! These talented individuals work tirelessly to create the minimalist pieces you love.</p>
+                        </div>
+                        
+                        <img src="https://images.unsplash.com/photo-1551836026-d5c88ac5c4c0?ixlib=rb-1.2.1&auto=format&fit=crop&w=800&q=80" alt="Design Team" class="post-image" data-modal="modal8">
+                        
+                        <div class="post-actions">
+                            <div class="post-action">Like</div>
+                            <div class="post-action">Comment</div>
+                            <div class="post-action">Share</div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+            
+            <!-- Sidebar -->
+            <div class="sidebar">
+                <div class="sidebar-section">
+                    <h3 class="sidebar-title">About DripSpace</h3>
+                    <div class="sidebar-links">
+                        <div class="sidebar-link">Home</div>
+                        <div class="sidebar-link">About</div>
+                        <div class="sidebar-link">Photos</div>
+                        <div class="sidebar-link">Videos</div>
+                        <div class="sidebar-link">Community</div>
+                    </div>
+                </div>
+                
+                <div class="sidebar-section">
+                    <h3 class="sidebar-title">Page Transparency</h3>
+                    <p>DripSpace is showing information to help you better understand its purpose.</p>
+                </div>
+                
+                <div class="sidebar-section">
+                    <h3 class="sidebar-title">Similar Pages</h3>
+                    <div class="sidebar-links">
+                        <div class="sidebar-link">Minimalist Fashion Co.</div>
+                        <div class="sidebar-link">Urban Style Collective</div>
+                        <div class="sidebar-link">Premium Apparel India</div>
+                    </div>
+                </div>
+            </div>
+        </div>
+        
+        <!-- Image Modals -->
+        <div class="fb-modal-view" id="modal1">
+            <div class="modal-content">
+                <img src="https://images.unsplash.com/photo-1552374196-c4e7ffc6e126?ixlib=rb-1.2.1&auto=format&fit=crop&w=1200&q=80" alt="New Collection" class="modal-image">
+                <div class="fb-close-btn">×</div>
+            </div>
+        </div>
+        
+        <div class="fb-modal-view" id="modal2">
+            <div class="modal-content">
+                <img src="https://images.unsplash.com/photo-1515886657613-9f3515b0c78f?ixlib=rb-1.2.1&auto=format&fit=crop&w=1200&q=80" alt="Photoshoot" class="modal-image">
+                <div class="fb-close-btn">×</div>
+            </div>
+        </div>
+        
+        <div class="fb-modal-view" id="modal3">
+            <div class="modal-content">
+                <img src="https://images.unsplash.com/photo-1539109136881-3be0616acf4b?ixlib=rb-1.2.1&auto=format&fit=crop&w=1200&q=80" alt="Customer Spotlight" class="modal-image">
+                <div class="fb-close-btn">×</div>
+            </div>
+        </div>
+        
+        <div class="fb-modal-view" id="modal4">
+            <div class="modal-content">
+                <img src="https://images.unsplash.com/photo-1441986300917-64674bd600d8?ixlib=rb-1.2.1&auto=format&fit=crop&w=1200&q=80" alt="New Store" class="modal-image">
+                <div class="fb-close-btn">×</div>
+            </div>
+        </div>
+        
+        <div class="fb-modal-view" id="modal5">
+            <div class="modal-content">
+                <img src="https://images.unsplash.com/photo-1507003211169-0a1dd7228f2d?ixlib=rb-1.2.1&auto=format&fit=crop&w=1200&q=80" alt="OOTD" class="modal-image">
+                <div class="fb-close-btn">×</div>
+            </div>
+        </div>
+        
+        <div class="fb-modal-view" id="modal6">
+            <div class="modal-content">
+                <img src="https://images.unsplash.com/photo-1584917865442-de89df76afd3?ixlib=rb-1.2.1&auto=format&fit=crop&w=1200&q=80" alt="Sale" class="modal-image">
+                <div class="fb-close-btn">×</div>
+            </div>
+        </div>
+        
+        <div class="fb-modal-view" id="modal7">
+            <div class="modal-content">
+                <img src="https://images.unsplash.com/photo-1523381294917-34496271c8e5?ixlib=rb-1.2.1&auto=format&fit=crop&w=1200&q=80" alt="Fabric" class="modal-image">
+                <div class="fb-close-btn">×</div>
+            </div>
+        </div>
+        
+        <div class="fb-modal-view" id="modal8">
+            <div class="modal-content">
+                <img src="https://images.unsplash.com/photo-1551836026-d5c88ac5c4c0?ixlib=rb-1.2.1&auto=format&fit=crop&w=1200&q=80" alt="Design Team" class="modal-image">
+                <div class="fb-close-btn">×</div>
+            </div>
+        </div>
+    </div>
+
+    <script>
+        // Image Modal Functionality
+        document.addEventListener('DOMContentLoaded', function() {
+            // Get all post images
+            const postImages = document.querySelectorAll('.post-image');
+            const modals = document.querySelectorAll('.fb-modal-view');
+            const closeButtons = document.querySelectorAll('.fb-close-btn');
+            
+            // Add click event to each post image
+            postImages.forEach(image => {
+                image.addEventListener('click', function() {
+                    const modalId = this.getAttribute('data-modal');
+                    const modal = document.getElementById(modalId);
+                    
+                    if (modal) {
+                        modal.classList.add('active');
+                        document.body.style.overflow = 'hidden'; // Prevent scrolling
+                    }
+                });
+            });
+            
+            // Add click event to close buttons
+            closeButtons.forEach(button => {
+                button.addEventListener('click', function() {
+                    const modal = this.closest('.fb-modal-view');
+                    modal.classList.remove('active');
+                    document.body.style.overflow = ''; // Restore scrolling
+                });
+            });
+            
+            // Close modal when clicking outside the image
+            modals.forEach(modal => {
+                modal.addEventListener('click', function(e) {
+                    if (e.target === this) {
+                        this.classList.remove('active');
+                        document.body.style.overflow = ''; // Restore scrolling
+                    }
+                });
+            });
+            
+            // Close modal with Escape key
+            document.addEventListener('keydown', function(e) {
+                if (e.key === 'Escape') {
+                    modals.forEach(modal => {
+                        modal.classList.remove('active');
+                    });
+                    document.body.style.overflow = ''; // Restore scrolling
+                }
+            });
+        });
+    </script>
+</body>
+</html>
