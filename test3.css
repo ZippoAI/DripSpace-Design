@@ -102,29 +102,29 @@ ul{
     fill: none;
 }
 
-        .mega-menu {
-            position: absolute;
-            top: 100%;
-            left: 0;
-            right: 0;
-            background: white;
-            border-top: 1px solid #e0e0e0;
-            padding: 0 40px;
-            box-shadow: 0 4px 12px rgba(0,0,0,0.1);
-            z-index: 1000;
-            max-height: 0;
-            overflow: hidden;
-            opacity: 0;
-            transition: max-height 0.4s ease-in-out, opacity 0.3s ease-in-out, padding 0.4s ease-in-out;
-            display: flex;
-        }
+    .mega-menu {
+    position: absolute;
+    top: 100%;
+    left: 0;
+    right: 0;
+    background: white;
+    border-top: 1px solid #e0e0e0;
+    padding: 0 40px;
+    box-shadow: 0 4px 12px rgba(0,0,0,0.1);
+    z-index: 1000;
+    max-height: 0;
+    overflow: hidden;
+    opacity: 0;
+    transition: max-height 0.4s ease-in-out, opacity 0.3s ease-in-out, padding 0.4s ease-in-out;
+    display: flex;
+    }
 
-        .mega-menu.active {
-            max-height: 90vh;
-            min-height: 40vh;
-            opacity: 1;
-            padding: 40px;
-        }
+    .mega-menu.active {
+    max-height: 90vh;
+    min-height: 40vh;
+    opacity: 1;
+    padding: 40px;
+    }
 
 
 .mega-column {
