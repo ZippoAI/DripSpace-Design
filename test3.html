@@ -3,6 +3,7 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/7.0.1/css/all.min.css" integrity="sha512-2SwdPD6INVrV/lHTZbO2nodKhrnDdJK9/kg2XD1r9uGqPo1cUbujc+IYdlYdEErWNu69gVcYgdxlmVmzTWnetw==" crossorigin="anonymous" referrerpolicy="no-referrer" />
     <link rel="stylesheet" href="test3.css">
     <title>Punjabi Clothes</title>
 </head>
@@ -16,14 +17,11 @@
         <a href="#home" class="logo">Branding</a>
 
         <ul class="nav-links">
-            <li><a href="#gifts" class="sale" onmouseenter="showMenu('gifts')">Gifts</a></li>
-            <li><a href="#new" onmouseenter="showMenu('new')">New</a></li>
-            <li><a href="#women" onmouseenter="showMenu('women')">Women</a></li>
-            <li><a href="#men" onmouseenter="showMenu('men')">Men</a></li>
-            <li><a href="#underwear" onmouseenter="showMenu('underwear')">Underwear</a></li>
-            <li><a href="#collection" onmouseenter="showMenu('collection')">Collection</a></li>
-            <li><a href="#kids" onmouseenter="showMenu('kids')">Kids</a></li>
             <li><a href="#home" onmouseenter="showMenu('home')">Home</a></li>
+            <li><a href="#new" onmouseenter="showMenu('new')">FootWear</a></li>
+            <li><a href="#men" onmouseenter="showMenu('men')">Men</a></li>
+            <li><a href="#underwear" onmouseenter="showMenu('underwear')">Accesories</a></li>
+            <li><a href="#collection" onmouseenter="showMenu('collection')">New Arrivals</a></li>
             <li><a href="#sale"onmouseenter="showMenu('sale')">Sale</a></li>
         </ul>
 
@@ -34,12 +32,13 @@
                     <path d="m21 21-4.35-4.35"/>
                 </svg>
             </button>
-            <button aria-label="Account">
+            <button class="js-open" aria-label="Account">
                 <svg viewBox="0 0 24 24">
                     <path d="M20 21v-2a4 4 0 0 0-4-4H8a4 4 0 0 0-4 4v2"/>
                     <circle cx="12" cy="7" r="4"/>
                 </svg>
             </button>
+
             <button aria-label="Cart">
                 <svg viewBox="0 0 24 24">
                     <path d="M6 2L3 6v14a2 2 0 0 0 2 2h14a2 2 0 0 0 2-2V6l-3-4z"/>
@@ -47,6 +46,11 @@
                     <path d="M16 10a4 4 0 0 1-8 0"/>
                 </svg>
             </button>
+            <div class="account">
+                <a href="#">Sign In</a>
+                <a class="js-slide" href="#">Create Account</a>
+                <a href="#">Track Order</a>
+            </div>
         </div>
         <div class="mega-menu" id="gifts-menu" onmouseleave="hideMenu()">
             <div class="mega-column">
@@ -180,7 +184,71 @@
             </div>
         </div>
 
+        <div class="mega-menu" id="collection-menu" onmouseleave="hideMenu()">
+            <div class="mega-column">
+                <h3>New Arrivals</h3>
+                <ul>
+                    <li><a href="#">Shop All New</a></li>
+                    <li><a href="#">Women's New</a></li>
+                    <li><a href="#">Men's New</a></li>
+                    <li><a href="#">Kids' New</a></li>
+                    <li><a href="#">Underwear New</a></li>
+                </ul>
+            </div>
+            <div class="mega-column">
+                <h3>New Arrivals</h3>
+                <ul>
+                    <li><a href="#">Shop All New</a></li>
+                    <li><a href="#">Women's New</a></li>
+                    <li><a href="#">Men's New</a></li>
+                    <li><a href="#">Kids' New</a></li>
+                    <li><a href="#">Underwear New</a></li>
+                </ul>
+            </div>
+            <div class="mega-column">
+                <h3>New Arrivals</h3>
+                <ul>
+                    <li><a href="#">Shop All New</a></li>
+                    <li><a href="#">Women's New</a></li>
+                    <li><a href="#">Men's New</a></li>
+                    <li><a href="#">Kids' New</a></li>
+                    <li><a href="#">Underwear New</a></li>
+                </ul>
+            </div>
+        </div>
         <div class="mega-menu" id="underwear-menu" onmouseleave="hideMenu()">
+            <div class="mega-column">
+                <h3>New Arrivals</h3>
+                <ul>
+                    <li><a href="#">Shop All New</a></li>
+                    <li><a href="#">Women's New</a></li>
+                    <li><a href="#">Men's New</a></li>
+                    <li><a href="#">Kids' New</a></li>
+                    <li><a href="#">Underwear New</a></li>
+                </ul>
+            </div>
+            <div class="mega-column">
+                <h3>New Arrivals</h3>
+                <ul>
+                    <li><a href="#">Shop All New</a></li>
+                    <li><a href="#">Women's New</a></li>
+                    <li><a href="#">Men's New</a></li>
+                    <li><a href="#">Kids' New</a></li>
+                    <li><a href="#">Underwear New</a></li>
+                </ul>
+            </div>
+            <div class="mega-column">
+                <h3>New Arrivals</h3>
+                <ul>
+                    <li><a href="#">Shop All New</a></li>
+                    <li><a href="#">Women's New</a></li>
+                    <li><a href="#">Men's New</a></li>
+                    <li><a href="#">Kids' New</a></li>
+                    <li><a href="#">Underwear New</a></li>
+                </ul>
+            </div>
+        </div>
+        <div class="mega-menu" id="sale-menu" onmouseleave="hideMenu()">
             <div class="mega-column">
                 <h3>New Arrivals</h3>
                 <ul>
@@ -217,6 +285,40 @@
     </header>
 
     <main id="main">
+
+        <div class="form">
+            <a href="#" class="x-mark"><i class="fa-solid fa-xmark"></i></a>
+            <div class="brand-header">
+              <h1 class="brand-name">DRIPSPACE</h1>
+              <p class="brand-tagline">Timeless Elegance</p>
+            </div>
+ <div class="login-container">
+    <div class="choose">
+        <div class="line">
+        <a href="#">Sign In</a>
+        <a href="#">Sign Up</a>            
+        </div>
+
+    </div>
+    <form class="login-form">
+        <div class="name">
+        <input type="text" id="email" class="form-input" placeholder="First Name" required>    
+        <input type="text" id="email" class="form-input" placeholder="Last Name" required> 
+        </div> 
+        <div class="mail">
+        <input type="email" id="email" class="form-input" placeholder="Enter Email" required>    
+        <input type="password" id="password" class="form-input" placeholder="Password" required>            
+        </div>  
+
+      
+      <button type="submit" class="btn-login">Login</button>
+      
+      <div class="form-footer">
+        <a href="#" class="link-forgot">Forgot Password?</a>
+      </div>
+    </form>
+  </div>
+        </div>
         <div class="container">
             <div class="texts">
                 <h1>Winter '25 Collection</h1>
@@ -243,23 +345,50 @@
     </section>
 
     <script>
-        let currentMenu = null
+   // ---- Mega Menu Logic ----
+let currentMenu = null;
 
-        function showMenu(menu){
-            hideMenu()
-            const menuElm = document.getElementById(menu + '-menu') 
-            if(menuElm){
-                menuElm.classList.add('active')
-                currentMenu = menuElm
-            }
-        }
+function showMenu(menu) {
+    hideMenu();
+    const menuElm = document.getElementById(menu + '-menu');
+    if (menuElm) {
+        menuElm.classList.add('active');
+        currentMenu = menuElm;
+    }
+}
 
-        function hideMenu(){
-            if(currentMenu){
-                currentMenu.classList.remove('active')
-                currentMenu = null
-            }
-        }
+function hideMenu() {
+    if (currentMenu) {
+        currentMenu.classList.remove('active');
+        currentMenu = null;
+    }
+}
+
+// ---- Account Dropdown (Create Account) ----
+const accountBtn = document.querySelector('.js-open');
+const accountBox = document.querySelector('.account');
+
+accountBtn.addEventListener('click', () => {
+    accountBox.classList.toggle('open');
+});
+
+// ---- Form Slide (Sign In / Sign Up Popup) ----
+const slide = document.querySelector('.js-slide');
+const form = document.querySelector('.form');
+const cross = document.querySelector('.x-mark');
+
+slide.addEventListener('click', () => {
+    form.classList.add('open-form');
+    // Close account dropdown when opening form
+    accountBox.classList.remove('open');
+});
+
+cross.addEventListener('click', () => {
+    form.classList.remove('open-form');
+    // Close account dropdown when closing form
+    accountBox.classList.remove('open');
+});
+
     </script>
 </body>
 </html>
