@@ -254,3 +254,16 @@
             visibility: hidden;
             transition: opacity 0.4s ease, visibility 0.4s ease;
         }
+
+        .hamburger-overlay.active {
+            opacity: 1;
+            visibility: visible;
+        }
+
+        .hamburger-header {
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            padding: 1.5rem;
+            border-bottom: 1px solid #e0e0e0;
+        }
