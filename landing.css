@@ -92,3 +92,51 @@
             display: flex;
             align-items: center;
         }
+
+
+        .nav-icons svg {
+            height: 22px;
+            width: 22px;
+            stroke: #000000;
+            stroke-width: 2;
+            fill: none;
+        }
+
+            input{
+            width: 0;
+            outline: none;
+            border: none;
+            background-color: #e0e0e0;
+            padding: 0.4rem 1rem;
+            border-radius: 18px;
+            opacity: 0;
+            transition: all 0.4s ease;
+        }
+
+        input.input-open{
+            opacity: 1;
+            width: 250px;
+        }
+
+        .account {
+            position: absolute;
+            top: 100%;
+            right: -20%;
+            max-width: 250px;
+            width: 200px;
+            display: flex;
+            height: 0;
+            overflow: hidden;
+            flex-direction: column;
+            z-index: 99999;
+            transition: all 0.5s ease;
+            background: rgb(60, 60, 60);
+            border-radius: 18px;
+        }
+        .account-padding{
+            padding: 1.4rem;
+            display: flex;
+            flex-direction: column;
+            gap: 1.4rem;
+
+        }
