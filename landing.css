@@ -420,15 +420,29 @@
         /* main section */
 
         #main{
-            height: 100vh;
+            height: 90vh;
             width: 100%;
             display: flex;
             justify-content: center;
             padding: 0 6vw;
+            padding-bottom: 2rem;
+            position: relative;
         }
 
         .gredient-container{
-            height: 80%;
+            height: 100%;
             width: 100%;
-            background-color: red;
+            /* background: linear-gradient(to bottom, #ffb9b9, #fbd7cf, #ffe7e0); */
+            background: linear-gradient(to bottom, #ffb9b9, #fbd7cf, #ffe7e0);
+            overflow: hidden;
+            position: relative;
+        }
+
+        .gredient-container img{
+            height: 100vh;
+            position: absolute;
+            top: 0;
+            left: 50%;
+            transform: translateX(-50%);
+            z-index: 2;
         }

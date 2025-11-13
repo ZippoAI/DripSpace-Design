@@ -1,0 +1,215 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Stylish Life - Luxurious Fashion</title>
+    <style>
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+        }
+
+        body {
+            font-family: 'Arial', sans-serif;
+            overflow-x: hidden;
+        }
+
+        .hero {
+            position: relative;
+            height: 100vh;
+            background: linear-gradient(135deg, #8B7FC6 0%, #9B9DD6 100%);
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            overflow: hidden;
+        }
+
+        .hero-content {
+            position: relative;
+            z-index: 2;
+            text-align: center;
+            width: 100%;
+            padding: 0 20px;
+        }
+
+        .hero-image {
+            position: absolute;
+            top: 50%;
+            left: 50%;
+            transform: translate(-50%, -50%);
+            width: 600px;
+            height: 100%;
+            object-fit: cover;
+            z-index: 1;
+        }
+
+        .luxurious-text {
+            position: absolute;
+            top: 80px;
+            left: 60px;
+            font-size: 18px;
+            font-weight: 300;
+            color: white;
+            letter-spacing: 3px;
+            text-transform: uppercase;
+        }
+
+        .main-title {
+            font-size: clamp(80px, 15vw, 200px);
+            font-weight: 900;
+            color: white;
+            letter-spacing: -5px;
+            line-height: 0.85;
+            text-transform: uppercase;
+            margin-bottom: 40px;
+            text-shadow: 2px 2px 20px rgba(0,0,0,0.1);
+        }
+
+        .best-offers {
+            position: absolute;
+            bottom: 180px;
+            left: 60px;
+            text-align: left;
+        }
+
+        .best-offers p {
+            color: white;
+            font-size: 14px;
+            font-weight: 600;
+            letter-spacing: 2px;
+            text-transform: uppercase;
+            line-height: 1.4;
+        }
+
+        .cta-box {
+            position: absolute;
+            bottom: 120px;
+            left: 50%;
+            transform: translateX(-50%);
+            background: rgba(255, 255, 255, 0.15);
+            backdrop-filter: blur(10px);
+            padding: 25px 50px;
+            border-radius: 8px;
+            border: 1px solid rgba(255, 255, 255, 0.2);
+            cursor: pointer;
+            transition: all 0.3s ease;
+        }
+
+        .cta-box:hover {
+            background: rgba(255, 255, 255, 0.25);
+            transform: translateX(-50%) translateY(-5px);
+            box-shadow: 0 10px 30px rgba(0,0,0,0.2);
+        }
+
+        .cta-box p {
+            color: white;
+            font-size: 15px;
+            font-weight: 700;
+            letter-spacing: 2px;
+            text-transform: uppercase;
+            text-align: center;
+            line-height: 1.5;
+        }
+
+        .celebrate-text {
+            position: absolute;
+            bottom: 120px;
+            right: 60px;
+            text-align: right;
+            max-width: 250px;
+        }
+
+        .celebrate-text p {
+            color: white;
+            font-size: 13px;
+            font-weight: 600;
+            letter-spacing: 1.5px;
+            text-transform: uppercase;
+            line-height: 1.6;
+        }
+
+        .nav {
+            position: absolute;
+            top: 0;
+            left: 0;
+            right: 0;
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            padding: 20px 40px;
+            z-index: 10;
+        }
+
+        .nav-left {
+            color: white;
+            font-size: 14px;
+            letter-spacing: 1px;
+        }
+
+        .nav-right {
+            display: flex;
+            gap: 30px;
+        }
+
+        .nav-icon {
+            color: white;
+            font-size: 24px;
+            cursor: pointer;
+            transition: transform 0.3s ease;
+        }
+
+        .nav-icon:hover {
+            transform: scale(1.1);
+        }
+
+        @media (max-width: 768px) {
+            .main-title {
+                font-size: 60px;
+            }
+            
+            .luxurious-text,
+            .best-offers,
+            .celebrate-text {
+                display: none;
+            }
+            
+            .cta-box {
+                bottom: 80px;
+                padding: 20px 40px;
+            }
+        }
+    </style>
+</head>
+<body>
+    <div class="hero">
+        <div class="nav">
+            <div class="nav-left">SHANIA MAIN ST CIVIC DESIGN</div>
+            <div class="nav-right">
+                <div class="nav-icon">☰</div>
+                <div class="nav-icon">🔍</div>
+                <div class="nav-icon">🛒</div>
+            </div>
+        </div>
+
+        <div class="luxurious-text">LUXURIOUS</div>
+
+        <div class="hero-content">
+            <h1 class="main-title">STYLISH LIFE</h1>
+        </div>
+
+        <div class="best-offers">
+            <p>ALL TIME BEST<br>OFFERS</p>
+        </div>
+
+        <div class="cta-box">
+            <p>SHOP NOW,<br>SAVE MORE</p>
+        </div>
+
+        <div class="celebrate-text">
+            <p>CELEBRATE INDIVIDUALITY<br>WITH UNIQUE OUTFITS</p>
+        </div>
+    </div>
+</body>
+</html>
