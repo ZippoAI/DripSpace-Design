@@ -379,3 +379,7 @@
         .hamburger-footer a:hover {
             color: #252525;
         }
+
+         @media (max-width: 768px){
+            
+         }
