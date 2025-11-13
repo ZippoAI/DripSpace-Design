@@ -277,5 +277,109 @@
             </div>
         </div>
     </div>
+
+    <main id="main">
+        <div class="gredient-container">
+        <div class="luxurious">
+            <h1>Luxurious</h1>
+            <h1>Stylish Life</h1>
+        </div>
+        <div class="left-text"></div>
+        <div class="mid-text"></div>
+        <div class="right-text"></div>            
+        </div>
+
+    </main>
+
+
+
+
+    <script>
+        // Mega Menu Logic
+        let currentMenu = null;
+
+        function showMenu(menu) {
+            hideMenu();
+            const menuElm = document.getElementById(menu + '-menu');
+            if (menuElm) {
+                menuElm.classList.add('active');
+                currentMenu = menuElm;
+            }
+        }
+
+        function hideMenu() {
+            if (currentMenu) {
+                currentMenu.classList.remove('active');
+                currentMenu = null;
+            }
+        }
+
+        // Account Dropdown
+        const accountBtn = document.querySelector('.js-open');
+        const accountBox = document.querySelector('.account');
+        const input = document.getElementById('input')
+        const inputBtn = document.getElementById('inputOpen')
+
+        accountBtn.addEventListener('click', () => {
+            accountBox.classList.toggle('open');
+        });
+        inputBtn.addEventListener('click', () => {
+            input.classList.add('input-open');
+        });
+
+        // Hamburger Menu Logic
+        const hamburgerBtn = document.querySelector('.hamburger-menu-btn');
+        const closeBtn = document.querySelector('.close-btn');
+        const hamburgerSidebar = document.querySelector('.hamburger-sidebar');
+        const hamburgerOverlay = document.querySelector('.hamburger-overlay');
+        const sectionTitles = document.querySelectorAll('.hamburger-section-title');
+
+
+        // Open hamburger menu
+        hamburgerBtn.addEventListener('click', () => {
+            hamburgerSidebar.classList.add('open');
+            hamburgerOverlay.classList.add('active');
+            document.body.style.overflow = 'hidden';
+        });
+
+        // Close hamburger menu
+        function closeHamburgerMenu() {
+            hamburgerSidebar.classList.remove('open');
+            hamburgerOverlay.classList.remove('active');
+            document.body.style.overflow = '';
+        }
+
+        closeBtn.addEventListener('click', closeHamburgerMenu);
+        hamburgerOverlay.addEventListener('click', closeHamburgerMenu);
+
+        // Toggle submenu in hamburger
+        sectionTitles.forEach(title => {
+            title.addEventListener('click', () => {
+                const submenu = title.nextElementSibling;
+                const isOpen = submenu.classList.contains('open');
+
+                // Close all submenus
+                document.querySelectorAll('.hamburger-submenu').forEach(menu => {
+                    menu.classList.remove('open');
+                });
+                document.querySelectorAll('.hamburger-section-title').forEach(t => {
+                    t.classList.remove('active');
+                });
+
+                // Toggle current submenu
+                if (!isOpen) {
+                    submenu.classList.add('open');
+                    title.classList.add('active');
+                }
+            });
+        });
+
+        // Close hamburger on ESC key
+        document.addEventListener('keydown', (e) => {
+            if (e.key === 'Escape' && hamburgerSidebar.classList.contains('open')) {
+                closeHamburgerMenu();
+            }
+        });
+    </script>
 </body>
 </html>
