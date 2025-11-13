@@ -433,7 +433,7 @@
             height: 100%;
             width: 100%;
             /* background: linear-gradient(to bottom, #ffb9b9, #fbd7cf, #ffe7e0); */
-            background: linear-gradient(to bottom, #ffb9b9, #fbd7cf, #ffe7e0);
+            background: linear-gradient(to bottom, #ff0c0c, #fe4016, #fbcec1);
             overflow: hidden;
             position: relative;
         }
