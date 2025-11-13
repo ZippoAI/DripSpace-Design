@@ -380,8 +380,9 @@
             color: #252525;
         }
 
-         @media (max-width: 768px){
-                        .hamburger-menu-btn {
+                /* Mobile Responsive */
+        @media (max-width: 768px) {
+            .hamburger-menu-btn {
                 display: block;
             }
 
@@ -392,4 +393,25 @@
             nav {
                 padding: 0.8rem 1.4rem;
             }
-         }
+
+
+            .mega-menu {
+                display: none !important;
+            }
+
+            .account {
+                right: 0;
+                transform: translateX(100%);
+            }
+
+            .account.open {
+                transform: translateX(0);
+            }
+        input.input-open{
+            opacity: 1;
+            width: 180px;
+        }
+        .logo{
+            display: none;
+        }
+        }
