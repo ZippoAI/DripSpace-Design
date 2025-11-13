@@ -71,3 +71,24 @@
             position: relative;
             text-transform: uppercase;
         }
+     .nav-links a:hover {
+            color: #262626;
+        }
+
+        .nav-icons {
+            display: flex;
+            gap: 1.5rem;
+            align-items: center;
+            position: relative;
+            z-index: 1001;
+        }
+
+        .nav-icons button {
+            border: none;
+            padding: 5px;
+            outline: none;
+            background: none;
+            cursor: pointer;
+            display: flex;
+            align-items: center;
+        }
