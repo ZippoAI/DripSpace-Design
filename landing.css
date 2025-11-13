@@ -381,5 +381,15 @@
         }
 
          @media (max-width: 768px){
-            
+                        .hamburger-menu-btn {
+                display: block;
+            }
+
+            .nav-links {
+                display: none;
+            }
+
+            nav {
+                padding: 0.8rem 1.4rem;
+            }
          }
