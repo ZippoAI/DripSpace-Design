@@ -315,3 +315,19 @@
         .hamburger-section-title:hover {
             background: #f5f5f5;
         }
+
+
+        .hamburger-section-title i {
+            transition: transform 0.3s ease;
+        }
+
+        .hamburger-section-title.active i {
+            transform: rotate(180deg);
+        }
+
+        .hamburger-submenu {
+            max-height: 0;
+            overflow: hidden;
+            transition: max-height 0.4s ease;
+            background: #f9f9f9;
+        }
