@@ -296,3 +296,22 @@
         .hamburger-section {
             border-bottom: 1px solid #e0e0e0;
         }
+
+
+        .hamburger-section-title {
+            padding: 1rem 1.5rem;
+            font-size: 14px;
+            font-weight: 400;
+            color: #000000;
+            text-transform: uppercase;
+            letter-spacing: 1px;
+            cursor: pointer;
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            transition: background 0.3s ease;
+        }
+
+        .hamburger-section-title:hover {
+            background: #f5f5f5;
+        }
