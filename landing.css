@@ -284,3 +284,15 @@
             line-height: 1;
             transition: transform 0.3s ease;
         }
+
+        .close-btn:hover {
+            transform: rotate(90deg);
+        }
+
+        .hamburger-content {
+            padding: 1rem 0;
+        }
+
+        .hamburger-section {
+            border-bottom: 1px solid #e0e0e0;
+        }
