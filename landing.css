@@ -140,3 +140,19 @@
             gap: 1.4rem;
 
         }
+
+    .account a {
+            text-decoration: none;
+            color: #ffffff;
+        }
+
+        .account a:hover {
+            text-decoration: underline;
+            color: #d9d9d9;
+
+        }
+
+        .account.open {
+            display: flex;
+            height: 160px;
+        }
