@@ -810,11 +810,47 @@
         }
 
         /* Auto-scroll indicator */
-        .auto-scroll-indicator {
+        .arrivals-bottom-texts {
             text-align: center;
             margin-top: 1rem;
             font-size: 0.9rem;
             color: #666;
+            h1{
+                text-transform: uppercase;
+                font-size: 3.2rem;
+            }
+        }
+
+
+
+        .section-grid{
+            min-height: 100vh;
+            display: grid;
+            grid-template-columns: 500px 1fr;
+            grid-template-rows: repeat(2, 550px);
+            grid-template-areas: 
+            'left     right'
+            'bottom     right'
+            ;
+            gap: 0.8rem;
+        }
+
+        .grid-column{
+            position: relative;
+        }
+
+        .grid-column:nth-child(1){            
+            background: linear-gradient(to bottom, #fd7878, #fcb4a4, #ffdcd3);
+            grid-area: left;
+        
+        }
+        .grid-column:nth-child(2){
+            background: linear-gradient(to bottom, #78e5fd, #a4d9fc, #d3eeff);
+            grid-area: right;
+        }
+        .grid-column:nth-child(3){
+            background: linear-gradient(to bottom, #f6fd78, #f3fca4, #fffed3);
+            grid-area: bottom;
         }
 
         /* Responsive */
