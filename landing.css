@@ -819,7 +819,41 @@
 
         /* Responsive */
 
-        
+                /* Responsive Design */
+        @media (max-width: 1024px) {
+            .page3-images {
+                flex-direction: column;
+            }
+
+            .page3-image {
+                min-height: 500px;
+            }
+        }
+
+        @media (max-width: 768px) {
+            .page3 {
+                padding: 1rem;
+            }
+
+            .page3-box {
+                width: 85%;
+                left: 7.5%;
+                top: 25%;
+            }
+
+            .section-header h3 {
+                font-size: 14px;
+            }
+
+            .section-content p {
+                font-size: 13px;
+            }
+
+            .btn {
+                font-size: 13px;
+                padding: 0.6rem 1.2rem;
+            }
+        }
 
 
         @media (max-width: 768px) {
