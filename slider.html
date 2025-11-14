@@ -1,0 +1,445 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
+    <title>Arrivals Slider</title>
+    <style>
+        @import url('https://fonts.googleapis.com/css2?family=Outfit:wght@100..900&display=swap');
+        
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+        }
+
+        body {
+            font-family: 'Outfit', sans-serif;
+            background: #f5f5f5;
+        }
+
+        .arrivals {
+            min-height: 70vh;
+            padding: 3rem 2rem;
+            background: #fff;
+        }
+
+        .arrivals-header {
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            margin-bottom: 2rem;
+        }
+
+        .arrivals h1 {
+            font-size: 2.5rem;
+            color: #111;
+            letter-spacing: 2px;
+            font-weight: 600;
+        }
+
+        .slider-controls {
+            display: flex;
+            gap: 1rem;
+        }
+
+        .slider-btn {
+            width: 50px;
+            height: 50px;
+            border: 2px solid #111;
+            background: transparent;
+            border-radius: 50%;
+            cursor: pointer;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            transition: all 0.3s ease;
+            font-size: 1.2rem;
+        }
+
+        .slider-btn:hover {
+            background: #111;
+            color: #fff;
+            transform: scale(1.1);
+        }
+
+        .slider-btn:disabled {
+            opacity: 0.3;
+            cursor: not-allowed;
+            transform: scale(1);
+        }
+
+        .slider-btn:disabled:hover {
+            background: transparent;
+            color: #111;
+        }
+
+        .arrival-container {
+            position: relative;
+            overflow: hidden;
+            padding: 1rem 0;
+        }
+
+        .arrival-track {
+            display: flex;
+            gap: 1.5rem;
+            transition: transform 0.5s cubic-bezier(0.4, 0, 0.2, 1);
+        }
+
+        .arrival-items {
+            min-width: 320px;
+            height: 450px;
+            background: #fff;
+            border-radius: 12px;
+            overflow: hidden;
+            box-shadow: 0 4px 15px rgba(0, 0, 0, 0.1);
+            transition: all 0.3s ease;
+            cursor: pointer;
+            flex-shrink: 0;
+        }
+
+        .arrival-items:hover {
+            transform: translateY(-10px);
+            box-shadow: 0 8px 25px rgba(0, 0, 0, 0.15);
+        }
+
+        .arrival-items img {
+            height: 75%;
+            width: 100%;
+            object-fit: cover;
+            transition: transform 0.3s ease;
+        }
+
+        .arrival-items:hover img {
+            transform: scale(1.05);
+        }
+
+        .arrival-info {
+            padding: 1.5rem;
+            background: #fff;
+        }
+
+        .arrival-items h2 {
+            font-size: 1.3rem;
+            color: #111;
+            margin-bottom: 0.5rem;
+            font-weight: 500;
+        }
+
+        .arrival-items h4 {
+            font-size: 1.5rem;
+            color: #ff4444;
+            font-weight: 600;
+        }
+
+        /* Slider Dots */
+        .slider-dots {
+            display: flex;
+            justify-content: center;
+            gap: 0.8rem;
+            margin-top: 2rem;
+        }
+
+        .dot {
+            width: 12px;
+            height: 12px;
+            border-radius: 50%;
+            background: #ddd;
+            cursor: pointer;
+            transition: all 0.3s ease;
+        }
+
+        .dot.active {
+            background: #111;
+            width: 30px;
+            border-radius: 6px;
+        }
+
+        /* Auto-scroll indicator */
+        .auto-scroll-indicator {
+            text-align: center;
+            margin-top: 1rem;
+            font-size: 0.9rem;
+            color: #666;
+        }
+
+        /* Responsive */
+        @media (max-width: 768px) {
+            .arrivals {
+                padding: 2rem 1rem;
+            }
+
+            .arrivals h1 {
+                font-size: 1.8rem;
+            }
+
+            .arrival-items {
+                min-width: 280px;
+                height: 400px;
+            }
+
+            .slider-btn {
+                width: 40px;
+                height: 40px;
+                font-size: 1rem;
+            }
+        }
+
+        @media (max-width: 480px) {
+            .arrival-items {
+                min-width: 250px;
+                height: 380px;
+            }
+
+            .arrivals-header {
+                flex-direction: column;
+                gap: 1rem;
+                align-items: flex-start;
+            }
+        }
+    </style>
+</head>
+<body>
+    <section class="arrivals">
+        <div class="arrivals-header">
+            <h1>New Arrivals</h1>
+            <div class="slider-controls">
+                <button class="slider-btn" id="prevBtn" aria-label="Previous">
+                    <i class="fas fa-chevron-left"></i>
+                </button>
+                <button class="slider-btn" id="nextBtn" aria-label="Next">
+                    <i class="fas fa-chevron-right"></i>
+                </button>
+            </div>
+        </div>
+
+        <div class="arrival-container">
+            <div class="arrival-track" id="sliderTrack">
+                <div class="arrival-items">
+                    <img src="https://raw.githubusercontent.com/Rakesh07778777/Drip-Space/main/image%20copy%202.png" alt="Track Jacket">
+                    <div class="arrival-info">
+                        <h2>Track Jackets</h2>
+                        <h4>$99.99</h4>
+                    </div>
+                </div>
+                <div class="arrival-items">
+                    <img src="https://raw.githubusercontent.com/Rakesh07778777/Drip-Space/main/image%20copy%202.png" alt="Track Jacket">
+                    <div class="arrival-info">
+                        <h2>Casual Wear</h2>
+                        <h4>$79.99</h4>
+                    </div>
+                </div>
+                <div class="arrival-items">
+                    <img src="https://raw.githubusercontent.com/Rakesh07778777/Drip-Space/main/image%20copy%202.png" alt="Track Jacket">
+                    <div class="arrival-info">
+                        <h2>Sports Collection</h2>
+                        <h4>$129.99</h4>
+                    </div>
+                </div>
+                <div class="arrival-items">
+                    <img src="https://raw.githubusercontent.com/Rakesh07778777/Drip-Space/main/image%20copy%202.png" alt="Track Jacket">
+                    <div class="arrival-info">
+                        <h2>Premium Jacket</h2>
+                        <h4>$149.99</h4>
+                    </div>
+                </div>
+                <div class="arrival-items">
+                    <img src="https://raw.githubusercontent.com/Rakesh07778777/Drip-Space/main/image%20copy%202.png" alt="Track Jacket">
+                    <div class="arrival-info">
+                        <h2>Urban Style</h2>
+                        <h4>$89.99</h4>
+                    </div>
+                </div>
+                <div class="arrival-items">
+                    <img src="https://raw.githubusercontent.com/Rakesh07778777/Drip-Space/main/image%20copy%202.png" alt="Track Jacket">
+                    <div class="arrival-info">
+                        <h2>Classic Design</h2>
+                        <h4>$99.99</h4>
+                    </div>
+                </div>
+            </div>
+        </div>
+
+        <div class="slider-dots" id="sliderDots"></div>
+        <div class="auto-scroll-indicator">
+            <small>Auto-scrolling every 4 seconds</small>
+        </div>
+    </section>
+
+    <script>
+        const sliderTrack = document.getElementById('sliderTrack');
+        const prevBtn = document.getElementById('prevBtn');
+        const nextBtn = document.getElementById('nextBtn');
+        const dotsContainer = document.getElementById('sliderDots');
+        const items = document.querySelectorAll('.arrival-items');
+        
+        let currentIndex = 0;
+        let itemsToShow = getItemsToShow();
+        let autoScrollInterval;
+
+        // Calculate how many items to show based on screen width
+        function getItemsToShow() {
+            const width = window.innerWidth;
+            if (width < 480) return 1;
+            if (width < 768) return 2;
+            if (width < 1024) return 3;
+            return 3;
+        }
+
+        // Calculate total slides
+        function getTotalSlides() {
+            return Math.ceil(items.length / itemsToShow);
+        }
+
+        // Create dots
+        function createDots() {
+            dotsContainer.innerHTML = '';
+            const totalSlides = getTotalSlides();
+            for (let i = 0; i < totalSlides; i++) {
+                const dot = document.createElement('div');
+                dot.classList.add('dot');
+                if (i === 0) dot.classList.add('active');
+                dot.addEventListener('click', () => goToSlide(i));
+                dotsContainer.appendChild(dot);
+            }
+        }
+
+        // Update dots
+        function updateDots() {
+            const dots = document.querySelectorAll('.dot');
+            dots.forEach((dot, index) => {
+                dot.classList.toggle('active', index === currentIndex);
+            });
+        }
+
+        // Move slider
+        function moveSlider() {
+            const itemWidth = items[0].offsetWidth;
+            const gap = 24; // 1.5rem gap
+            const offset = currentIndex * itemsToShow * (itemWidth + gap);
+            sliderTrack.style.transform = `translateX(-${offset}px)`;
+            updateDots();
+            updateButtons();
+        }
+
+        // Update button states
+        function updateButtons() {
+            const totalSlides = getTotalSlides();
+            prevBtn.disabled = currentIndex === 0;
+            nextBtn.disabled = currentIndex >= totalSlides - 1;
+        }
+
+        // Go to specific slide
+        function goToSlide(index) {
+            currentIndex = index;
+            moveSlider();
+            resetAutoScroll();
+        }
+
+        // Next slide
+        function nextSlide() {
+            const totalSlides = getTotalSlides();
+            if (currentIndex < totalSlides - 1) {
+                currentIndex++;
+                moveSlider();
+            } else {
+                // Loop back to start
+                currentIndex = 0;
+                moveSlider();
+            }
+        }
+
+        // Previous slide
+        function prevSlide() {
+            if (currentIndex > 0) {
+                currentIndex--;
+                moveSlider();
+            }
+        }
+
+        // Auto scroll
+        function startAutoScroll() {
+            autoScrollInterval = setInterval(() => {
+                nextSlide();
+            }, 4000);
+        }
+
+        function resetAutoScroll() {
+            clearInterval(autoScrollInterval);
+            startAutoScroll();
+        }
+
+        // Event listeners
+        nextBtn.addEventListener('click', () => {
+            nextSlide();
+            resetAutoScroll();
+        });
+
+        prevBtn.addEventListener('click', () => {
+            prevSlide();
+            resetAutoScroll();
+        });
+
+        // Handle window resize
+        window.addEventListener('resize', () => {
+            const newItemsToShow = getItemsToShow();
+            if (newItemsToShow !== itemsToShow) {
+                itemsToShow = newItemsToShow;
+                currentIndex = 0;
+                createDots();
+                moveSlider();
+            }
+        });
+
+        // Pause on hover
+        sliderTrack.addEventListener('mouseenter', () => {
+            clearInterval(autoScrollInterval);
+        });
+
+        sliderTrack.addEventListener('mouseleave', () => {
+            startAutoScroll();
+        });
+
+        // Touch/swipe support
+        let touchStartX = 0;
+        let touchEndX = 0;
+
+        sliderTrack.addEventListener('touchstart', (e) => {
+            touchStartX = e.changedTouches[0].screenX;
+            clearInterval(autoScrollInterval);
+        });
+
+        sliderTrack.addEventListener('touchend', (e) => {
+            touchEndX = e.changedTouches[0].screenX;
+            handleSwipe();
+            startAutoScroll();
+        });
+
+        function handleSwipe() {
+            const swipeThreshold = 50;
+            if (touchStartX - touchEndX > swipeThreshold) {
+                nextSlide();
+            } else if (touchEndX - touchStartX > swipeThreshold) {
+                prevSlide();
+            }
+        }
+
+        // Keyboard navigation
+        document.addEventListener('keydown', (e) => {
+            if (e.key === 'ArrowLeft') {
+                prevSlide();
+                resetAutoScroll();
+            } else if (e.key === 'ArrowRight') {
+                nextSlide();
+                resetAutoScroll();
+            }
+        });
+
+        // Initialize
+        createDots();
+        updateButtons();
+        startAutoScroll();
+    </script>
+</body>
+</html>

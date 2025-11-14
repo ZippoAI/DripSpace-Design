@@ -7,26 +7,295 @@
     <title>Document</title>
 </head>
 <body>
+        <header>
 
+        <nav>
+            <!-- Hamburger Menu Button -->
+            <button class="hamburger-menu-btn" aria-label="Open Menu">
+                <i class="fa-solid fa-bars"></i>
+            </button>
+
+            <a href="#home" class="logo">Branding</a>
+
+            <ul class="nav-links">
+                <li><a href="#home" onmouseenter="showMenu('home')">Home</a></li>
+                <li><a href="#footwear" onmouseenter="showMenu('footwear')">FootWear</a></li>
+                <li><a href="#men" onmouseenter="showMenu('men')">Men</a></li>
+                <li><a href="#new" onmouseenter="showMenu('new')">New Arrivals</a></li>
+            </ul>
+
+            <div class="nav-icons">
+                <button aria-label="Search" id="inputOpen">
+                    <input type="search" placeholder="Search" id="input">
+                    <svg viewBox="0 0 24 24">
+                        <circle cx="11" cy="11" r="8"/>
+                        <path d="m21 21-4.35-4.35"/>
+                    </svg>
+                </button>                    
+
+                <button class="js-open" aria-label="Account">
+                    <svg viewBox="0 0 24 24">
+                        <path d="M20 21v-2a4 4 0 0 0-4-4H8a4 4 0 0 0-4 4v2"/>
+                        <circle cx="12" cy="7" r="4"/>
+                    </svg>
+                </button>
+                <button aria-label="Cart">
+                    <svg viewBox="0 0 24 24">
+                        <path d="M6 2L3 6v14a2 2 0 0 0 2 2h14a2 2 0 0 0 2-2V6l-3-4z"/>
+                        <line x1="3" y1="6" x2="21" y2="6"/>
+                        <path d="M16 10a4 4 0 0 1-8 0"/>
+                    </svg>
+                </button>
+                <div class="account">
+                    <div class="account-padding">
+                    <a class="js-sign-up" href="#">Sign In</a>
+                    <a class="js-slide" href="#">Create Account</a>
+                    <a href="#">Track Order</a>                        
+                    </div>
+
+                </div>
+            </div>
+
+            <!-- Mega Menus -->
+
+            <div class="mega-menu" id="footwear-menu" onmouseleave="hideMenu()">
+                <div class="mega-column">
+                    <h3>Men's Footwear</h3>
+                    <ul>
+                        <li><a href="#">Punjabi Jutti</a></li>
+                        <li><a href="#">Mojari</a></li>
+                        <li><a href="#">Sandals</a></li>
+                        <li><a href="#">Formal Shoes</a></li>
+                    </ul>
+                </div>
+                <div class="mega-column">
+                    <h3>Women's Footwear</h3>
+                    <ul>
+                        <li><a href="#">Designer Jutti</a></li>
+                        <li><a href="#">Embroidered</a></li>
+                        <li><a href="#">Kolhapuri</a></li>
+                        <li><a href="#">Heels</a></li>
+                    </ul>
+                </div>
+            </div>
+
+            <div class="mega-menu" id="men-menu" onmouseleave="hideMenu()">
+                <div class="mega-column">
+                    <h3>Traditional Wear</h3>
+                    <ul>
+                        <li><a href="#">Kurta Pajama</a></li>
+                        <li><a href="#">Sherwani</a></li>
+                        <li><a href="#">Pathani Suit</a></li>
+                        <li><a href="#">Nehru Jacket</a></li>
+                    </ul>
+                </div>
+                <div class="mega-column">
+                    <h3>Casual Wear</h3>
+                    <ul>
+                        <li><a href="#">Shirts</a></li>
+                        <li><a href="#">T-Shirts</a></li>
+                        <li><a href="#">Jeans</a></li>
+                        <li><a href="#">Jackets</a></li>
+                    </ul>
+                </div>
+            </div>
+
+            <!-- <div class="mega-menu" id="accessories-menu" onmouseleave="hideMenu()">
+                <div class="mega-column">
+                    <h3>Accessories</h3>
+                    <ul>
+                        <li><a href="#">Turbans</a></li>
+                        <li><a href="#">Stoles</a></li>
+                        <li><a href="#">Belts</a></li>
+                        <li><a href="#">Wallets</a></li>
+                    </ul>
+                </div>
+                <div class="mega-column">
+                    <h3>Jewelry</h3>
+                    <ul>
+                        <li><a href="#">Kada</a></li>
+                        <li><a href="#">Rings</a></li>
+                        <li><a href="#">Chains</a></li>
+                        <li><a href="#">Earrings</a></li>
+                    </ul>
+                </div>
+            </div> -->
+
+            <!-- <div class="mega-menu" id="new-menu" onmouseleave="hideMenu()">
+                <div class="mega-column">
+                    <h3>New Arrivals</h3>
+                    <ul>
+                        <li><a href="#">Shop All New</a></li>
+                        <li><a href="#">Women's New</a></li>
+                        <li><a href="#">Men's New</a></li>
+                        <li><a href="#">Kids' New</a></li>
+                    </ul>
+                </div>
+            </div> -->
+
+            <!-- <div class="mega-menu" id="sale-menu" onmouseleave="hideMenu()">
+                <div class="mega-column">
+                    <h3>Sale Items</h3>
+                    <ul>
+                        <li><a href="#">Up to 50% Off</a></li>
+                        <li><a href="#">Clearance</a></li>
+                        <li><a href="#">End of Season</a></li>
+                        <li><a href="#">Limited Time</a></li>
+                    </ul>
+                </div>
+            </div> -->
+        </nav>
+    </header>
+
+    <!-- Hamburger Sidebar -->
+    <div class="hamburger-overlay"></div>
+    <div class="hamburger-sidebar">
+        <div class="hamburger-header">
+            <h2>Branding</h2>
+            <button class="close-btn" aria-label="Close Menu">
+                <i class="fa-solid fa-times"></i>
+            </button>
+        </div>
+
+        <div class="hamburger-content">
+            <div class="hamburger-section">
+                <div class="hamburger-section-title">
+                    Home
+                    <i class="fa-solid fa-chevron-down"></i>
+                </div>
+
+            </div>
+
+            <div class="hamburger-section">
+                <div class="hamburger-section-title">
+                    FootWear
+                    <i class="fa-solid fa-chevron-down"></i>
+                </div>
+                <div class="hamburger-submenu">
+                    <ul>
+                        <li><a href="#">Punjabi Jutti</a></li>
+                        <li><a href="#">Mojari</a></li>
+                        <li><a href="#">Sandals</a></li>
+                        <li><a href="#">Designer Jutti</a></li>
+                        <li><a href="#">Embroidered</a></li>
+                    </ul>
+                </div>
+            </div>
+
+            <div class="hamburger-section">
+                <div class="hamburger-section-title">
+                    Branding
+                    <i class="fa-solid fa-chevron-down"></i>
+                </div>
+                <div class="hamburger-submenu">
+                    <ul>
+                        <li><a href="#">Kurta Pajama</a></li>
+                        <li><a href="#">Sherwani</a></li>
+                        <li><a href="#">Pathani Suit</a></li>
+                        <li><a href="#">Nehru Jacket</a></li>
+                        <li><a href="#">Shirts</a></li>
+                    </ul>
+                </div>
+            </div>
+
+
+            <div class="hamburger-section">
+                <div class="hamburger-section-title">
+                    New Arrivals
+                    <i class="fa-solid fa-chevron-down"></i>
+                </div>
+            </div>
+        </div>
+    </div>
 
     <main id="main">
         <div class="gredient-container">
             <img src="assets/images/image-removebg-preview.png" alt="">
         <div class="luxurious">
-            <h1>Luxurious</h1>
-            <h1>Stylish Life</h1>
+            <h1 class="lux">Luxurious</h1>
+            <h1 class="stylish">Stylish Life</h1>
         </div>
         <div class="left-text">
             All time best offer
         </div>
         <div class="mid-text"></div>
-        <div class="right-text"></div>            
+        <div class="right-text">
+            celebrate individuality <br> with unique outfit
+        </div>            
         </div>
-
     </main>
 
+    <section class="page2">
+    <div class="video-page">
+            <video playsinline muted loop autoplay src="assets/images/3888252-uhd_4096_2160_25fps.mp4"></video>
+    </div>
+    </section>
 
+    <section class="arrivals">
+        <div class="arrivals-header">
+            <h1>New Arrivals</h1>
+            <div class="slider-controls">
+                <button class="slider-btn" id="prevBtn" aria-label="Previous">
+                    <i class="fas fa-chevron-left"></i>
+                </button>
+                <button class="slider-btn" id="nextBtn" aria-label="Next">
+                    <i class="fas fa-chevron-right"></i>
+                </button>
+            </div>
+        </div>
 
+        <div class="arrival-container">
+            <div class="arrival-track" id="sliderTrack">
+                <div class="arrival-items">
+                    <img src="https://raw.githubusercontent.com/Rakesh07778777/Drip-Space/main/image%20copy%202.png" alt="Track Jacket">
+                    <div class="arrival-info">
+                        <h2>Track Jackets</h2>
+                        <h4>$99.99</h4>
+                    </div>
+                </div>
+                <div class="arrival-items">
+                    <img src="https://raw.githubusercontent.com/Rakesh07778777/Drip-Space/main/image%20copy%202.png" alt="Track Jacket">
+                    <div class="arrival-info">
+                        <h2>Casual Wear</h2>
+                        <h4>$79.99</h4>
+                    </div>
+                </div>
+                <div class="arrival-items">
+                    <img src="https://raw.githubusercontent.com/Rakesh07778777/Drip-Space/main/image%20copy%202.png" alt="Track Jacket">
+                    <div class="arrival-info">
+                        <h2>Sports Collection</h2>
+                        <h4>$129.99</h4>
+                    </div>
+                </div>
+                <div class="arrival-items">
+                    <img src="https://raw.githubusercontent.com/Rakesh07778777/Drip-Space/main/image%20copy%202.png" alt="Track Jacket">
+                    <div class="arrival-info">
+                        <h2>Premium Jacket</h2>
+                        <h4>$149.99</h4>
+                    </div>
+                </div>
+                <div class="arrival-items">
+                    <img src="https://raw.githubusercontent.com/Rakesh07778777/Drip-Space/main/image%20copy%202.png" alt="Track Jacket">
+                    <div class="arrival-info">
+                        <h2>Urban Style</h2>
+                        <h4>$89.99</h4>
+                    </div>
+                </div>
+                <div class="arrival-items">
+                    <img src="https://raw.githubusercontent.com/Rakesh07778777/Drip-Space/main/image%20copy%202.png" alt="Track Jacket">
+                    <div class="arrival-info">
+                        <h2>Classic Design</h2>
+                        <h4>$99.99</h4>
+                    </div>
+                </div>
+            </div>
+        </div>
+
+        <div class="slider-dots" id="sliderDots"></div>
+        <div class="auto-scroll-indicator">
+            <small>Auto-scrolling every 4 seconds</small>
+        </div>
+    </section>
 
     <script>
         // Mega Menu Logic
@@ -114,6 +383,170 @@
                 closeHamburgerMenu();
             }
         });
+
+
+
+ const sliderTrack = document.getElementById('sliderTrack');
+        const prevBtn = document.getElementById('prevBtn');
+        const nextBtn = document.getElementById('nextBtn');
+        const dotsContainer = document.getElementById('sliderDots');
+        const items = document.querySelectorAll('.arrival-items');
+        
+        let currentIndex = 0;
+        let itemsToShow = getItemsToShow();
+        let autoScrollInterval;
+
+        // Calculate how many items to show based on screen width
+        function getItemsToShow() {
+            const width = window.innerWidth;
+            if (width < 480) return 1;
+            if (width < 768) return 2;
+            if (width < 1024) return 3;
+            return 3;
+        }
+
+        // Calculate total slides
+        function getTotalSlides() {
+            return Math.ceil(items.length / itemsToShow);
+        }
+
+        // Create dots
+        function createDots() {
+            dotsContainer.innerHTML = '';
+            const totalSlides = getTotalSlides();
+            for (let i = 0; i < totalSlides; i++) {
+                const dot = document.createElement('div');
+                dot.classList.add('dot');
+                if (i === 0) dot.classList.add('active');
+                dot.addEventListener('click', () => goToSlide(i));
+                dotsContainer.appendChild(dot);
+            }
+        }
+
+        // Update dots
+        function updateDots() {
+            const dots = document.querySelectorAll('.dot');
+            dots.forEach((dot, index) => {
+                dot.classList.toggle('active', index === currentIndex);
+            });
+        }
+
+        // Move slider
+        function moveSlider() {
+            const itemWidth = items[0].offsetWidth;
+            const gap = 24; // 1.5rem gap
+            const offset = currentIndex * itemsToShow * (itemWidth + gap);
+            sliderTrack.style.transform = `translateX(-${offset}px)`;
+            updateDots();
+            updateButtons();
+        }
+
+        // Update button states
+        function updateButtons() {
+            const totalSlides = getTotalSlides();
+            prevBtn.disabled = currentIndex === 0;
+            nextBtn.disabled = currentIndex >= totalSlides - 1;
+        }
+
+        // Go to specific slide
+        function goToSlide(index) {
+            currentIndex = index;
+            moveSlider();
+            resetAutoScroll();
+        }
+
+        // Next slide
+        function nextSlide() {
+            const totalSlides = getTotalSlides();
+            if (currentIndex < totalSlides - 1) {
+                currentIndex++;
+                moveSlider();
+            } else {
+                // Loop back to start
+                currentIndex = 0;
+                moveSlider();
+            }
+        }
+
+        // Previous slide
+        function prevSlide() {
+            if (currentIndex > 0) {
+                currentIndex--;
+                moveSlider();
+            }
+        }
+
+
+        // Event listeners
+        nextBtn.addEventListener('click', () => {
+            nextSlide();
+            resetAutoScroll();
+        });
+
+        prevBtn.addEventListener('click', () => {
+            prevSlide();
+            resetAutoScroll();
+        });
+
+        // Handle window resize
+        window.addEventListener('resize', () => {
+            const newItemsToShow = getItemsToShow();
+            if (newItemsToShow !== itemsToShow) {
+                itemsToShow = newItemsToShow;
+                currentIndex = 0;
+                createDots();
+                moveSlider();
+            }
+        });
+
+        // Pause on hover
+        sliderTrack.addEventListener('mouseenter', () => {
+            clearInterval(autoScrollInterval);
+        });
+
+        sliderTrack.addEventListener('mouseleave', () => {
+            startAutoScroll();
+        });
+
+        // Touch/swipe support
+        let touchStartX = 0;
+        let touchEndX = 0;
+
+        sliderTrack.addEventListener('touchstart', (e) => {
+            touchStartX = e.changedTouches[0].screenX;
+            clearInterval(autoScrollInterval);
+        });
+
+        sliderTrack.addEventListener('touchend', (e) => {
+            touchEndX = e.changedTouches[0].screenX;
+            handleSwipe();
+            startAutoScroll();
+        });
+
+        function handleSwipe() {
+            const swipeThreshold = 50;
+            if (touchStartX - touchEndX > swipeThreshold) {
+                nextSlide();
+            } else if (touchEndX - touchStartX > swipeThreshold) {
+                prevSlide();
+            }
+        }
+
+        // Keyboard navigation
+        document.addEventListener('keydown', (e) => {
+            if (e.key === 'ArrowLeft') {
+                prevSlide();
+                resetAutoScroll();
+            } else if (e.key === 'ArrowRight') {
+                nextSlide();
+                resetAutoScroll();
+            }
+        });
+
+        // Initialize
+        createDots();
+        updateButtons();
+        startAutoScroll();
     </script>
 </body>
 </html>
