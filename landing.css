@@ -1011,7 +1011,39 @@
                 height: 40px;
                 font-size: 1rem;
             }
+
+            .hamburger-menu-btn {
+                display: block;
+            }
+
+            .nav-links {
+                display: none;
+            }
+
+            nav {
+                padding: 0.8rem 1.4rem;
+            }
+
+
+            .mega-menu {
+                display: none !important;
+            }
+
+            .account {
+                right: 0;
+                transform: translateX(100%);
+            }
+
+            .account.open {
+                transform: translateX(0);
+            }
+        input.input-open{
+            opacity: 1;
+            width: 180px;
         }
+        .logo{
+        }
+    }
 
         @media (max-width: 480px) {
             .arrival-items {
