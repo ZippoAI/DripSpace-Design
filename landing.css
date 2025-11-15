@@ -38,7 +38,7 @@
 
         .logo {
             text-decoration: none;
-            color: #ff0000;
+            color: #0a0a0a;
             font-size: 1.5rem;
             font-weight: 600;
             z-index: 1001;
@@ -128,9 +128,9 @@
             flex-direction: column;
             z-index: 99999;
             transition: all 0.5s ease;
-            background: linear-gradient(to bottom, #ffffff, #eeeeee, #dfdfdf);
+            background: linear-gradient(to bottom, #ffffff, #f8f8f8, #f3f3f3);
             border-radius: 18px;
-            box-shadow: 0 10px 25px rgba(255, 255, 255, 0.25), 
+            box-shadow: 0 10px 25px rgba(115, 115, 115, 0.163), 
             0 4px 10px rgba(0, 0, 0, 0.2);
 
         }
@@ -156,8 +156,8 @@
         .account.open {
             display: flex;
             height: 160px;
-            border: 0.5px solid rgb(255, 255, 255);
-            box-shadow: 0 10px 25px rgba(255, 188, 188, 0.25), 
+            border: 0.5px solid rgba(159, 159, 159, 0.614);
+            box-shadow: 0 10px 25px rgba(45, 45, 45, 0.25), 
             0 4px 10px rgba(0, 0, 0, 0.2);
 
         }
@@ -213,7 +213,7 @@
         }
 
         .mega-column ul li a:hover {
-            color: #d32f2f;
+            color: #1b1b1b;
         }
 
         /* Hamburger Menu Styles */
@@ -398,7 +398,7 @@
             height: 90%;
             width: 100%;
             /* background: linear-gradient(to bottom, #ffb9b9, #fbd7cf, #ffe7e0); */
-            background: linear-gradient(to bottom, #ff0c0c, #fe4016, #fbcec1);
+            background: linear-gradient(to bottom, #161616, #777777, #d4d4d4);
             overflow: hidden;
             position: relative;
             padding: 0 2rem;
@@ -481,15 +481,15 @@
         }
 
         .page3-image:nth-child(1) {
-            background-image: url(https://images.unsplash.com/photo-1441986300917-64674bd600d8?w=800);
+            background-image: url(https://raw.githubusercontent.com/Rakesh07778777/Drip-Space/main/image%20copy%2027.png);
         }
 
         .page3-image:nth-child(2) {
-            background-image: url(https://images.unsplash.com/photo-1445205170230-053b83016050?w=800);
+            background-image: url(https://raw.githubusercontent.com/Rakesh07778777/Drip-Space/main/image%20copy%2029.png);
         }
 
         .page3-image:nth-child(3) {
-            background-image: url(https://images.unsplash.com/photo-1483985988355-763728e1935b?w=800);
+            background-image: url(https://raw.githubusercontent.com/Rakesh07778777/Drip-Space/main/image%20copy%2031.png);
         }
 
         .page3-box {
@@ -497,7 +497,8 @@
             top: 30%;
             left: 15%;
             width: 70%;
-            background-color: rgba(239, 146, 146, 0.95);
+            background-color: rgba(23, 23, 23, 0.311);
+            backdrop-filter: blur(10px);
             border-radius: 18px;
             box-shadow: 0 10px 40px rgba(0, 0, 0, 0.3);
             overflow: hidden;
@@ -821,12 +822,13 @@
             /* position: absolute; */
             position: relative;
             h1{
-                color: #fff;
+                color: #2b2b2b;
                 text-transform: uppercase;
                 position: relative;
                 z-index: 1;
                 font-size: 1.4rem;
-                font-weight: 500;
+                font-weight: 400;
+                letter-spacing: 2px;
             }
         }
 
@@ -836,6 +838,10 @@
             height: 100%;
             width: 100%;
             object-fit: cover;
+        }
+
+        .image-content2{
+            padding: 1.2rem;
         }
 
         .image-content3 img{
@@ -849,12 +855,12 @@
         }
 
         .grid-column:nth-child(1){            
-            background: linear-gradient(to bottom, #ffcbcb, #ffe4dd, #fdf4f2);
+            background: linear-gradient(to bottom, #ffe9e9, #fdf1ee, #fffdfd);
             grid-area: left;
             padding: 1.2rem;
         }
         .grid-column:nth-child(2){
-            background: linear-gradient(to bottom, #b5f1ff, #d4eeff, #f5fbff);
+            background: linear-gradient(to bottom, #d9f8fe, #eaf6fe, #f8fafc);
             grid-area: right;
             video{
                 width: 100%;
@@ -924,7 +930,7 @@
                 color: #111;
                 transition: color 0.3s ease;
                 &:hover{
-                    color: #ff2222;
+                    color: #4c4c4c;
                 }
             }
         }
