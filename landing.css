@@ -38,10 +38,11 @@
 
         .logo {
             text-decoration: none;
-            color: #000000;
+            color: #ff0000;
             font-size: 1.5rem;
             font-weight: 600;
             z-index: 1001;
+            letter-spacing: 4px;
         }
 
         ul {
@@ -127,8 +128,11 @@
             flex-direction: column;
             z-index: 99999;
             transition: all 0.5s ease;
-            background: rgb(60, 60, 60);
+            background: linear-gradient(to bottom, #ffffff, #eeeeee, #dfdfdf);
             border-radius: 18px;
+            box-shadow: 0 10px 25px rgba(255, 255, 255, 0.25), 
+            0 4px 10px rgba(0, 0, 0, 0.2);
+
         }
         .account-padding{
             padding: 1.4rem;
@@ -140,18 +144,22 @@
 
         .account a {
             text-decoration: none;
-            color: #ffffff;
+            color: #030303;
         }
 
         .account a:hover {
             text-decoration: underline;
-            color: #d9d9d9;
+            color: #353535;
 
         }
 
         .account.open {
             display: flex;
             height: 160px;
+            border: 0.5px solid rgb(255, 255, 255);
+            box-shadow: 0 10px 25px rgba(255, 188, 188, 0.25), 
+            0 4px 10px rgba(0, 0, 0, 0.2);
+
         }
 
         .mega-menu {
@@ -373,41 +381,6 @@
             color: #252525;
         }
 
-        /* Mobile Responsive */
-        @media (max-width: 768px) {
-            .hamburger-menu-btn {
-                display: block;
-            }
-
-            .nav-links {
-                display: none;
-            }
-
-            nav {
-                padding: 0.8rem 1.4rem;
-            }
-
-
-            .mega-menu {
-                display: none !important;
-            }
-
-            .account {
-                right: 0;
-                transform: translateX(100%);
-            }
-
-            .account.open {
-                transform: translateX(0);
-            }
-        input.input-open{
-            opacity: 1;
-            width: 180px;
-        }
-        .logo{
-            display: none;
-        }
-        }
 
         /* main section */
 
@@ -949,6 +922,7 @@
         .page5-container h2{
             text-transform: uppercase;
             font-weight: 500;
+                margin-top: 1.2rem;
             a{
                 color: #111;
                 transition: color 0.3s ease;
@@ -958,6 +932,26 @@
             }
         }
 
+        .page6{
+            min-height: 60vh;
+            padding: 10vw 2rem;
+            h2{
+                font-weight: 300;
+                text-transform: uppercase;
+                font-size: 1.2rem;
+            }
+
+            p{
+                font-weight: 300;
+                line-height: 1.4rem;
+                margin-top: 1.2rem;
+                color: #2e2e2e;
+                font-size: 1rem;
+                span a{
+                    color: #000;
+                }
+            }
+        }
         
         /* Responsive */
 
