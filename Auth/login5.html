@@ -1,0 +1,600 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>DripSpace - Login</title>
+    <style>
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+        }
+
+        body {
+            font-family: 'Helvetica Neue', Arial, sans-serif;
+            height: 100vh;
+            overflow: hidden;
+            background: #000;
+        }
+
+        .container {
+            display: flex;
+            height: 100vh;
+        }
+
+        /* Left Panel - Form */
+        .form-panel {
+            flex: 1;
+            background: #ffffff;
+            display: flex;
+            flex-direction: column;
+            justify-content: center;
+            padding: 0 80px;
+            position: relative;
+            animation: slideInLeft 0.8s ease-out;
+        }
+
+        @keyframes slideInLeft {
+            from {
+                opacity: 0;
+                transform: translateX(-30px);
+            }
+            to {
+                opacity: 1;
+                transform: translateX(0);
+            }
+        }
+
+        .logo {
+            position: absolute;
+            top: 10px;
+            left: 80px;
+            font-size: 28px;
+            font-weight: 700;
+            letter-spacing: 2px;
+            color: #000;
+        }
+
+        .form-content {
+            max-width: 420px;
+            width: 100%;
+        }
+
+        .form-header {
+            margin-bottom: 50px;
+        }
+
+        .form-header h1 {
+            font-size: 42px;
+            font-weight: 300;
+            letter-spacing: -1px;
+            color: #000;
+            margin-bottom: 12px;
+        }
+
+        .form-header p {
+            font-size: 15px;
+            color: #666;
+            font-weight: 400;
+            letter-spacing: 0.3px;
+        }
+
+        .input-group {
+            margin-bottom: 28px;
+            position: relative;
+        }
+
+        .input-group label {
+            display: block;
+            font-size: 11px;
+            font-weight: 600;
+            text-transform: uppercase;
+            letter-spacing: 1.5px;
+            color: #000;
+            margin-bottom: 12px;
+        }
+
+        .input-wrapper {
+            position: relative;
+        }
+
+        .input-group input {
+            width: 100%;
+            padding: 16px 20px;
+            font-size: 15px;
+            border: 1.5px solid #e0e0e0;
+            background: #fafafa;
+            transition: all 0.3s ease;
+            outline: none;
+            letter-spacing: 0.3px;
+        }
+
+        .input-group input:focus {
+            border-color: #000;
+            background: #fff;
+            transform: translateY(-2px);
+            box-shadow: 0 4px 12px rgba(0, 0, 0, 0.08);
+        }
+
+        .input-group input::placeholder {
+            color: #999;
+        }
+
+        .forgot-password {
+            text-align: right;
+            margin-top: 8px;
+        }
+
+        .forgot-password a {
+            font-size: 13px;
+            color: #666;
+            text-decoration: none;
+            transition: color 0.3s ease;
+            letter-spacing: 0.2px;
+        }
+
+        .forgot-password a:hover {
+            color: #000;
+        }
+
+        .button-group {
+            margin-top: 40px;
+        }
+
+        .btn {
+            width: 100%;
+            padding: 18px;
+            font-size: 13px;
+            font-weight: 600;
+            text-transform: uppercase;
+            letter-spacing: 2px;
+            border: none;
+            cursor: pointer;
+            transition: all 0.3s ease;
+            position: relative;
+            overflow: hidden;
+        }
+
+        .btn-primary {
+            background: #000;
+            color: #fff;
+            margin-bottom: 16px;
+        }
+
+        .btn-primary:hover {
+            background: #222;
+            transform: translateY(-2px);
+            box-shadow: 0 8px 20px rgba(0, 0, 0, 0.3);
+        }
+
+        .btn-primary:active {
+            transform: translateY(0);
+        }
+
+        .btn-secondary {
+            background: transparent;
+            color: #000;
+            border: 1.5px solid #000;
+        }
+
+        .btn-secondary:hover {
+            background: #000;
+            color: #fff;
+            transform: translateY(-2px);
+            box-shadow: 0 8px 20px rgba(0, 0, 0, 0.15);
+        }
+
+        .divider {
+            display: flex;
+            align-items: center;
+            margin: 35px 0;
+        }
+
+        .divider::before,
+        .divider::after {
+            content: '';
+            flex: 1;
+            height: 1px;
+            background: #e0e0e0;
+        }
+
+        .divider span {
+            padding: 0 20px;
+            font-size: 12px;
+            color: #999;
+            letter-spacing: 1px;
+        }
+
+        /* Right Panel - Image */
+        .image-panel {
+            flex: 1;
+            position: relative;
+            overflow: hidden;
+        }
+
+        .image-panel::before {
+            content: '';
+            position: absolute;
+            top: 0;
+            left: 0;
+            right: 0;
+            bottom: 0;
+            background: linear-gradient(135deg, rgba(0, 0, 0, 0.3) 0%, rgba(0, 0, 0, 0.1) 100%);
+            z-index: 1;
+        }
+
+        .background-image {
+            width: 100%;
+            height: 100%;
+            object-fit: cover;
+            animation: zoomIn 20s ease-in-out infinite alternate;
+        }
+
+        @keyframes zoomIn {
+            from {
+                transform: scale(1);
+            }
+            to {
+                transform: scale(1.1);
+            }
+        }
+
+        .image-overlay {
+            position: absolute;
+            bottom: 60px;
+            left: 60px;
+            z-index: 2;
+            color: #fff;
+        }
+
+        .image-overlay h2 {
+            font-size: 48px;
+            font-weight: 300;
+            letter-spacing: -1px;
+            margin-bottom: 12px;
+            text-shadow: 0 2px 8px rgba(0, 0, 0, 0.3);
+        }
+
+        .image-overlay p {
+            font-size: 16px;
+            font-weight: 300;
+            letter-spacing: 1px;
+            text-shadow: 0 2px 6px rgba(0, 0, 0, 0.3);
+        }
+
+        /* Loading Animation */
+        .btn.loading {
+            pointer-events: none;
+            position: relative;
+        }
+
+        .btn.loading::after {
+            content: '';
+            position: absolute;
+            width: 16px;
+            height: 16px;
+            top: 50%;
+            left: 50%;
+            margin-left: -8px;
+            margin-top: -8px;
+            border: 2px solid rgba(255, 255, 255, 0.3);
+            border-top-color: #fff;
+            border-radius: 50%;
+            animation: spin 0.6s linear infinite;
+        }
+
+        .btn.loading span {
+            opacity: 0;
+        }
+
+        @keyframes spin {
+            to {
+                transform: rotate(360deg);
+            }
+        }
+
+        /* Responsive Design */
+        @media (max-width: 1024px) {
+            .form-panel {
+                padding: 0 50px;
+            }
+
+            .logo {
+                left: 10%;
+                top: 10px;
+                font-size: 24px;
+            }
+
+        .form-header {
+            margin-top: 32px;
+            margin-bottom: 24px;
+
+        }
+
+        .form-header h1 {
+            font-size: 1.4rem;
+            margin-bottom: 8px;
+        }
+
+        .form-header p {
+            font-size: 12px;
+        }
+        
+
+            .image-overlay {
+                left: 40px;
+                bottom: 40px;
+            }
+
+            .image-overlay h2 {
+                font-size: 36px;
+            }
+        }
+
+        @media (max-width: 768px) {
+            .container {
+                flex-direction: column;
+            }
+
+            .image-panel{
+                display: none;
+            }
+
+
+            .form-panel {
+                padding: 0 30px;
+                align-items: center;
+            }
+
+            .logo {
+                left: 20%;
+                top: 10px;
+                font-size: 24px;
+            }
+        
+
+        .form-content {
+            max-width: 420px;
+            width: 100%;
+        }
+
+        .form-header {
+            margin-top: 32px;
+            margin-bottom: 24px;
+
+        }
+
+        .form-header h1 {
+            font-size: 1.4rem;
+            margin-bottom: 8px;
+        }
+
+        .form-header p {
+            font-size: 12px;
+        }
+
+        .input-group {
+            margin-bottom: 18px;
+            position: relative;
+        }
+
+        .input-group label {
+            display: block;
+            font-size: 10px;
+            font-weight: 600;
+            text-transform: uppercase;
+            letter-spacing: 1.5px;
+            color: #000;
+            margin-bottom: 10px;
+        }
+
+        .input-wrapper {
+            position: relative;
+        }
+
+        .input-group input {
+            width: 100%;
+            padding: 8px 12px;
+            font-size: 15px;
+            border: 1.5px solid #e0e0e0;
+            background: #fafafa;
+            transition: all 0.3s ease;
+            outline: none;
+            letter-spacing: 0.3px;
+        }
+
+        .button-group {
+            margin-top: 24px;
+            margin-bottom: 10px;
+        }
+
+        .btn {
+            padding: 12px;
+            font-size: 12px;
+
+        }
+
+        .btn-primary {
+            margin-bottom: 10px;
+        }
+
+        .btn-primary:hover {
+            background: #222;
+            transform: translateY(-2px);
+            box-shadow: 0 8px 20px rgba(0, 0, 0, 0.3);
+        }
+
+        .btn-primary:active {
+            transform: translateY(0);
+        }
+
+        .btn-secondary {
+            background: transparent;
+            color: #000;
+            border: 1.5px solid #000;
+        }
+
+        .btn-secondary:hover {
+            background: #000;
+            color: #fff;
+            transform: translateY(-2px);
+            box-shadow: 0 8px 20px rgba(0, 0, 0, 0.15);
+        }
+
+        .divider {
+            display: flex;
+            align-items: center;
+            margin: 18px 0;
+        }
+        }
+
+        @media(max-width : 480px){
+            .logo {
+                left: 10%;
+                top: 10px;
+                font-size: 24px;
+            }
+        
+        }
+    </style>
+</head>
+<body>
+    <div class="container">
+        <!-- Left Panel - Form -->
+        <div class="form-panel">
+            <div class="logo">DRIPSPACE</div>
+            
+            <div class="form-content">
+                <div class="form-header">
+                    <h1>Welcome Back</h1>
+                    <p>Enter your credentials to access your account</p>
+                </div>
+
+                <form id="loginForm">
+                    <div class="input-group">
+                        <label for="username">Username</label>
+                        <div class="input-wrapper">
+                            <input 
+                                type="text" 
+                                id="username" 
+                                name="username" 
+                                placeholder="Enter your username"
+                                required
+                            >
+                        </div>
+                    </div>
+
+                    <div class="input-group">
+                        <label for="password">Password</label>
+                        <div class="input-wrapper">
+                            <input 
+                                type="password" 
+                                id="password" 
+                                name="password" 
+                                placeholder="Enter your password"
+                                required
+                            >
+                        </div>
+                        <div class="forgot-password">
+                            <a href="#" id="forgotPassword">Forgot Password?</a>
+                        </div>
+                    </div>
+
+                    <div class="button-group">
+                        <button type="submit" class="btn btn-primary" id="loginBtn">
+                            <span>Login</span>
+                        </button>
+                        
+                        <div class="divider">
+                            <span>OR</span>
+                        </div>
+                        
+                        <button type="button" class="btn btn-secondary" id="registerBtn">
+                            <span>Create Account</span>
+                        </button>
+                    </div>
+                </form>
+            </div>
+        </div>
+
+        <!-- Right Panel - Image -->
+        <div class="image-panel">
+        <img src="https://raw.githubusercontent.com/Rakesh07778777/Drip-Space/main/image%20copy%2051.png" alt="" 
+        
+        class="background-image"
+        >
+
+            <div class="image-overlay">
+                <h2>New Season</h2>
+                <p>Discover the latest collection</p>
+            </div>
+        </div>
+    </div>
+
+    <script>
+        // Form Elements
+        const loginForm = document.getElementById('loginForm');
+        const loginBtn = document.getElementById('loginBtn');
+        const registerBtn = document.getElementById('registerBtn');
+        const forgotPassword = document.getElementById('forgotPassword');
+        const usernameInput = document.getElementById('username');
+        const passwordInput = document.getElementById('password');
+
+        // Login Form Submission
+        loginForm.addEventListener('submit', function(e) {
+            e.preventDefault();
+            
+            const username = usernameInput.value.trim();
+            const password = passwordInput.value.trim();
+
+            if (!username || !password) {
+                alert('Please fill in all fields');
+                return;
+            }
+
+            // Add loading state
+            loginBtn.classList.add('loading');
+
+            // Simulate API call
+            setTimeout(() => {
+                loginBtn.classList.remove('loading');
+                alert(`Welcome back, ${username}! 🎉\n\nThis is a demo interface. In production, this would authenticate with your backend.`);
+                
+                // Reset form
+                loginForm.reset();
+            }, 1500);
+        });
+
+        // Register Button
+        registerBtn.addEventListener('click', function() {
+            alert('Register functionality would redirect to the registration page.\n\nThis is a demo interface.');
+        });
+
+        // Forgot Password Link
+        forgotPassword.addEventListener('click', function(e) {
+            e.preventDefault();
+            alert('Password reset functionality would be handled here.\n\nThis is a demo interface.');
+        });
+
+        // Input Focus Animations
+        const inputs = document.querySelectorAll('input');
+        inputs.forEach(input => {
+            input.addEventListener('focus', function() {
+                this.parentElement.parentElement.style.transform = 'translateX(4px)';
+            });
+
+            input.addEventListener('blur', function() {
+                this.parentElement.parentElement.style.transform = 'translateX(0)';
+            });
+        });
+
+        // Keyboard Navigation
+        document.addEventListener('keydown', function(e) {
+            if (e.key === 'Enter' && e.ctrlKey) {
+                loginForm.dispatchEvent(new Event('submit'));
+            }
+        });
+    </script>
+</body>
+</html>
