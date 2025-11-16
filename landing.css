@@ -642,7 +642,8 @@
         .arrivals {
             min-height: 70vh;
             padding: 3rem 2rem;
-            background: #fff;
+            background: linear-gradient(135deg, #1a1a1a 0%, #2d2d2d 100%);
+
         }
 
         .arrivals-header {
@@ -654,9 +655,20 @@
 
         .arrivals h1 {
             font-size: 2.5rem;
-            color: #111;
+            color: #ffffff;
             letter-spacing: 2px;
             font-weight: 600;
+            position: relative;
+        }
+
+            .arrivals h1.arrivals-h1::after {
+            content: '';
+            position: absolute;
+            bottom: -10px;
+            left: 0;
+            width: 80px;
+            height: 2px;
+            background: #ffffff;
         }
 
         .slider-controls {
@@ -664,10 +676,13 @@
             gap: 1rem;
         }
 
+        .arrival-info .shoes-add-btn{
+            padding: 0.8rem;
+        }
         .slider-btn {
             width: 50px;
             height: 50px;
-            border: 2px solid #111;
+            border: 2px solid #ffffff;
             background: transparent;
             border-radius: 50%;
             cursor: pointer;
@@ -887,13 +902,16 @@
             height: 100vh;
             width: 100%;
             display: flex;
+            /* flex-direction: column; */
             justify-content: center;
+            align-items: center;
             gap: 0.8rem;
             flex-wrap: wrap;
         }
-
+        .item-column{
+            display: flex;
+        }
         .jacket-item{
-            background-color: red;
             height: 250px;
             width: 200px;
             cursor: pointer;
@@ -910,17 +928,254 @@
             padding: 0 1.8rem;
         }
 
-        .page5-container{
-            height: 100%;
+        /* shoes ----------> */
+
+                .shoes-slider {
+            min-height: 80vh;
+            padding: 4rem 2rem;
+            background: linear-gradient(135deg, #1a1a1a 0%, #2d2d2d 100%);
+            position: relative;
+            overflow: hidden;
+        }
+
+        .shoes-slider::before {
+            content: '';
+            position: absolute;
+            top: 0;
+            left: 0;
+            right: 0;
+            height: 1px;
+            background: linear-gradient(90deg, transparent, #fff, transparent);
+            opacity: 0.1;
+        }
+
+        .shoes-slider-header {
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            margin-bottom: 3rem;
+            padding: 0 1rem;
+        }
+
+        .shoes-slider-header h1 {
+            font-size: clamp(2rem, 2.5vw, 3.5rem);
+            color: #fff;
+            letter-spacing: 4px;
+            font-weight: 300;
+            text-transform: uppercase;
+            position: relative;
+        }
+
+        .shoes-slider-header h1::after {
+            content: '';
+            position: absolute;
+            bottom: -10px;
+            left: 0;
+            width: 80px;
+            height: 2px;
+            background: #fff;
+        }
+
+        .shoes-controls {
+            display: flex;
+            gap: 1rem;
+        }
+
+        .shoes-control-btn {
+            width: 55px;
+            height: 55px;
+            border: 2px solid rgba(255, 255, 255, 0.3);
+            background: rgba(255, 255, 255, 0.05);
+            backdrop-filter: blur(10px);
+            border-radius: 50%;
+            cursor: pointer;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            transition: all 0.3s ease;
+            color: #fff;
+            font-size: 1.2rem;
+        }
+
+        .shoes-control-btn:hover:not(:disabled) {
+            background: #fff;
+            color: #1a1a1a;
+            transform: scale(1.1);
+            border-color: #fff;
+        }
+
+        .shoes-control-btn:disabled {
+            opacity: 0.2;
+            cursor: not-allowed;
+        }
+
+        .shoes-slider-container {
+            position: relative;
+            overflow: hidden;
+            padding: 2rem 0;
+        }
+
+        .shoes-track {
+            display: flex;
+            gap: 2rem;
+            transition: transform 0.6s cubic-bezier(0.4, 0, 0.2, 1);
+            padding: 0 1rem;
+        }
+
+        .shoes-item {
+            min-width: 300px;
+            width: 320px;
+            height: 450px;
+            background: #fff;
+            border-radius: 20px;
+            overflow: hidden;
+            position: relative;
+            flex-shrink: 0;
+            cursor: pointer;
+            transition: all 0.4s ease;
+            box-shadow: 0 10px 40px rgba(0, 0, 0, 0.3);
+        }
+
+        .shoes-item:hover {
+            box-shadow: 0 20px 60px rgba(0, 0, 0, 0.4);
+        }
+
+        .shoes-item::before {
+            content: '';
+            position: absolute;
+            top: 0;
+            left: 0;
+            right: 0;
+            bottom: 0;
+            background: linear-gradient(to bottom, transparent 60%, rgba(0,0,0,0.7));
+            z-index: 1;
+            opacity: 0;
+            transition: opacity 0.4s ease;
+        }
+
+        .shoes-item:hover::before {
+            opacity: 1;
+        }
+
+        .shoes-image-wrapper {
+            height: 70%;
             width: 100%;
             overflow: hidden;
-
-            video{
-                object-fit: cover;
-                height: 100%;
-                width: 100%;
-            }
+            position: relative;
+            background: linear-gradient(135deg, #f5f5f5 0%, #e0e0e0 100%);
         }
+
+        .shoes-item img {
+            height: 100%;
+            width: 100%;
+            object-fit: cover;
+            transition: transform 0.6s ease;
+        }
+
+        .shoes-item:hover img {
+            transform: scale(1.1) rotate(2deg);
+        }
+
+        .shoes-info {
+            padding: 1.8rem;
+            background: #fff;
+            position: relative;
+            z-index: 2;
+        }
+
+        .shoes-category {
+            font-size: 0.75rem;
+            text-transform: uppercase;
+            letter-spacing: 2px;
+            color: #999;
+            margin-bottom: 0.5rem;
+            font-weight: 500;
+        }
+
+        .shoes-item h2 {
+            font-size: 1.2rem;
+            color: #1a1a1a;
+            font-weight: 600;
+            margin-bottom: 0.4rem;
+            line-height: 1.3;
+            font-weight: 400;
+        }
+
+        .shoes-price-row {
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+        }
+
+        .shoes-item h4 {
+            font-size: 1rem;
+            color: #000;
+            font-weight: 300;
+        }
+
+        .shoes-add-btn {
+            background: #000;
+            color: #fff;
+            border: none;
+            padding: 0.8rem 0.8rem;
+            border-radius: 25px;
+            font-size: 0.6rem;
+            font-weight: 600;
+            cursor: pointer;
+            transition: all 0.3s ease;
+            text-transform: uppercase;
+            letter-spacing: 1px;
+        }
+
+        .shoes-add-btn:hover {
+            background: #333;
+            transform: scale(1.05);
+        }
+
+        /* Slider Progress Bar */
+        .shoes-progress {
+            display: flex;
+            justify-content: center;
+            gap: 1rem;
+            margin-top: 2.5rem;
+            padding: 0 1rem;
+        }
+
+        .shoes-progress-dot {
+            width: 10px;
+            height: 10px;
+            border-radius: 50%;
+            background: rgba(255, 255, 255, 0.3);
+            cursor: pointer;
+            transition: all 0.3s ease;
+            position: relative;
+        }
+
+        .shoes-progress-dot.active {
+            background: #fff;
+            width: 40px;
+            border-radius: 5px;
+        }
+
+        .shoes-progress-dot:hover:not(.active) {
+            background: rgba(255, 255, 255, 0.6);
+            transform: scale(1.3);
+        }
+
+        /* Floating elements for visual interest */
+        .shoes-slider::after {
+            content: 'NEW';
+            position: absolute;
+            top: 10%;
+            right: 5%;
+            font-size: 8rem;
+            font-weight: 900;
+            color: rgba(255, 255, 255, 0.03);
+            pointer-events: none;
+            letter-spacing: 10px;
+        }
+
+        /* shoes ----------> */
 
         .page5-container h2{
             text-transform: uppercase;
@@ -1044,8 +1299,18 @@
             opacity: 1;
             width: 180px;
         }
-        .logo{
+
+            .jacket-items{
+            height: 100vh;
+            width: 100%;
+            display: flex;
+            flex-direction: column;
+            justify-content: center;
+            flex-wrap: wrap;
+            align-items: center;
+            gap: 0.8rem;
         }
+
     }
 
         @media (max-width: 480px) {
