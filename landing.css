@@ -447,11 +447,24 @@
             height: 100vh;
             width: 100vw;
             padding: 2.5rem 0;
+            position: relative;
             video{
                 height: 100%;
                 width: 100%;
                 object-fit: cover;
             }
+        }
+
+        .video-headings{
+            position: absolute;
+            bottom: 12%;
+            left: 50%;
+            transform: translateX(-50%);
+            color: #fff;
+        }
+
+        .video-headings h1{
+            font-size: clamp(2.4rem , 7vw , 4.4rem);
         }
 
         /* Page 3 */
