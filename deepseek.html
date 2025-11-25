@@ -1,0 +1,2504 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Drip-Space - Luxurious Stylish Life</title>
+    
+    <!-- Fonts -->
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Outfit:wght@100..900&family=Playfair+Display:wght@400..900&display=swap" rel="stylesheet">
+    
+    <!-- Font Awesome -->
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
+    
+    <style>
+        /* ================================
+           RESET & BASE STYLES
+        ================================ */
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+        }
+
+        html {
+            scroll-behavior: smooth;
+            overflow-x: hidden;
+        }
+
+        body {
+            font-family: "Outfit", sans-serif;
+            overflow-x: hidden;
+            background: #000;
+            color: #fff;
+            cursor: none;
+        }
+
+        /* Custom Scrollbar */
+        ::-webkit-scrollbar {
+            width: 12px;
+        }
+
+        ::-webkit-scrollbar-track {
+            background: #0a0a0a;
+        }
+
+        ::-webkit-scrollbar-thumb {
+            background: linear-gradient(135deg, #fff, #888);
+            border-radius: 6px;
+        }
+
+        ::-webkit-scrollbar-thumb:hover {
+            background: linear-gradient(135deg, #fff, #666);
+        }
+
+        /* Enhanced Custom Cursor */
+        .custom-cursor {
+            width: 8px;
+            height: 8px;
+            background: #fff;
+            border-radius: 50%;
+            position: fixed;
+            pointer-events: none;
+            z-index: 9999;
+            mix-blend-mode: difference;
+            display: none;
+            transition: transform 0.15s ease, width 0.3s ease, height 0.3s ease;
+        }
+
+        .cursor-follower {
+            width: 40px;
+            height: 40px;
+            border: 1.5px solid rgba(255, 255, 255, 0.8);
+            border-radius: 50%;
+            position: fixed;
+            pointer-events: none;
+            z-index: 9998;
+            mix-blend-mode: difference;
+            display: none;
+            transition: transform 0.25s cubic-bezier(0.4, 0, 0.2, 1), 
+                        width 0.4s cubic-bezier(0.4, 0, 0.2, 1), 
+                        height 0.4s cubic-bezier(0.4, 0, 0.2, 1);
+        }
+
+        .custom-cursor.hover {
+            transform: scale(3);
+            background: rgba(255, 255, 255, 0.3);
+        }
+
+        .cursor-follower.hover {
+            transform: scale(1.5);
+            border-color: rgba(255, 255, 255, 1);
+            background: rgba(255, 255, 255, 0.1);
+        }
+
+        @media (min-width: 1024px) {
+            .custom-cursor,
+            .cursor-follower {
+                display: block;
+            }
+        }
+
+        /* ================================
+           ENHANCED LOADING ANIMATION
+        ================================ */
+        .page-loader {
+            position: fixed;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 100%;
+            background: #000;
+            z-index: 99999;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            transition: opacity 0.8s ease, visibility 0.8s ease;
+        }
+
+        .page-loader.hidden {
+            opacity: 0;
+            visibility: hidden;
+        }
+
+        .loader-content {
+            text-align: center;
+        }
+
+        .loader-text {
+            font-size: clamp(2.5rem, 6vw, 4rem);
+            color: #fff;
+            letter-spacing: 15px;
+            font-weight: 300;
+            margin-bottom: 2rem;
+            position: relative;
+            overflow: hidden;
+        }
+
+        .loader-text::after {
+            content: '';
+            position: absolute;
+            bottom: -5px;
+            left: 0;
+            width: 100%;
+            height: 2px;
+            background: linear-gradient(90deg, transparent, #fff, transparent);
+            animation: shimmer 2s infinite;
+        }
+
+        @keyframes shimmer {
+            0%, 100% { transform: translateX(-100%); }
+            50% { transform: translateX(100%); }
+        }
+
+        .loader-progress-container {
+            width: 300px;
+            height: 3px;
+            background: rgba(255, 255, 255, 0.1);
+            border-radius: 3px;
+            overflow: hidden;
+            margin: 0 auto;
+        }
+
+        .loader-progress {
+            width: 0%;
+            height: 100%;
+            background: linear-gradient(90deg, #fff, #ccc);
+            border-radius: 3px;
+            transition: width 0.3s ease;
+        }
+
+        /* ================================
+           ENHANCED HERO SECTION
+        ================================ */
+        #main {
+            height: 100vh;
+            width: 100%;
+            position: relative;
+            overflow: hidden;
+        }
+
+        .gradient-container {
+            height: 100%;
+            width: 100%;
+            background: linear-gradient(135deg, #0a0a0a 0%, #1a1a1a 50%, #2a2a2a 100%);
+            position: relative;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+        }
+
+        .gradient-container img {
+            height: 90%;
+            width: auto;
+            object-fit: contain;
+            position: absolute;
+            top: 50%;
+            left: 50%;
+            transform: translate(-50%, -50%);
+            z-index: 2;
+            filter: drop-shadow(0 0 80px rgba(255, 255, 255, 0.15));
+            transition: transform 1.2s cubic-bezier(0.4, 0, 0.2, 1);
+            opacity: 0;
+        }
+
+        .luxurious {
+            position: absolute;
+            top: 15%;
+            left: 8%;
+            z-index: 3;
+            opacity: 0;
+        }
+
+        .luxurious h1.lux {
+            font-size: clamp(3rem, 6vw, 5rem);
+            color: #fff;
+            font-weight: 200;
+            letter-spacing: 8px;
+            margin-bottom: 1rem;
+            opacity: 0;
+            transform: translateY(30px);
+        }
+
+        .luxurious h1.stylish {
+            font-size: clamp(8rem, 18vw, 20rem);
+            letter-spacing: 20px;
+            text-transform: uppercase;
+            color: #fff;
+            font-weight: 700;
+            line-height: 0.85;
+            opacity: 0;
+            transform: translateY(50px);
+            background: linear-gradient(135deg, #fff 0%, #aaa 50%, #fff 100%);
+            -webkit-background-clip: text;
+            -webkit-text-fill-color: transparent;
+            background-clip: text;
+            background-size: 200% 100%;
+            animation: gradientShift 8s ease infinite;
+        }
+
+        @keyframes gradientShift {
+            0%, 100% { background-position: 0% 50%; }
+            50% { background-position: 100% 50%; }
+        }
+
+        .hero-text {
+            position: absolute;
+            z-index: 3;
+            color: #fff;
+            font-size: clamp(1rem, 1.8vw, 1.5rem);
+            letter-spacing: 3px;
+            font-weight: 200;
+            opacity: 0;
+            transform: translateY(20px);
+        }
+
+        .left-text {
+            bottom: 25%;
+            left: 8%;
+            writing-mode: vertical-rl;
+            text-orientation: mixed;
+        }
+
+        .right-text {
+            bottom: 15%;
+            right: 8%;
+            text-align: right;
+        }
+
+        .enhanced-scroll-indicator {
+            position: absolute;
+            bottom: 5%;
+            left: 50%;
+            transform: translateX(-50%);
+            z-index: 3;
+            display: flex;
+            flex-direction: column;
+            align-items: center;
+            gap: 15px;
+            opacity: 0;
+        }
+
+        .enhanced-scroll-indicator span {
+            font-size: 0.9rem;
+            letter-spacing: 3px;
+            text-transform: uppercase;
+            color: rgba(255, 255, 255, 0.8);
+            font-weight: 300;
+        }
+
+        .enhanced-scroll-line {
+            width: 1px;
+            height: 60px;
+            background: linear-gradient(to bottom, rgba(255, 255, 255, 0.9), transparent);
+            position: relative;
+            overflow: hidden;
+        }
+
+        .enhanced-scroll-line::after {
+            content: '';
+            position: absolute;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 30px;
+            background: linear-gradient(to bottom, #fff, transparent);
+            animation: enhancedScroll 2.5s infinite;
+        }
+
+        @keyframes enhancedScroll {
+            0% { transform: translateY(-30px); opacity: 0; }
+            50% { opacity: 1; }
+            100% { transform: translateY(60px); opacity: 0; }
+        }
+
+        /* ================================
+           ENHANCED VIDEO SECTION
+        ================================ */
+        .video-section {
+            height: 100vh;
+            width: 100%;
+            position: relative;
+            overflow: hidden;
+        }
+
+        .video-section video {
+            height: 100%;
+            width: 100%;
+            object-fit: cover;
+            filter: brightness(0.6) contrast(1.1);
+            transform: scale(1.1);
+            transition: transform 1.5s cubic-bezier(0.4, 0, 0.2, 1);
+        }
+
+        .video-section.in-view video {
+            transform: scale(1);
+        }
+
+        .video-overlay {
+            position: absolute;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 100%;
+            background: linear-gradient(45deg, rgba(0,0,0,0.4) 0%, rgba(0,0,0,0.2) 50%, rgba(0,0,0,0.4) 100%);
+            z-index: 1;
+        }
+
+        .enhanced-video-headings {
+            position: absolute;
+            top: 50%;
+            left: 50%;
+            transform: translate(-50%, -50%);
+            z-index: 2;
+            text-align: center;
+            width: 90%;
+        }
+
+        .enhanced-video-headings h1 {
+            font-size: clamp(3rem, 8vw, 6rem);
+            font-weight: 700;
+            letter-spacing: 8px;
+            text-transform: uppercase;
+            line-height: 1.1;
+            margin-bottom: 1.5rem;
+            background: linear-gradient(135deg, #fff 0%, #ccc 100%);
+            -webkit-background-clip: text;
+            -webkit-text-fill-color: transparent;
+            background-clip: text;
+            opacity: 0;
+            transform: translateY(60px) rotateX(90deg);
+            transform-origin: bottom;
+            transition: all 1.2s cubic-bezier(0.4, 0, 0.2, 1);
+        }
+
+        .enhanced-video-headings h1.animate {
+            opacity: 1;
+            transform: translateY(0) rotateX(0);
+        }
+
+        .enhanced-video-headings h1:nth-child(2) {
+            transition-delay: 0.3s;
+        }
+
+        /* ================================
+           ENHANCED PAGE 3 - INTERACTIVE CARDS
+        ================================ */
+        .page3 {
+            min-height: 100vh;
+            width: 100%;
+            background: #fff;
+            padding: 10rem 2rem;
+            position: relative;
+        }
+
+        .page3-images {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(380px, 1fr));
+            gap: 3rem;
+            max-width: 1400px;
+            margin: 0 auto;
+        }
+
+        .page3-image {
+            min-height: 700px;
+            position: relative;
+            background-size: cover;
+            background-position: center;
+            border-radius: 25px;
+            overflow: hidden;
+            cursor: pointer;
+            transition: all 0.8s cubic-bezier(0.4, 0, 0.2, 1);
+            opacity: 0;
+            transform: translateY(80px) scale(0.95);
+            box-shadow: 0 20px 60px rgba(0,0,0,0.1);
+        }
+
+        .page3-image.animate {
+            opacity: 1;
+            transform: translateY(0) scale(1);
+        }
+
+        .page3-image:nth-child(1) {
+            background-image: url(https://raw.githubusercontent.com/Rakesh07778777/Drip-Space/main/image%20copy%2027.png);
+        }
+
+        .page3-image:nth-child(2) {
+            background-image: url(https://raw.githubusercontent.com/Rakesh07778777/Drip-Space/main/image%20copy%2029.png);
+        }
+
+        .page3-image:nth-child(3) {
+            background-image: url(https://raw.githubusercontent.com/Rakesh07778777/Drip-Space/main/image%20copy%2031.png);
+        }
+
+        .page3-image::before {
+            content: '';
+            position: absolute;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 100%;
+            background: linear-gradient(to bottom, transparent 30%, rgba(0,0,0,0.9));
+            z-index: 1;
+            transition: all 0.8s ease;
+            opacity: 0.8;
+        }
+
+        .page3-image:hover::before {
+            background: linear-gradient(135deg, rgba(0,0,0,0.2), rgba(0,0,0,0.95));
+            opacity: 1;
+        }
+
+        .page3-image:hover {
+            transform: translateY(-20px) scale(1.02);
+            box-shadow: 0 40px 100px rgba(0,0,0,0.25);
+        }
+
+        .page3-box {
+            position: absolute;
+            bottom: 0;
+            left: 0;
+            width: 100%;
+            padding: 3rem;
+            z-index: 2;
+            transform: translateY(20px);
+            opacity: 0;
+            transition: all 0.6s ease;
+        }
+
+        .page3-image:hover .page3-box {
+            transform: translateY(0);
+            opacity: 1;
+        }
+
+        .enhanced-hover-section {
+            background-color: rgba(255, 255, 255, 0.95);
+            backdrop-filter: blur(25px);
+            border-radius: 20px;
+            overflow: hidden;
+            transition: all 0.5s cubic-bezier(0.4, 0, 0.2, 1);
+            transform: translateY(10px);
+            opacity: 0;
+        }
+
+        .page3-image:hover .enhanced-hover-section {
+            transform: translateY(0);
+            opacity: 1;
+        }
+
+        .enhanced-section-header {
+            height: 70px;
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            padding: 0 2.5rem;
+            cursor: pointer;
+            background: rgba(255, 255, 255, 0.9);
+            transition: all 0.4s ease;
+        }
+
+        .enhanced-section-header:hover {
+            background: rgba(255, 255, 255, 1);
+        }
+
+        .enhanced-section-header h3 {
+            font-size: 1.3rem;
+            font-weight: 600;
+            color: #000;
+            letter-spacing: 2px;
+            text-transform: uppercase;
+        }
+
+        .enhanced-section-header span:last-child {
+            font-size: 1.8rem;
+            color: #000;
+            transition: transform 0.5s cubic-bezier(0.4, 0, 0.2, 1);
+        }
+
+        .enhanced-hover-section:hover .enhanced-section-header span:last-child {
+            transform: translateX(15px) rotate(45deg);
+        }
+
+        .enhanced-section-content {
+            max-height: 0;
+            opacity: 0;
+            overflow: hidden;
+            transition: all 0.7s cubic-bezier(0.4, 0, 0.2, 1);
+            background: linear-gradient(135deg, #ffffff, #fafafa);
+        }
+
+        .enhanced-hover-section:hover .enhanced-section-content {
+            max-height: 400px;
+            opacity: 1;
+        }
+
+        .enhanced-content-inner {
+            padding: 2.5rem;
+        }
+
+        .enhanced-section-content p {
+            font-size: 1.1rem;
+            color: #555;
+            line-height: 1.8;
+            margin-bottom: 2rem;
+            font-weight: 300;
+        }
+
+        .enhanced-button-container {
+            display: flex;
+            gap: 1.2rem;
+            flex-wrap: wrap;
+        }
+
+        .enhanced-btn {
+            border: none;
+            padding: 1.2rem 2.5rem;
+            border-radius: 15px;
+            cursor: none;
+            font-size: 1rem;
+            font-weight: 600;
+            transition: all 0.4s cubic-bezier(0.4, 0, 0.2, 1);
+            letter-spacing: 1.5px;
+            position: relative;
+            overflow: hidden;
+        }
+
+        .enhanced-btn::before {
+            content: '';
+            position: absolute;
+            top: 0;
+            left: -100%;
+            width: 100%;
+            height: 100%;
+            background: linear-gradient(90deg, transparent, rgba(255,255,255,0.3), transparent);
+            transition: left 0.6s ease;
+        }
+
+        .enhanced-btn:hover::before {
+            left: 100%;
+        }
+
+        .enhanced-btn-primary {
+            background: linear-gradient(135deg, #000 0%, #333 100%);
+            color: #fff;
+            box-shadow: 0 10px 30px rgba(0,0,0,0.2);
+        }
+
+        .enhanced-btn-primary:hover {
+            transform: translateY(-5px) scale(1.05);
+            box-shadow: 0 20px 50px rgba(0,0,0,0.3);
+        }
+
+        .enhanced-btn-secondary {
+            background: transparent;
+            color: #000;
+            border: 2px solid #000;
+            backdrop-filter: blur(10px);
+        }
+
+        .enhanced-btn-secondary:hover {
+            background: #000;
+            color: #fff;
+            transform: translateY(-5px);
+            box-shadow: 0 15px 40px rgba(0,0,0,0.2);
+        }
+
+        /* ================================
+           ENHANCED CATEGORIES SECTION
+        ================================ */
+        .categories {
+            min-height: 100vh;
+            width: 100%;
+            padding: 10rem 2rem;
+            background: linear-gradient(135deg, #0a0a0a 0%, #151515 100%);
+            position: relative;
+            overflow: hidden;
+        }
+
+        .categories::before {
+            content: '';
+            position: absolute;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 100%;
+            background: radial-gradient(circle at 30% 50%, rgba(255,255,255,0.03) 0%, transparent 50%);
+        }
+
+        .categories h1 {
+            font-size: clamp(2.5rem, 5vw, 4rem);
+            text-align: center;
+            margin-bottom: 6rem;
+            font-weight: 200;
+            letter-spacing: 8px;
+            text-transform: uppercase;
+            color: #fff;
+            opacity: 0;
+            transform: translateY(50px);
+        }
+
+        .enhanced-category-card {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(300px, 1fr));
+            gap: 2.5rem;
+            max-width: 1400px;
+            margin: 0 auto;
+        }
+
+        .enhanced-category-card-item {
+            position: relative;
+            aspect-ratio: 3/4;
+            cursor: none;
+            overflow: hidden;
+            border-radius: 20px;
+            transition: all 0.7s cubic-bezier(0.4, 0, 0.2, 1);
+            opacity: 0;
+            transform: translateY(60px) scale(0.95);
+            box-shadow: 0 15px 50px rgba(0,0,0,0.3);
+        }
+
+        .enhanced-category-card-item.animate {
+            opacity: 1;
+            transform: translateY(0) scale(1);
+        }
+
+        .enhanced-category-card-item:hover {
+            transform: translateY(-20px) scale(1.03);
+            box-shadow: 0 30px 80px rgba(255,255,255,0.1);
+        }
+
+        .enhanced-category-card-item img {
+            width: 100%;
+            height: 100%;
+            object-fit: cover;
+            transition: all 0.9s cubic-bezier(0.4, 0, 0.2, 1);
+            filter: brightness(0.9);
+        }
+
+        .enhanced-category-card-item:hover img {
+            transform: scale(1.2) rotate(2deg);
+            filter: brightness(1.1);
+        }
+
+        .enhanced-category-card-item h2 {
+            position: absolute;
+            bottom: 0;
+            left: 0;
+            right: 0;
+            font-size: 1.5rem;
+            font-weight: 300;
+            padding: 2.5rem;
+            text-align: center;
+            background: linear-gradient(to top, rgba(0,0,0,0.95), transparent);
+            color: #fff;
+            letter-spacing: 3px;
+            text-transform: uppercase;
+            transform: translateY(30px);
+            opacity: 0;
+            transition: all 0.6s ease;
+        }
+
+        .enhanced-category-card-item:hover h2 {
+            transform: translateY(0);
+            opacity: 1;
+        }
+
+        /* ================================
+           ENHANCED ARRIVALS SLIDER
+        ================================ */
+        .arrivals {
+            min-height: 100vh;
+            padding: 10rem 2rem;
+            background: linear-gradient(135deg, #0a0a0a 0%, #1a1a1a 100%);
+            position: relative;
+        }
+
+        .arrivals::before {
+            content: '';
+            position: absolute;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 100%;
+            background: radial-gradient(circle at 70% 30%, rgba(255,255,255,0.05) 0%, transparent 50%);
+        }
+
+        .enhanced-arrivals-header {
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            margin-bottom: 6rem;
+            max-width: 1400px;
+            margin-left: auto;
+            margin-right: auto;
+            opacity: 0;
+            transform: translateY(50px);
+        }
+
+        .enhanced-arrivals-header h1 {
+            font-size: clamp(2.5rem, 5vw, 4rem);
+            color: #fff;
+            letter-spacing: 8px;
+            font-weight: 200;
+            text-transform: uppercase;
+            position: relative;
+        }
+
+        .enhanced-arrivals-header h1::after {
+            content: '';
+            position: absolute;
+            bottom: -20px;
+            left: 0;
+            width: 120px;
+            height: 3px;
+            background: linear-gradient(90deg, #fff, transparent);
+        }
+
+        .enhanced-slider-controls {
+            display: flex;
+            gap: 1.5rem;
+        }
+
+        .enhanced-slider-btn {
+            width: 65px;
+            height: 65px;
+            border: 2px solid rgba(255, 255, 255, 0.4);
+            background: rgba(255, 255, 255, 0.05);
+            backdrop-filter: blur(20px);
+            border-radius: 50%;
+            cursor: none;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            transition: all 0.5s cubic-bezier(0.4, 0, 0.2, 1);
+            color: #fff;
+            font-size: 1.4rem;
+            position: relative;
+            overflow: hidden;
+        }
+
+        .enhanced-slider-btn::before {
+            content: '';
+            position: absolute;
+            top: 0;
+            left: -100%;
+            width: 100%;
+            height: 100%;
+            background: linear-gradient(90deg, transparent, rgba(255,255,255,0.2), transparent);
+            transition: left 0.6s ease;
+        }
+
+        .enhanced-slider-btn:hover::before {
+            left: 100%;
+        }
+
+        .enhanced-slider-btn:hover {
+            background: #fff;
+            color: #000;
+            transform: scale(1.1) rotate(5deg);
+            box-shadow: 0 15px 40px rgba(255,255,255,0.2);
+        }
+
+        .enhanced-arrival-container {
+            position: relative;
+            overflow: hidden;
+            padding: 3rem 0;
+            max-width: 1400px;
+            margin: 0 auto;
+        }
+
+        .enhanced-arrival-track {
+            display: flex;
+            gap: 3rem;
+            transition: transform 0.8s cubic-bezier(0.4, 0, 0.2, 1);
+        }
+
+        .enhanced-arrival-items {
+            min-width: 380px;
+            height: 520px;
+            background: #fff;
+            border-radius: 25px;
+            overflow: hidden;
+            box-shadow: 0 20px 60px rgba(0, 0, 0, 0.3);
+            transition: all 0.6s cubic-bezier(0.4, 0, 0.2, 1);
+            cursor: none;
+            flex-shrink: 0;
+            opacity: 0;
+            transform: translateY(50px) scale(0.95);
+        }
+
+        .enhanced-arrival-items.animate {
+            opacity: 1;
+            transform: translateY(0) scale(1);
+        }
+
+        .enhanced-arrival-items:hover {
+            transform: translateY(-20px) scale(1.02);
+            box-shadow: 0 30px 80px rgba(0, 0, 0, 0.4);
+        }
+
+        .enhanced-image-scale {
+            height: 70%;
+            width: 100%;
+            overflow: hidden;
+            position: relative;
+        }
+
+        .enhanced-arrival-items img {
+            height: 100%;
+            width: 100%;
+            object-fit: cover;
+            transition: transform 0.8s cubic-bezier(0.4, 0, 0.2, 1);
+        }
+
+        .enhanced-arrival-items:hover img {
+            transform: scale(1.15);
+        }
+
+        .enhanced-arrival-info {
+            padding: 2.5rem;
+            background: #fff;
+            position: relative;
+        }
+
+        .enhanced-arrival-items h2 {
+            font-size: 1.4rem;
+            color: #000;
+            font-weight: 500;
+            margin-bottom: 1rem;
+            letter-spacing: 2px;
+        }
+
+        .enhanced-arrival-items h4 {
+            font-size: 1.3rem;
+            color: #000;
+            font-weight: 600;
+        }
+
+        .enhanced-slider-dots {
+            display: flex;
+            justify-content: center;
+            gap: 1.5rem;
+            margin-top: 4rem;
+        }
+
+        .enhanced-dot {
+            width: 15px;
+            height: 15px;
+            border-radius: 50%;
+            background: rgba(255, 255, 255, 0.3);
+            cursor: none;
+            transition: all 0.5s cubic-bezier(0.4, 0, 0.2, 1);
+            position: relative;
+            overflow: hidden;
+        }
+
+        .enhanced-dot::before {
+            content: '';
+            position: absolute;
+            top: 0;
+            left: -100%;
+            width: 100%;
+            height: 100%;
+            background: #fff;
+            transition: left 0.4s ease;
+        }
+
+        .enhanced-dot.active {
+            background: rgba(255, 255, 255, 0.1);
+        }
+
+        .enhanced-dot.active::before {
+            left: 0;
+        }
+
+        .enhanced-dot:hover {
+            transform: scale(1.3);
+        }
+
+        .enhanced-arrivals-bottom-texts {
+            text-align: center;
+            margin-top: 6rem;
+            color: #fff;
+            opacity: 0;
+            transform: translateY(50px);
+        }
+
+        .enhanced-arrivals-bottom-texts h1 {
+            font-size: clamp(2rem, 5vw, 3.5rem);
+            font-weight: 200;
+            letter-spacing: 5px;
+            line-height: 1.4;
+            background: linear-gradient(135deg, #fff, #aaa);
+            -webkit-background-clip: text;
+            -webkit-text-fill-color: transparent;
+            background-clip: text;
+        }
+
+        /* ================================
+           ENHANCED GRID SECTION
+        ================================ */
+        .enhanced-section-grid {
+            min-height: 100vh;
+            display: grid;
+            grid-template-columns: 500px 1fr;
+            grid-template-rows: repeat(2, 450px);
+            grid-template-areas: 
+                'left right'
+                'bottom right';
+            gap: 2.5rem;
+            padding: 2.5rem;
+            background: #fff;
+        }
+
+        .enhanced-grid-column {
+            position: relative;
+            overflow: hidden;
+            border-radius: 25px;
+            transition: all 0.6s cubic-bezier(0.4, 0, 0.2, 1);
+            opacity: 0;
+            transform: scale(0.95);
+            box-shadow: 0 15px 50px rgba(0,0,0,0.1);
+        }
+
+        .enhanced-grid-column.animate {
+            opacity: 1;
+            transform: scale(1);
+        }
+
+        .enhanced-grid-column:hover {
+            transform: scale(1.03);
+            box-shadow: 0 25px 80px rgba(0,0,0,0.2);
+        }
+
+        .enhanced-image-content {
+            height: 100%;
+            width: 100%;
+            position: relative;
+            display: flex;
+            align-items: flex-start;
+            padding: 3rem;
+        }
+
+        .enhanced-image-content h1 {
+            color: #000;
+            text-transform: uppercase;
+            position: relative;
+            z-index: 2;
+            font-size: 2rem;
+            font-weight: 300;
+            letter-spacing: 4px;
+            opacity: 0;
+            transform: translateY(20px);
+        }
+
+        .enhanced-grid-column.animate .enhanced-image-content h1 {
+            opacity: 1;
+            transform: translateY(0);
+            transition: all 0.8s ease 0.3s;
+        }
+
+        .enhanced-image-content1 img,
+        .enhanced-image-content3 img {
+            position: absolute;
+            height: 90%;
+            width: auto;
+            object-fit: contain;
+            transition: all 0.8s ease;
+        }
+
+        .enhanced-image-content1 img {
+            bottom: 0;
+            right: 0;
+        }
+
+        .enhanced-image-content3 img {
+            top: 50%;
+            left: 50%;
+            transform: translate(-50%, -50%);
+        }
+
+        .enhanced-grid-column:hover .enhanced-image-content1 img,
+        .enhanced-grid-column:hover .enhanced-image-content3 img {
+            transform: scale(1.08);
+        }
+
+        .enhanced-grid-column:hover .enhanced-image-content3 img {
+            transform: translate(-50%, -50%) scale(1.08);
+        }
+
+        .enhanced-grid-column:nth-child(1) {
+            background: linear-gradient(135deg, #ffe9e9, #fdf1ee, #fffdfd);
+            grid-area: left;
+        }
+
+        .enhanced-grid-column:nth-child(2) {
+            background: linear-gradient(135deg, #d9f8fe, #eaf6fe, #f8fafc);
+            grid-area: right;
+        }
+
+        .enhanced-grid-column:nth-child(2) video {
+            width: 100%;
+            height: 100%;
+            position: absolute;
+            top: 0;
+            left: 0;
+            object-fit: cover;
+            filter: brightness(1.1) contrast(1.1);
+        }
+
+        .enhanced-grid-column:nth-child(3) {
+            background: linear-gradient(135deg, #a4d9ff, #b9e2ff, #f2faff);
+            grid-area: bottom;
+        }
+
+        /* ================================
+           ENHANCED JACKETS SECTION
+        ================================ */
+        .jackets {
+            min-height: 100vh;
+            padding: 10rem 2rem;
+            background: #0a0a0a;
+            position: relative;
+        }
+
+        .jackets::before {
+            content: '';
+            position: absolute;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 100%;
+            background: radial-gradient(circle at 50% 50%, rgba(255,255,255,0.05) 0%, transparent 70%);
+        }
+
+        .jackets h2 {
+            font-size: clamp(4rem, 8vw, 6rem);
+            text-align: center;
+            margin-bottom: 6rem;
+            font-weight: 700;
+            letter-spacing: 15px;
+            text-transform: uppercase;
+            color: #fff;
+            opacity: 0;
+            transform: translateY(50px);
+            background: linear-gradient(135deg, #fff 0%, #aaa 100%);
+            -webkit-background-clip: text;
+            -webkit-text-fill-color: transparent;
+            background-clip: text;
+        }
+
+        .enhanced-jacket-items {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(250px, 1fr));
+            gap: 2.5rem;
+            max-width: 1400px;
+            margin: 0 auto;
+        }
+
+        .enhanced-jacket-item {
+            aspect-ratio: 4/5;
+            cursor: none;
+            overflow: hidden;
+            border-radius: 20px;
+            transition: all 0.7s cubic-bezier(0.4, 0, 0.2, 1);
+            position: relative;
+            opacity: 0;
+            transform: translateY(60px) scale(0.95);
+            box-shadow: 0 15px 50px rgba(0,0,0,0.4);
+        }
+
+        .enhanced-jacket-item.animate {
+            opacity: 1;
+            transform: translateY(0) scale(1);
+        }
+
+        .enhanced-jacket-item::after {
+            content: '';
+            position: absolute;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 100%;
+            background: linear-gradient(135deg, rgba(0,0,0,0.3), transparent);
+            opacity: 0;
+            transition: opacity 0.6s ease;
+        }
+
+        .enhanced-jacket-item:hover::after {
+            opacity: 1;
+        }
+
+        .enhanced-jacket-item:hover {
+            transform: translateY(-15px) scale(1.05);
+            box-shadow: 0 25px 80px rgba(255,255,255,0.15);
+        }
+
+        .enhanced-jacket-item img {
+            height: 100%;
+            width: 100%;
+            object-fit: cover;
+            transition: transform 0.8s cubic-bezier(0.4, 0, 0.2, 1);
+            filter: brightness(0.9);
+        }
+
+        .enhanced-jacket-item:hover img {
+            transform: scale(1.2);
+            filter: brightness(1.1);
+        }
+
+        /* ================================
+           ENHANCED SHOES SLIDER
+        ================================ */
+        .shoes-slider {
+            min-height: 100vh;
+            padding: 10rem 2rem;
+            background: linear-gradient(135deg, #0a0a0a 0%, #1a1a1a 100%);
+            position: relative;
+        }
+
+        .shoes-slider::before {
+            content: '';
+            position: absolute;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 100%;
+            background: radial-gradient(circle at 80% 20%, rgba(255,255,255,0.05) 0%, transparent 50%);
+        }
+
+        .enhanced-shoes-slider-header {
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            margin-bottom: 6rem;
+            max-width: 1400px;
+            margin-left: auto;
+            margin-right: auto;
+            opacity: 0;
+            transform: translateY(50px);
+        }
+
+        .enhanced-shoes-slider-header h1 {
+            font-size: clamp(2.5rem, 5vw, 4rem);
+            color: #fff;
+            letter-spacing: 8px;
+            font-weight: 200;
+            text-transform: uppercase;
+            position: relative;
+        }
+
+        .enhanced-shoes-slider-header h1::after {
+            content: '';
+            position: absolute;
+            bottom: -20px;
+            left: 0;
+            width: 120px;
+            height: 3px;
+            background: linear-gradient(90deg, #fff, transparent);
+        }
+
+        .enhanced-shoes-controls {
+            display: flex;
+            gap: 1.5rem;
+        }
+
+        .enhanced-shoes-control-btn {
+            width: 65px;
+            height: 65px;
+            border: 2px solid rgba(255, 255, 255, 0.4);
+            background: rgba(255, 255, 255, 0.05);
+            backdrop-filter: blur(20px);
+            border-radius: 50%;
+            cursor: none;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            transition: all 0.5s cubic-bezier(0.4, 0, 0.2, 1);
+            color: #fff;
+            font-size: 1.4rem;
+            position: relative;
+            overflow: hidden;
+        }
+
+        .enhanced-shoes-control-btn::before {
+            content: '';
+            position: absolute;
+            top: 0;
+            left: -100%;
+            width: 100%;
+            height: 100%;
+            background: linear-gradient(90deg, transparent, rgba(255,255,255,0.2), transparent);
+            transition: left 0.6s ease;
+        }
+
+        .enhanced-shoes-control-btn:hover::before {
+            left: 100%;
+        }
+
+        .enhanced-shoes-control-btn:hover {
+            background: #fff;
+            color: #000;
+            transform: scale(1.1) rotate(5deg);
+            box-shadow: 0 15px 40px rgba(255,255,255,0.2);
+        }
+
+        .enhanced-shoes-slider-container {
+            position: relative;
+            overflow: hidden;
+            padding: 3rem 0;
+            max-width: 1400px;
+            margin: 0 auto;
+        }
+
+        .enhanced-shoes-track {
+            display: flex;
+            gap: 3rem;
+            transition: transform 0.8s cubic-bezier(0.4, 0, 0.2, 1);
+        }
+
+        .enhanced-shoes-item {
+            min-width: 380px;
+            height: 520px;
+            background: #fff;
+            border-radius: 25px;
+            overflow: hidden;
+            position: relative;
+            flex-shrink: 0;
+            cursor: none;
+            transition: all 0.6s cubic-bezier(0.4, 0, 0.2, 1);
+            box-shadow: 0 20px 60px rgba(0, 0, 0, 0.3);
+            opacity: 0;
+            transform: translateY(50px) scale(0.95);
+        }
+
+        .enhanced-shoes-item.animate {
+            opacity: 1;
+            transform: translateY(0) scale(1);
+        }
+
+        .enhanced-shoes-item:hover {
+            transform: translateY(-20px) scale(1.02);
+            box-shadow: 0 30px 80px rgba(255, 255, 255, 0.1);
+        }
+
+        .enhanced-shoes-image-wrapper {
+            height: 65%;
+            width: 100%;
+            overflow: hidden;
+            background: linear-gradient(135deg, #f5f5f5 0%, #e8e8e8 100%);
+        }
+
+        .enhanced-shoes-item img {
+            height: 100%;
+            width: 100%;
+            object-fit: cover;
+            transition: transform 0.8s cubic-bezier(0.4, 0, 0.2, 1);
+        }
+
+        .enhanced-shoes-item:hover img {
+            transform: scale(1.15) rotate(2deg);
+        }
+
+        .enhanced-shoes-info {
+            padding: 2.5rem;
+            background: #fff;
+        }
+
+        .enhanced-shoes-category {
+            font-size: 0.8rem;
+            text-transform: uppercase;
+            letter-spacing: 3px;
+            color: #999;
+            margin-bottom: 1rem;
+            font-weight: 500;
+        }
+
+        .enhanced-shoes-item h2 {
+            font-size: 1.4rem;
+            color: #000;
+            font-weight: 500;
+            margin-bottom: 1rem;
+            letter-spacing: 2px;
+        }
+
+        .enhanced-shoes-price-row {
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+        }
+
+        .enhanced-shoes-item h4 {
+            font-size: 1.3rem;
+            color: #000;
+            font-weight: 600;
+        }
+
+        /* ================================
+           ENHANCED FOOTER SECTION
+        ================================ */
+        .page6 {
+            min-height: 60vh;
+            padding: 10rem 2rem;
+            background: #fff;
+            max-width: 1200px;
+            margin: 0 auto;
+            opacity: 0;
+            transform: translateY(50px);
+        }
+
+        .page6.animate {
+            opacity: 1;
+            transform: translateY(0);
+        }
+
+        .page6 h2 {
+            font-weight: 300;
+            text-transform: uppercase;
+            font-size: 2.5rem;
+            margin-bottom: 3rem;
+            color: #000;
+            letter-spacing: 5px;
+            position: relative;
+        }
+
+        .page6 h2::after {
+            content: '';
+            position: absolute;
+            bottom: -15px;
+            left: 0;
+            width: 100px;
+            height: 2px;
+            background: #000;
+        }
+
+        .page6 p {
+            font-weight: 300;
+            line-height: 2;
+            color: #333;
+            font-size: 1.2rem;
+            text-align: justify;
+        }
+
+        .page6 span a {
+            color: #000;
+            text-decoration: underline;
+            transition: all 0.3s ease;
+            font-weight: 500;
+        }
+
+        .page6 span a:hover {
+            color: #666;
+            letter-spacing: 1px;
+        }
+
+        /* ================================
+           ENHANCED TEXT ANIMATIONS
+        ================================ */
+        .text-reveal {
+            opacity: 0;
+            transform: translateY(50px);
+            transition: all 1s cubic-bezier(0.4, 0, 0.2, 1);
+        }
+
+        .text-reveal.revealed {
+            opacity: 1;
+            transform: translateY(0);
+        }
+
+        .char {
+            display: inline-block;
+            opacity: 0;
+            transform: translateY(30px) rotateX(90deg);
+            transform-origin: bottom;
+        }
+
+        /* ================================
+           ENHANCED RESPONSIVE DESIGN
+        ================================ */
+        @media (max-width: 1024px) {
+            .enhanced-section-grid {
+                grid-template-columns: 1fr;
+                grid-template-rows: repeat(3, 400px);
+                grid-template-areas: 
+                    'left'
+                    'bottom'
+                    'right';
+            }
+        }
+
+        @media (max-width: 768px) {
+            .luxurious h1.stylish {
+                font-size: clamp(5rem, 15vw, 12rem);
+                letter-spacing: 10px;
+            }
+
+            .luxurious h1.lux {
+                font-size: clamp(2rem, 6vw, 3rem);
+            }
+
+            .page3-images {
+                grid-template-columns: 1fr;
+                gap: 2rem;
+            }
+
+            .page3-image {
+                min-height: 500px;
+            }
+
+            .enhanced-category-card {
+                grid-template-columns: repeat(2, 1fr);
+                gap: 1.5rem;
+            }
+
+            .enhanced-arrival-items,
+            .enhanced-shoes-item {
+                min-width: 320px;
+                height: 450px;
+            }
+
+            .enhanced-arrivals-header,
+            .enhanced-shoes-slider-header {
+                flex-direction: column;
+                gap: 2rem;
+                align-items: flex-start;
+            }
+
+            .enhanced-slider-controls,
+            .enhanced-shoes-controls {
+                align-self: flex-end;
+            }
+        }
+
+        @media (max-width: 480px) {
+            .luxurious {
+                top: 10%;
+                left: 5%;
+            }
+
+            .luxurious h1.stylish {
+                font-size: clamp(4rem, 12vw, 8rem);
+                letter-spacing: 5px;
+            }
+
+            .hero-text {
+                font-size: 0.9rem;
+            }
+
+            .enhanced-category-card {
+                grid-template-columns: 1fr;
+            }
+
+            .enhanced-arrival-items,
+            .enhanced-shoes-item {
+                min-width: 280px;
+                height: 420px;
+            }
+
+            .enhanced-jacket-items {
+                grid-template-columns: repeat(2, 1fr);
+                gap: 1rem;
+            }
+        }
+    </style>
+</head>
+<body>
+    <!-- ENHANCED PAGE LOADER -->
+    <div class="page-loader">
+        <div class="loader-content">
+            <div class="loader-text">DRIP SPACE</div>
+            <div class="loader-progress-container">
+                <div class="loader-progress"></div>
+            </div>
+        </div>
+    </div>
+
+    <!-- ENHANCED CUSTOM CURSOR -->
+    <div class="custom-cursor"></div>
+    <div class="cursor-follower"></div>
+
+    <!-- ENHANCED HERO SECTION -->
+    <main id="main">
+        <div class="gradient-container">
+            <img src="https://raw.githubusercontent.com/Rakesh07778777/Drip-Space/main/Adobe%20Express%20-%20file%20(9).png" 
+                 alt="Fashion Model" id="hero-image">
+            
+            <div class="luxurious">
+                <h1 class="lux text-reveal">Luxurious</h1>
+                <h1 class="stylish" id="stylish-text">Stylish Life</h1>
+            </div>
+            
+            <div class="left-text hero-text">
+                All time best offer
+            </div>
+            
+            <div class="right-text hero-text">
+                celebrate individuality <br> with unique outfit
+            </div>
+
+            <div class="enhanced-scroll-indicator">
+                <span>Explore Collections</span>
+                <div class="enhanced-scroll-line"></div>
+            </div>
+        </div>
+    </main>
+
+    <!-- ENHANCED VIDEO SECTION -->
+    <div class="video-section">
+        <video playsinline autoplay muted loop 
+               src="https://raw.githubusercontent.com/Rakesh07778777/Drip-Space/main/1470984_People_Fashion_3840x2160.mp4">
+        </video>
+        <div class="video-overlay"></div>
+        <div class="enhanced-video-headings">
+            <h1>Don't fit the vibe</h1>
+            <h1>Become the vibe</h1>
+        </div>
+    </div>
+
+    <!-- ENHANCED PAGE 3 - COLLECTIONS -->
+    <section class="page3">
+        <div class="page3-images">
+            <div class="page3-image">
+                <div class="page3-box">
+                    <div class="enhanced-hover-section">
+                        <div class="enhanced-section-header">
+                            <span>•</span>
+                            <h3>Collections</h3>
+                            <span>→</span>
+                        </div>
+                        <div class="enhanced-section-content">
+                            <div class="enhanced-content-inner">
+                                <p>Browse our latest seasonal collections featuring trending designs and premium materials for the modern fashion enthusiast.</p>
+                                <div class="enhanced-button-container">
+                                    <button class="enhanced-btn enhanced-btn-primary">View Collection</button>
+                                    <button class="enhanced-btn enhanced-btn-secondary">New Arrivals</button>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+
+            <div class="page3-image">
+                <div class="page3-box">
+                    <div class="enhanced-hover-section">
+                        <div class="enhanced-section-header">
+                            <span>•</span>
+                            <h3>Collections</h3>
+                            <span>→</span>
+                        </div>
+                        <div class="enhanced-section-content">
+                            <div class="enhanced-content-inner">
+                                <p>Discover exclusive collections from top designers and emerging brands, curated for the sophisticated wardrobe.</p>
+                                <div class="enhanced-button-container">
+                                    <button class="enhanced-btn enhanced-btn-primary">Shop Collection</button>
+                                    <button class="enhanced-btn enhanced-btn-secondary">Featured Items</button>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+
+            <div class="page3-image">
+                <div class="page3-box">
+                    <div class="enhanced-hover-section">
+                        <div class="enhanced-section-header">
+                            <span>•</span>
+                            <h3>Collections</h3>
+                            <span>→</span>
+                        </div>
+                        <div class="enhanced-section-content">
+                            <div class="enhanced-content-inner">
+                                <p>Access premium collections with limited edition exclusive pieces that redefine luxury fashion standards.</p>
+                                <div class="enhanced-button-container">
+                                    <button class="enhanced-btn enhanced-btn-primary">Browse Now</button>
+                                    <button class="enhanced-btn enhanced-btn-secondary">Premium Access</button>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- ENHANCED CATEGORIES SECTION -->
+    <section class="categories">
+        <h1 class="text-reveal">Explore the Drip-Space all collections</h1>
+        <div class="enhanced-category-card">
+            <div class="enhanced-category-card-item">
+                <img src="https://raw.githubusercontent.com/Rakesh07778777/Drip-Space/main/image%20copy%2042.png" alt="Men Jackets">
+                <h2>Men Jackets</h2>
+            </div>
+            <div class="enhanced-category-card-item">
+                <img src="https://raw.githubusercontent.com/Rakesh07778777/Drip-Space/main/image%20copy%2044.png" alt="Men Jackets">
+                <h2>Men Jackets</h2>
+            </div>
+            <div class="enhanced-category-card-item">
+                <img src="https://raw.githubusercontent.com/Rakesh07778777/Drip-Space/main/image%20copy%2045.png" alt="Men Jackets">
+                <h2>Men Jackets</h2>
+            </div>
+            <div class="enhanced-category-card-item">
+                <img src="https://raw.githubusercontent.com/Rakesh07778777/Drip-Space/main/image%20copy%2046.png" alt="Men Jackets">
+                <h2>Men Jackets</h2>
+            </div>
+            <div class="enhanced-category-card-item">
+                <img src="https://raw.githubusercontent.com/Rakesh07778777/Drip-Space/main/image%20copy%2047.png" alt="Men Jackets">
+                <h2>Men Jackets</h2>
+            </div>
+            <div class="enhanced-category-card-item">
+                <img src="https://raw.githubusercontent.com/Rakesh07778777/Drip-Space/main/image%20copy%2048.png" alt="Men Jackets">
+                <h2>Men Jackets</h2>
+            </div>
+            <div class="enhanced-category-card-item">
+                <img src="https://raw.githubusercontent.com/Rakesh07778777/Drip-Space/main/image%20copy%2049.png" alt="Men Jackets">
+                <h2>Men Jackets</h2>
+            </div>
+            <div class="enhanced-category-card-item">
+                <img src="https://raw.githubusercontent.com/Rakesh07778777/Drip-Space/main/image%20copy%2050.png" alt="Men Jackets">
+                <h2>Men Jackets</h2>
+            </div>
+        </div>
+    </section>
+
+    <!-- ENHANCED NEW ARRIVALS SLIDER -->
+    <section class="arrivals">
+        <div class="enhanced-arrivals-header">
+            <h1 class="text-reveal">New Arrivals</h1>
+            <div class="enhanced-slider-controls">
+                <button class="enhanced-slider-btn" id="enhancedPrevBtn" aria-label="Previous">
+                    <i class="fas fa-chevron-left"></i>
+                </button>
+                <button class="enhanced-slider-btn" id="enhancedNextBtn" aria-label="Next">
+                    <i class="fas fa-chevron-right"></i>
+                </button>
+            </div>
+        </div>
+
+        <div class="enhanced-arrival-container">
+            <div class="enhanced-arrival-track" id="enhancedSliderTrack">
+                <div class="enhanced-arrival-items">
+                    <div class="enhanced-image-scale">
+                        <img src="https://raw.githubusercontent.com/Rakesh07778777/Drip-Space/main/image%20copy%202.png" alt="Track Jacket">
+                    </div>
+                    <div class="enhanced-arrival-info">
+                        <h2>Track Jackets</h2>
+                        <h4>$99.99</h4>
+                    </div>
+                </div>
+                <div class="enhanced-arrival-items">
+                    <div class="enhanced-image-scale">
+                        <img src="https://raw.githubusercontent.com/Rakesh07778777/Drip-Space/main/image%20copy%203.png" alt="Casual Wear">
+                    </div>
+                    <div class="enhanced-arrival-info">
+                        <h2>Casual Wear</h2>
+                        <h4>$79.99</h4>
+                    </div>
+                </div>
+                <div class="enhanced-arrival-items">
+                    <div class="enhanced-image-scale">
+                        <img src="https://raw.githubusercontent.com/Rakesh07778777/Drip-Space/main/image%20copy%204.png" alt="Sports Collection">
+                    </div>
+                    <div class="enhanced-arrival-info">
+                        <h2>Sports Collection</h2>
+                        <h4>$129.99</h4>
+                    </div>
+                </div>
+                <div class="enhanced-arrival-items">
+                    <div class="enhanced-image-scale">
+                        <img src="https://raw.githubusercontent.com/Rakesh07778777/Drip-Space/main/image%20copy%205.png" alt="Premium Jacket">
+                    </div>
+                    <div class="enhanced-arrival-info">
+                        <h2>Premium Jacket</h2>
+                        <h4>$149.99</h4>
+                    </div>
+                </div>
+                <div class="enhanced-arrival-items">
+                    <div class="enhanced-image-scale">
+                        <img src="https://raw.githubusercontent.com/Rakesh07778777/Drip-Space/main/image%20copy%207.png" alt="Urban Style">
+                    </div>
+                    <div class="enhanced-arrival-info">
+                        <h2>Urban Style</h2>
+                        <h4>$89.99</h4>
+                    </div>
+                </div>
+                <div class="enhanced-arrival-items">
+                    <div class="enhanced-image-scale">
+                        <img src="https://raw.githubusercontent.com/Rakesh07778777/Drip-Space/main/image%20copy.png" alt="Classic Design">
+                    </div>
+                    <div class="enhanced-arrival-info">
+                        <h2>Classic Design</h2>
+                        <h4>$99.99</h4>
+                    </div>
+                </div>
+                <div class="enhanced-arrival-items">
+                    <div class="enhanced-image-scale">
+                        <img src="https://raw.githubusercontent.com/Rakesh07778777/Drip-Space/main/image.png" alt="Classic Design">
+                    </div>
+                    <div class="enhanced-arrival-info">
+                        <h2>Classic Design</h2>
+                        <h4>$99.99</h4>
+                    </div>
+                </div>
+            </div>
+        </div>
+
+        <div class="enhanced-slider-dots" id="enhancedSliderDots"></div>
+        
+        <div class="enhanced-arrivals-bottom-texts">
+            <h1>Here every click is a step <br> towards a more stylish you</h1>
+        </div>
+    </section>
+
+    <!-- ENHANCED GRID SECTION -->
+    <section class="enhanced-section-grid">
+        <div class="enhanced-grid-column">
+            <div class="enhanced-image-content enhanced-image-content1">
+                <h1>nike solo swoosh</h1>
+                <img src="https://raw.githubusercontent.com/Rakesh07778777/Drip-Space/main/image-removebg-preview%20(5).png" alt="Nike Solo Swoosh">
+            </div>
+        </div>
+        <div class="enhanced-grid-column">
+            <div class="enhanced-image-content enhanced-image-content2">
+                <h1>jordan flight fleece</h1>
+                <video autoplay playsinline muted loop 
+                       src="https://raw.githubusercontent.com/Rakesh07778777/Drip-Space/main/From%20KlickPin%20CF%20Pinterest%20Pin-11610911541550627.mp4">
+                </video>
+            </div>
+        </div>
+        <div class="enhanced-grid-column">
+            <div class="enhanced-image-content enhanced-image-content3">
+                <h1>nike sportwear therma</h1>
+                <img src="https://raw.githubusercontent.com/Rakesh07778777/Drip-Space/main/image-removebg-preview%20(6).png" alt="Nike Sportswear">
+            </div>
+        </div>
+    </section>
+
+    <!-- ENHANCED JACKETS GALLERY -->
+    <section class="jackets">
+        <h2 class="text-reveal">Drip</h2>
+        <div class="enhanced-jacket-items">
+            <div class="enhanced-jacket-item">
+                <img src="https://raw.githubusercontent.com/Rakesh07778777/Drip-Space/main/image%20copy%2026.png" alt="Jacket">
+            </div>
+            <div class="enhanced-jacket-item">
+                <img src="https://raw.githubusercontent.com/Rakesh07778777/Drip-Space/main/image%20copy%2025.png" alt="Jacket">
+            </div>
+            <div class="enhanced-jacket-item">
+                <img src="https://raw.githubusercontent.com/Rakesh07778777/Drip-Space/main/image%20copy%2024.png" alt="Jacket">
+            </div>
+            <div class="enhanced-jacket-item">
+                <img src="https://raw.githubusercontent.com/Rakesh07778777/Drip-Space/main/image%20copy%2023.png" alt="Jacket">
+            </div>
+            <div class="enhanced-jacket-item">
+                <img src="https://raw.githubusercontent.com/Rakesh07778777/Drip-Space/main/image%20copy%2024.png" alt="Jacket">
+            </div>
+            <div class="enhanced-jacket-item">
+                <img src="https://raw.githubusercontent.com/Rakesh07778777/Drip-Space/main/image%20copy%2025.png" alt="Jacket">
+            </div>
+            <div class="enhanced-jacket-item">
+                <img src="https://raw.githubusercontent.com/Rakesh07778777/Drip-Space/main/image%20copy%2026.png" alt="Jacket">
+            </div>
+            <div class="enhanced-jacket-item">
+                <img src="https://raw.githubusercontent.com/Rakesh07778777/Drip-Space/main/image%20copy%2024.png" alt="Jacket">
+            </div>
+            <div class="enhanced-jacket-item">
+                <img src="https://raw.githubusercontent.com/Rakesh07778777/Drip-Space/main/image%20copy%2026.png" alt="Jacket">
+            </div>
+            <div class="enhanced-jacket-item">
+                <img src="https://raw.githubusercontent.com/Rakesh07778777/Drip-Space/main/image%20copy%2026.png" alt="Jacket">
+            </div>
+            <div class="enhanced-jacket-item">
+                <img src="https://raw.githubusercontent.com/Rakesh07778777/Drip-Space/main/image%20copy%2026.png" alt="Jacket">
+            </div>
+            <div class="enhanced-jacket-item">
+                <img src="https://raw.githubusercontent.com/Rakesh07778777/Drip-Space/main/image%20copy%2025.png" alt="Jacket">
+            </div>
+        </div>
+    </section>
+
+    <!-- ENHANCED SHOES SLIDER -->
+    <section class="shoes-slider">
+        <div class="enhanced-shoes-slider-header">
+            <h1 class="text-reveal">Footwear Collection</h1>
+            <div class="enhanced-shoes-controls">
+                <button class="enhanced-shoes-control-btn" id="enhancedShoesPrevBtn" aria-label="Previous">
+                    <i class="fas fa-chevron-left"></i>
+                </button>
+                <button class="enhanced-shoes-control-btn" id="enhancedShoesNextBtn" aria-label="Next">
+                    <i class="fas fa-chevron-right"></i>
+                </button>
+            </div>
+        </div>
+
+        <div class="enhanced-shoes-slider-container">
+            <div class="enhanced-shoes-track" id="enhancedShoesTrack">
+                <div class="enhanced-shoes-item">
+                    <div class="enhanced-shoes-image-wrapper">
+                        <img src="https://raw.githubusercontent.com/Rakesh07778777/Drip-Space/main/image%20copy%2032.png" alt="Nike Air Max">
+                    </div>
+                    <div class="enhanced-shoes-info">
+                        <div class="enhanced-shoes-category">Sneakers</div>
+                        <h2>Nike Air Max</h2>
+                        <div class="enhanced-shoes-price-row">
+                            <h4>$159.99</h4>
+                        </div>
+                    </div>
+                </div>
+                <div class="enhanced-shoes-item">
+                    <div class="enhanced-shoes-image-wrapper">
+                        <img src="https://raw.githubusercontent.com/Rakesh07778777/Drip-Space/main/image%20copy%2033.png" alt="Classic Runners">
+                    </div>
+                    <div class="enhanced-shoes-info">
+                        <div class="enhanced-shoes-category">Premium</div>
+                        <h2>Classic Runners</h2>
+                        <div class="enhanced-shoes-price-row">
+                            <h4>$189.99</h4>
+                        </div>
+                    </div>
+                </div>
+                <div class="enhanced-shoes-item">
+                    <div class="enhanced-shoes-image-wrapper">
+                        <img src="https://raw.githubusercontent.com/Rakesh07778777/Drip-Space/main/image%20copy%2034.png" alt="Performance Pro">
+                    </div>
+                    <div class="enhanced-shoes-info">
+                        <div class="enhanced-shoes-category">Sport</div>
+                        <h2>Performance Pro</h2>
+                        <div class="enhanced-shoes-price-row">
+                            <h4>$199.99</h4>
+                        </div>
+                    </div>
+                </div>
+                <div class="enhanced-shoes-item">
+                    <div class="enhanced-shoes-image-wrapper">
+                        <img src="https://raw.githubusercontent.com/Rakesh07778777/Drip-Space/main/image%20copy%2035.png" alt="Ultra Boost">
+                    </div>
+                    <div class="enhanced-shoes-info">
+                        <div class="enhanced-shoes-category">Running</div>
+                        <h2>Ultra Boost</h2>
+                        <div class="enhanced-shoes-price-row">
+                            <h4>$179.99</h4>
+                        </div>
+                    </div>
+                </div>
+                <div class="enhanced-shoes-item">
+                    <div class="enhanced-shoes-image-wrapper">
+                        <img src="https://raw.githubusercontent.com/Rakesh07778777/Drip-Space/main/image%20copy%2036.png" alt="Street Style">
+                    </div>
+                    <div class="enhanced-shoes-info">
+                        <div class="enhanced-shoes-category">Casual</div>
+                        <h2>Street Style</h2>
+                        <div class="enhanced-shoes-price-row">
+                            <h4>$149.99</h4>
+                        </div>
+                    </div>
+                </div>
+                <div class="enhanced-shoes-item">
+                    <div class="enhanced-shoes-image-wrapper">
+                        <img src="https://raw.githubusercontent.com/Rakesh07778777/Drip-Space/main/image%20copy%2037.png" alt="Limited Edition">
+                    </div>
+                    <div class="enhanced-shoes-info">
+                        <div class="enhanced-shoes-category">Designer</div>
+                        <h2>Limited Edition</h2>
+                        <div class="enhanced-shoes-price-row">
+                            <h4>$249.99</h4>
+                        </div>
+                    </div>
+                </div>
+                <div class="enhanced-shoes-item">
+                    <div class="enhanced-shoes-image-wrapper">
+                        <img src="https://raw.githubusercontent.com/Rakesh07778777/Drip-Space/main/image%20copy%2038.png" alt="Urban Classic">
+                    </div>
+                    <div class="enhanced-shoes-info">
+                        <div class="enhanced-shoes-category">High Top</div>
+                        <h2>Urban Classic</h2>
+                        <div class="enhanced-shoes-price-row">
+                            <h4>$169.99</h4>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- ENHANCED FOOTER CONTENT -->
+    <div class="page6">
+        <h2 class="text-reveal">mens clothing</h2>
+        <p>
+            Check out all the freshest styles your closet needs in our men's clothing range. You'll find a roundup of everyday essentials, including tops and T-Shirts, as well as comfy lounge sets and underwear. Formal event coming up? Scroll no further than our men's blazers and suits for the sharpest looks and nail the dress code. When it comes to men's pants, there's chinos, joggers and cargo styles in all the staple colors. dreaming of denim? our <span><a href="#">men's jeans</a></span> offer a range of fits to suit your style, including skinny, straight and tapered, to name just a few. Wear yours with a trendy oversized shirt or a classic denim number from our men's shirts edit. and when it comes to chilly weather, our men's jackets and coats have you covered – we've got puffer jackets and trench coats, as well as leather jackets and bomber jackets in year-round colors.
+        </p>
+    </div>
+
+    <!-- GSAP LIBRARY -->
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/gsap/3.12.5/gsap.min.js"></script>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/gsap/3.12.5/ScrollTrigger.min.js"></script>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/gsap/3.12.5/TextPlugin.min.js"></script>
+
+    <script>
+        'use strict';
+
+        // ENHANCED PAGE LOADER
+        window.addEventListener('load', function() {
+            const loader = document.querySelector('.page-loader');
+            const progress = document.querySelector('.loader-progress');
+            let width = 0;
+            
+            const interval = setInterval(() => {
+                if (width >= 100) {
+                    clearInterval(interval);
+                    setTimeout(() => {
+                        loader.classList.add('hidden');
+                        initHeroAnimations();
+                        initEnhancedAnimations();
+                    }, 500);
+                } else {
+                    width += 2;
+                    progress.style.width = width + '%';
+                }
+            }, 30);
+        });
+
+        // ENHANCED CUSTOM CURSOR
+        function initEnhancedCursor() {
+            const cursor = document.querySelector('.custom-cursor');
+            const cursorFollower = document.querySelector('.cursor-follower');
+
+            if (window.innerWidth < 1024) {
+                document.body.style.cursor = 'auto';
+                return;
+            }
+
+            let mouseX = 0, mouseY = 0;
+            let followerX = 0, followerY = 0;
+
+            document.addEventListener('mousemove', function(e) {
+                mouseX = e.clientX;
+                mouseY = e.clientY;
+                
+                cursor.style.left = mouseX + 'px';
+                cursor.style.top = mouseY + 'px';
+            });
+
+            function animateFollower() {
+                const distX = mouseX - followerX;
+                const distY = mouseY - followerY;
+                
+                followerX += distX * 0.1;
+                followerY += distY * 0.1;
+                
+                cursorFollower.style.left = followerX + 'px';
+                cursorFollower.style.top = followerY + 'px';
+                
+                requestAnimationFrame(animateFollower);
+            }
+            animateFollower();
+
+            const hoverElements = document.querySelectorAll('a, button, .page3-image, .enhanced-category-card-item, .enhanced-arrival-items, .enhanced-shoes-item, .enhanced-jacket-item');
+            
+            hoverElements.forEach(el => {
+                el.addEventListener('mouseenter', function() {
+                    cursor.classList.add('hover');
+                    cursorFollower.classList.add('hover');
+                });
+                
+                el.addEventListener('mouseleave', function() {
+                    cursor.classList.remove('hover');
+                    cursorFollower.classList.remove('hover');
+                });
+            });
+        }
+
+        // ENHANCED HERO ANIMATIONS
+        function initHeroAnimations() {
+            const tl = gsap.timeline();
+            
+            tl.to('.gradient-container img', {
+                opacity: 1,
+                duration: 1.5,
+                ease: "power2.out"
+            })
+            .to('.luxurious h1.lux', {
+                opacity: 1,
+                y: 0,
+                duration: 1.2,
+                ease: "power3.out"
+            }, "-=0.5")
+            .to('.luxurious h1.stylish', {
+                opacity: 1,
+                y: 0,
+                duration: 1.5,
+                ease: "power3.out"
+            }, "-=0.8")
+            .to('.hero-text', {
+                opacity: 1,
+                y: 0,
+                duration: 1,
+                stagger: 0.2,
+                ease: "power2.out"
+            }, "-=0.5")
+            .to('.enhanced-scroll-indicator', {
+                opacity: 1,
+                duration: 0.8,
+                ease: "power2.out"
+            }, "-=0.3");
+
+            // Animate stylish text characters
+            const stylishText = document.getElementById('stylish-text');
+            const text = stylishText.textContent;
+            stylishText.innerHTML = '';
+            
+            text.split('').forEach((char, i) => {
+                const span = document.createElement('span');
+                span.textContent = char;
+                span.className = 'char';
+                span.style.display = 'inline-block';
+                stylishText.appendChild(span);
+                
+                gsap.to(span, {
+                    opacity: 1,
+                    y: 0,
+                    rotationX: 0,
+                    duration: 0.8,
+                    delay: 1 + (i * 0.05),
+                    ease: "back.out(1.7)"
+                });
+            });
+        }
+
+        // ENHANCED GSAP SCROLL ANIMATIONS
+        gsap.registerPlugin(ScrollTrigger, TextPlugin);
+
+        function initEnhancedAnimations() {
+            // Enhanced video section animations
+            gsap.utils.toArray('.enhanced-video-headings h1').forEach((heading, index) => {
+                ScrollTrigger.create({
+                    trigger: '.video-section',
+                    start: 'top 70%',
+                    onEnter: () => {
+                        heading.classList.add('animate');
+                        document.querySelector('.video-section').classList.add('in-view');
+                    },
+                    onLeaveBack: () => {
+                        heading.classList.remove('animate');
+                        document.querySelector('.video-section').classList.remove('in-view');
+                    }
+                });
+            });
+
+            // Page3 images staggered animation
+            gsap.utils.toArray('.page3-image').forEach((image, index) => {
+                gsap.to(image, {
+                    scrollTrigger: {
+                        trigger: image,
+                        start: 'top 85%',
+                        toggleActions: 'play none none reverse'
+                    },
+                    opacity: 1,
+                    y: 0,
+                    scale: 1,
+                    duration: 1.2,
+                    delay: index * 0.15,
+                    ease: "power3.out"
+                });
+            });
+
+            // Categories title animation
+            gsap.to('.categories h1', {
+                scrollTrigger: {
+                    trigger: '.categories h1',
+                    start: 'top 80%',
+                    toggleActions: 'play none none reverse'
+                },
+                opacity: 1,
+                y: 0,
+                duration: 1.5,
+                ease: "power3.out"
+            });
+
+            // Category cards wave animation
+            gsap.utils.toArray('.enhanced-category-card-item').forEach((item, index) => {
+                gsap.to(item, {
+                    scrollTrigger: {
+                        trigger: item,
+                        start: 'top 90%',
+                        toggleActions: 'play none none reverse'
+                    },
+                    opacity: 1,
+                    y: 0,
+                    scale: 1,
+                    duration: 0.9,
+                    delay: (index % 4) * 0.1,
+                    ease: "back.out(1.4)"
+                });
+            });
+
+            // Arrivals header animation
+            gsap.to('.enhanced-arrivals-header', {
+                scrollTrigger: {
+                    trigger: '.enhanced-arrivals-header',
+                    start: 'top 80%',
+                    toggleActions: 'play none none reverse'
+                },
+                opacity: 1,
+                y: 0,
+                duration: 1.2,
+                ease: "power3.out"
+            });
+
+            // Arrival items animation
+            gsap.utils.toArray('.enhanced-arrival-items').forEach((item, index) => {
+                gsap.to(item, {
+                    scrollTrigger: {
+                        trigger: item,
+                        start: 'top 85%',
+                        toggleActions: 'play none none reverse'
+                    },
+                    opacity: 1,
+                    y: 0,
+                    scale: 1,
+                    duration: 1,
+                    delay: index * 0.1,
+                    ease: "power2.out"
+                });
+            });
+
+            // Grid columns animation
+            gsap.utils.toArray('.enhanced-grid-column').forEach((col, index) => {
+                gsap.to(col, {
+                    scrollTrigger: {
+                        trigger: col,
+                        start: 'top 80%',
+                        toggleActions: 'play none none reverse'
+                    },
+                    opacity: 1,
+                    scale: 1,
+                    duration: 1.2,
+                    delay: index * 0.2,
+                    ease: "back.out(1.7)"
+                });
+            });
+
+            // Jackets title animation
+            gsap.to('.jackets h2', {
+                scrollTrigger: {
+                    trigger: '.jackets',
+                    start: 'top 70%',
+                    toggleActions: 'play none none reverse'
+                },
+                opacity: 1,
+                y: 0,
+                duration: 1.5,
+                ease: "power3.out"
+            });
+
+            // Jacket items animation
+            gsap.utils.toArray('.enhanced-jacket-item').forEach((item, index) => {
+                gsap.to(item, {
+                    scrollTrigger: {
+                        trigger: item,
+                        start: 'top 90%',
+                        toggleActions: 'play none none reverse'
+                    },
+                    opacity: 1,
+                    y: 0,
+                    scale: 1,
+                    duration: 0.8,
+                    delay: (index % 6) * 0.08,
+                    ease: "power2.out"
+                });
+            });
+
+            // Shoes slider header animation
+            gsap.to('.enhanced-shoes-slider-header', {
+                scrollTrigger: {
+                    trigger: '.enhanced-shoes-slider-header',
+                    start: 'top 80%',
+                    toggleActions: 'play none none reverse'
+                },
+                opacity: 1,
+                y: 0,
+                duration: 1.2,
+                ease: "power3.out"
+            });
+
+            // Shoes items animation
+            gsap.utils.toArray('.enhanced-shoes-item').forEach((item, index) => {
+                gsap.to(item, {
+                    scrollTrigger: {
+                        trigger: item,
+                        start: 'top 85%',
+                        toggleActions: 'play none none reverse'
+                    },
+                    opacity: 1,
+                    y: 0,
+                    scale: 1,
+                    duration: 1,
+                    delay: index * 0.1,
+                    ease: "power2.out"
+                });
+            });
+
+            // Arrivals bottom text animation
+            gsap.to('.enhanced-arrivals-bottom-texts', {
+                scrollTrigger: {
+                    trigger: '.enhanced-arrivals-bottom-texts',
+                    start: 'top 85%',
+                    toggleActions: 'play none none reverse'
+                },
+                opacity: 1,
+                y: 0,
+                duration: 1.2,
+                ease: "power3.out"
+            });
+
+            // Footer animation
+            gsap.to('.page6', {
+                scrollTrigger: {
+                    trigger: '.page6',
+                    start: 'top 80%',
+                    toggleActions: 'play none none reverse'
+                },
+                opacity: 1,
+                y: 0,
+                duration: 1.2,
+                ease: "power3.out"
+            });
+
+            // Text reveal animations
+            gsap.utils.toArray('.text-reveal').forEach((text) => {
+                ScrollTrigger.create({
+                    trigger: text,
+                    start: 'top 85%',
+                    onEnter: () => text.classList.add('revealed')
+                });
+            });
+        }
+
+        // ENHANCED ARRIVALS SLIDER
+        (function initEnhancedArrivalsSlider() {
+            const sliderTrack = document.getElementById('enhancedSliderTrack');
+            const prevBtn = document.getElementById('enhancedPrevBtn');
+            const nextBtn = document.getElementById('enhancedNextBtn');
+            const dotsContainer = document.getElementById('enhancedSliderDots');
+            const arrivalItems = document.querySelectorAll('.enhanced-arrival-items');
+
+            let currentSlideIndex = 0;
+            let itemsToShow = getItemsToShow();
+
+            function getItemsToShow() {
+                const width = window.innerWidth;
+                if (width < 480) return 1;
+                if (width < 768) return 2;
+                return 3;
+            }
+
+            function getTotalSlides() {
+                return Math.ceil(arrivalItems.length / itemsToShow);
+            }
+
+            function createDots() {
+                dotsContainer.innerHTML = '';
+                const totalSlides = getTotalSlides();
+
+                for (let i = 0; i < totalSlides; i++) {
+                    const dot = document.createElement('div');
+                    dot.classList.add('enhanced-dot');
+                    if (i === 0) dot.classList.add('active');
+                    dot.addEventListener('click', () => goToSlide(i));
+                    dotsContainer.appendChild(dot);
+                }
+            }
+
+            function updateDots() {
+                const dots = document.querySelectorAll('.enhanced-dot');
+                dots.forEach((dot, index) => {
+                    dot.classList.toggle('active', index === currentSlideIndex);
+                });
+            }
+
+            function moveSlider() {
+                const itemWidth = arrivalItems[0].offsetWidth + 48;
+                sliderTrack.style.transform = `translateX(-${currentSlideIndex * itemsToShow * itemWidth}px)`;
+                updateDots();
+            }
+
+            function nextSlide() {
+                if (currentSlideIndex < getTotalSlides() - 1) {
+                    currentSlideIndex++;
+                } else {
+                    currentSlideIndex = 0;
+                }
+                moveSlider();
+            }
+
+            function prevSlide() {
+                if (currentSlideIndex > 0) {
+                    currentSlideIndex--;
+                } else {
+                    currentSlideIndex = getTotalSlides() - 1;
+                }
+                moveSlider();
+            }
+
+            function goToSlide(index) {
+                currentSlideIndex = index;
+                moveSlider();
+            }
+
+            nextBtn.addEventListener('click', nextSlide);
+            prevBtn.addEventListener('click', prevSlide);
+
+            let autoPlayInterval = setInterval(nextSlide, 5000);
+
+            sliderTrack.addEventListener('mouseenter', () => clearInterval(autoPlayInterval));
+            sliderTrack.addEventListener('mouseleave', () => {
+                autoPlayInterval = setInterval(nextSlide, 5000);
+            });
+
+            window.addEventListener('resize', debounce(function() {
+                itemsToShow = getItemsToShow();
+                createDots();
+                moveSlider();
+            }, 250));
+
+            createDots();
+            moveSlider();
+        })();
+
+        // ENHANCED SHOES SLIDER
+        (function initEnhancedShoesSlider() {
+            const shoesTrack = document.getElementById('enhancedShoesTrack');
+            const shoesPrevBtn = document.getElementById('enhancedShoesPrevBtn');
+            const shoesNextBtn = document.getElementById('enhancedShoesNextBtn');
+            const shoesItems = document.querySelectorAll('.enhanced-shoes-item');
+
+            let shoesIndex = 0;
+            let shoesToShow = getShoesItemsToShow();
+
+            function getShoesItemsToShow() {
+                const width = window.innerWidth;
+                if (width < 480) return 1;
+                if (width < 768) return 2;
+                return 3;
+            }
+
+            function moveShoesSlider() {
+                const itemWidth = shoesItems[0].offsetWidth + 48;
+                shoesTrack.style.transform = `translateX(-${shoesIndex * shoesToShow * itemWidth}px)`;
+            }
+
+            function nextShoes() {
+                const totalSlides = Math.ceil(shoesItems.length / shoesToShow);
+                shoesIndex = (shoesIndex + 1) % totalSlides;
+                moveShoesSlider();
+            }
+
+            function prevShoes() {
+                const totalSlides = Math.ceil(shoesItems.length / shoesToShow);
+                if (shoesIndex > 0) {
+                    shoesIndex--;
+                } else {
+                    shoesIndex = totalSlides - 1;
+                }
+                moveShoesSlider();
+            }
+
+            shoesNextBtn.addEventListener('click', nextShoes);
+            shoesPrevBtn.addEventListener('click', prevShoes);
+
+            let autoPlayInterval = setInterval(nextShoes, 5000);
+
+            shoesTrack.addEventListener('mouseenter', () => clearInterval(autoPlayInterval));
+            shoesTrack.addEventListener('mouseleave', () => {
+                autoPlayInterval = setInterval(nextShoes, 5000);
+            });
+
+            window.addEventListener('resize', debounce(function() {
+                shoesToShow = getShoesItemsToShow();
+                moveShoesSlider();
+            }, 250));
+        })();
+
+        // ENHANCED PARALLAX EFFECT
+        function initEnhancedParallax() {
+            const heroImg = document.querySelector('.gradient-container img');
+            
+            window.addEventListener('scroll', function() {
+                const scrolled = window.pageYOffset;
+                const rate = scrolled * -0.3;
+                
+                if (heroImg && scrolled < window.innerHeight) {
+                    heroImg.style.transform = `translate(-50%, -50%) translateY(${rate}px)`;
+                }
+            });
+        }
+
+        // ENHANCED MAGNETIC BUTTONS
+        function initEnhancedMagneticButtons() {
+            const buttons = document.querySelectorAll('.enhanced-btn, .enhanced-slider-btn, .enhanced-shoes-control-btn');
+            
+            buttons.forEach(button => {
+                button.addEventListener('mousemove', function(e) {
+                    if (window.innerWidth < 1024) return;
+                    
+                    const rect = button.getBoundingClientRect();
+                    const x = e.clientX - rect.left - rect.width / 2;
+                    const y = e.clientY - rect.top - rect.height / 2;
+                    
+                    gsap.to(button, {
+                        x: x * 0.3,
+                        y: y * 0.3,
+                        duration: 0.4,
+                        ease: "power2.out"
+                    });
+                });
+                
+                button.addEventListener('mouseleave', function() {
+                    gsap.to(button, {
+                        x: 0,
+                        y: 0,
+                        duration: 0.6,
+                        ease: "elastic.out(1, 0.5)"
+                    });
+                });
+            });
+        }
+
+        // INITIALIZE EVERYTHING
+        document.addEventListener('DOMContentLoaded', function() {
+            initEnhancedCursor();
+            initEnhancedAnimations();
+            initEnhancedParallax();
+            initEnhancedMagneticButtons();
+            
+            // Refresh ScrollTrigger on load
+            setTimeout(() => {
+                ScrollTrigger.refresh();
+            }, 1000);
+        });
+
+        // DEBOUNCE UTILITY
+        function debounce(func, wait) {
+            let timeout;
+            return function executedFunction(...args) {
+                const later = () => {
+                    clearTimeout(timeout);
+                    func(...args);
+                };
+                clearTimeout(timeout);
+                timeout = setTimeout(later, wait);
+            };
+        }
+
+        // PERFORMANCE OPTIMIZATION
+        if (window.matchMedia('(prefers-reduced-motion: reduce)').matches) {
+            gsap.globalTimeline.timeScale(2);
+        }
+
+        console.log('%c✨ Drip-Space Enhanced Version Loaded! ', 'background: linear-gradient(135deg, #000, #333); color: #fff; padding: 15px; font-size: 18px; font-weight: bold; border-radius: 5px;');
+    </script>
+</body>
+</html>

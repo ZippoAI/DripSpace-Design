@@ -1,0 +1,2141 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Drip-Space - Luxurious Stylish Life</title>
+    
+    <!-- Fonts -->
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Outfit:wght@100..900&family=Playfair+Display:wght@400..900&display=swap" rel="stylesheet">
+    
+    <!-- Font Awesome -->
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
+    
+    <style>
+        /* ================================
+           RESET & BASE STYLES
+        ================================ */
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+        }
+
+        html {
+            scroll-behavior: smooth;
+            overflow-x: hidden;
+        }
+
+        body {
+            font-family: "Outfit", sans-serif;
+            overflow-x: hidden;
+            background: #000;
+            color: #fff;
+        }
+
+        /* Custom Scrollbar */
+        ::-webkit-scrollbar {
+            width: 10px;
+        }
+
+        ::-webkit-scrollbar-track {
+            background: #000;
+        }
+
+        ::-webkit-scrollbar-thumb {
+            background: #fff;
+            border-radius: 5px;
+        }
+
+        ::-webkit-scrollbar-thumb:hover {
+            background: #ccc;
+        }
+
+        /* Custom Cursor */
+        .custom-cursor {
+            width: 12px;
+            height: 12px;
+            background: #fff;
+            border-radius: 50%;
+            position: fixed;
+            pointer-events: none;
+            z-index: 9999;
+            mix-blend-mode: difference;
+            display: none;
+            transition: width 0.3s ease, height 0.3s ease, background 0.3s ease;
+        }
+
+        .cursor-follower {
+            width: 40px;
+            height: 40px;
+            border: 2px solid rgba(255, 255, 255, 0.5);
+            border-radius: 50%;
+            position: fixed;
+            pointer-events: none;
+            z-index: 9998;
+            mix-blend-mode: difference;
+            display: none;
+            transition: width 0.4s cubic-bezier(0.4, 0, 0.2, 1), 
+                        height 0.4s cubic-bezier(0.4, 0, 0.2, 1),
+                        border-color 0.3s ease;
+        }
+
+        .custom-cursor.hover {
+            width: 60px;
+            height: 60px;
+            background: rgba(255, 255, 255, 0.2);
+        }
+
+        .cursor-follower.hover {
+            width: 80px;
+            height: 80px;
+            border-color: rgba(255, 255, 255, 0.8);
+        }
+
+        @media (min-width: 1024px) {
+            .custom-cursor,
+            .cursor-follower {
+                display: block;
+            }
+        }
+
+        /* ================================
+           LOADING ANIMATION
+        ================================ */
+        .page-loader {
+            position: fixed;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 100%;
+            background: #000;
+            z-index: 99999;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            transition: opacity 0.5s ease, visibility 0.5s ease;
+        }
+
+        .page-loader.hidden {
+            opacity: 0;
+            visibility: hidden;
+        }
+
+        .loader-content {
+            text-align: center;
+        }
+
+        .loader-text {
+            font-size: clamp(2rem, 5vw, 3.5rem);
+            color: #fff;
+            letter-spacing: 10px;
+            font-weight: 700;
+            animation: pulse 2s infinite;
+        }
+
+        @keyframes pulse {
+            0%, 100% { opacity: 1; }
+            50% { opacity: 0.5; }
+        }
+
+        .loader-bar {
+            width: 200px;
+            height: 3px;
+            background: rgba(255, 255, 255, 0.2);
+            margin: 2rem auto 0;
+            border-radius: 3px;
+            overflow: hidden;
+        }
+
+        .loader-progress {
+            width: 0%;
+            height: 100%;
+            background: #fff;
+            animation: loading 2s ease-in-out forwards;
+        }
+
+        @keyframes loading {
+            0% { width: 0%; }
+            100% { width: 100%; }
+        }
+
+        /* ================================
+           HERO SECTION
+        ================================ */
+        #main {
+            height: 100vh;
+            width: 100%;
+            position: relative;
+            overflow: hidden;
+        }
+
+        .gradient-container {
+            height: 100%;
+            width: 100%;
+            background: linear-gradient(to bottom, #0a0a0a, #1a1a1a, #2a2a2a);
+            position: relative;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+        }
+
+        .gradient-container img {
+            height: 100%;
+            width: auto;
+            object-fit: contain;
+            position: absolute;
+            top: 50%;
+            left: 50%;
+            transform: translate(-50%, -50%);
+            z-index: 2;
+            filter: drop-shadow(0 0 60px rgba(255, 255, 255, 0.1));
+            transition: transform 0.3s ease;
+        }
+
+        .luxurious {
+            position: absolute;
+            top: 10%;
+            left: 5%;
+            z-index: 3;
+            opacity: 0;
+            animation: fadeInLeft 1.5s ease forwards 0.5s;
+        }
+
+        @keyframes fadeInLeft {
+            from {
+                opacity: 0;
+                transform: translateX(-100px);
+            }
+            to {
+                opacity: 1;
+                transform: translateX(0);
+            }
+        }
+
+        .luxurious h1.lux {
+            font-size: clamp(2.5rem, 5vw, 4.5rem);
+            color: #fff;
+            font-weight: 300;
+            letter-spacing: 3px;
+            margin-bottom: 0.5rem;
+        }
+
+        .luxurious h1.stylish {
+            font-size: clamp(6rem, 15vw, 16rem);
+            letter-spacing: 15px;
+            text-transform: uppercase;
+            color: #fff;
+            font-weight: 700;
+            line-height: 0.9;
+            animation: fadeInUp 1.5s ease forwards 0.8s;
+            opacity: 0;
+        }
+
+        @keyframes fadeInUp {
+            from {
+                opacity: 0;
+                transform: translateY(100px);
+            }
+            to {
+                opacity: 1;
+                transform: translateY(0);
+            }
+        }
+
+        .hero-text {
+            position: absolute;
+            z-index: 3;
+            color: #fff;
+            font-size: clamp(0.9rem, 1.5vw, 1.3rem);
+            letter-spacing: 2px;
+            font-weight: 300;
+            opacity: 0;
+            animation: fadeIn 1s ease forwards 1.2s;
+        }
+
+        @keyframes fadeIn {
+            from { opacity: 0; transform: translateY(20px); }
+            to { opacity: 1; transform: translateY(0); }
+        }
+
+        .left-text {
+            bottom: 25%;
+            left: 5%;
+        }
+
+        .right-text {
+            bottom: 15%;
+            right: 5%;
+            text-align: right;
+        }
+
+        .scroll-indicator {
+            position: absolute;
+            bottom: 5%;
+            left: 50%;
+            transform: translateX(-50%);
+            z-index: 3;
+            display: flex;
+            flex-direction: column;
+            align-items: center;
+            gap: 10px;
+            opacity: 0;
+            animation: fadeIn 1s ease forwards 1.5s;
+        }
+
+        .scroll-indicator span {
+            font-size: 0.8rem;
+            letter-spacing: 2px;
+            text-transform: uppercase;
+            color: rgba(255, 255, 255, 0.7);
+        }
+
+        .scroll-line {
+            width: 2px;
+            height: 50px;
+            background: linear-gradient(to bottom, rgba(255, 255, 255, 0.7), transparent);
+            animation: scrollAnimation 2s infinite;
+        }
+
+        @keyframes scrollAnimation {
+            0% { transform: translateY(0); opacity: 1; }
+            100% { transform: translateY(20px); opacity: 0; }
+        }
+
+        /* ================================
+           VIDEO SECTION
+        ================================ */
+        .video-section {
+            height: 100vh;
+            width: 100%;
+            position: relative;
+            overflow: hidden;
+        }
+
+        .video-section video {
+            height: 100%;
+            width: 100%;
+            object-fit: cover;
+            filter: brightness(0.7);
+        }
+
+        .video-overlay {
+            position: absolute;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 100%;
+            background: linear-gradient(to bottom, rgba(0,0,0,0.3), rgba(0,0,0,0.6));
+            z-index: 1;
+        }
+
+        .video-headings {
+            position: absolute;
+            top: 50%;
+            left: 50%;
+            transform: translate(-50%, -50%);
+            z-index: 2;
+            text-align: center;
+            width: 90%;
+        }
+
+        .video-headings h1 {
+            font-size: clamp(2.5rem, 7vw, 5.5rem);
+            font-weight: 700;
+            letter-spacing: 5px;
+            text-transform: uppercase;
+            line-height: 1.2;
+            background: linear-gradient(135deg, #fff, #999);
+            -webkit-background-clip: text;
+            -webkit-text-fill-color: transparent;
+            background-clip: text;
+            opacity: 0;
+            transform: translateY(50px);
+            transition: all 1s ease;
+        }
+
+        .video-headings h1.animate {
+            opacity: 1;
+            transform: translateY(0);
+        }
+
+        /* ================================
+           PAGE 3 - INTERACTIVE CARDS
+        ================================ */
+        .page3 {
+            min-height: 100vh;
+            width: 100%;
+            background: #fff;
+            padding: 8rem 2rem;
+            position: relative;
+        }
+
+        .page3-images {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(350px, 1fr));
+            gap: 2rem;
+            max-width: 1400px;
+            margin: 0 auto;
+        }
+
+        .page3-image {
+            min-height: 650px;
+            position: relative;
+            background-size: cover;
+            background-position: center;
+            border-radius: 20px;
+            overflow: hidden;
+            cursor: pointer;
+            transition: all 0.6s cubic-bezier(0.4, 0, 0.2, 1);
+            opacity: 0;
+            transform: translateY(50px);
+        }
+
+        .page3-image.animate {
+            opacity: 1;
+            transform: translateY(0);
+        }
+
+        .page3-image::before {
+            content: '';
+            position: absolute;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 100%;
+            background: linear-gradient(to bottom, transparent 40%, rgba(0,0,0,0.8));
+            z-index: 1;
+            transition: all 0.6s ease;
+        }
+
+        .page3-image:hover::before {
+            background: linear-gradient(to bottom, rgba(0,0,0,0.3), rgba(0,0,0,0.9));
+        }
+
+        .page3-image:hover {
+            transform: translateY(-10px);
+            box-shadow: 0 30px 80px rgba(0,0,0,0.3);
+        }
+
+        .page3-image:nth-child(1) {
+            background-image: url(https://raw.githubusercontent.com/Rakesh07778777/Drip-Space/main/image%20copy%2027.png);
+        }
+
+        .page3-image:nth-child(2) {
+            background-image: url(https://raw.githubusercontent.com/Rakesh07778777/Drip-Space/main/image%20copy%2029.png);
+        }
+
+        .page3-image:nth-child(3) {
+            background-image: url(https://raw.githubusercontent.com/Rakesh07778777/Drip-Space/main/image%20copy%2031.png);
+        }
+
+        .page3-box {
+            position: absolute;
+            bottom: 0;
+            left: 0;
+            width: 100%;
+            padding: 2rem;
+            z-index: 2;
+        }
+
+        .hover-section {
+            background-color: rgba(255, 255, 255, 0.95);
+            backdrop-filter: blur(20px);
+            border-radius: 16px;
+            overflow: hidden;
+            transition: all 0.4s cubic-bezier(0.4, 0, 0.2, 1);
+        }
+
+        .section-header {
+            height: 60px;
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            padding: 0 2rem;
+            cursor: pointer;
+        }
+
+        .section-header h3 {
+            font-size: 1.2rem;
+            font-weight: 600;
+            color: #000;
+            letter-spacing: 1px;
+            text-transform: uppercase;
+        }
+
+        .section-header span:last-child {
+            font-size: 1.5rem;
+            color: #000;
+            transition: transform 0.3s ease;
+        }
+
+        .hover-section:hover .section-header span:last-child {
+            transform: translateX(10px);
+        }
+
+        .section-content {
+            max-height: 0;
+            opacity: 0;
+            overflow: hidden;
+            transition: all 0.5s cubic-bezier(0.4, 0, 0.2, 1);
+            background: linear-gradient(to bottom, #ffffff, #f8f8f8);
+        }
+
+        .hover-section:hover .section-content {
+            max-height: 300px;
+            opacity: 1;
+        }
+
+        .content-inner {
+            padding: 2rem;
+        }
+
+        .section-content p {
+            font-size: 1rem;
+            color: #555;
+            line-height: 1.8;
+            margin-bottom: 1.5rem;
+        }
+
+        .button-container {
+            display: flex;
+            gap: 1rem;
+            flex-wrap: wrap;
+        }
+
+        .btn {
+            border: none;
+            padding: 1rem 2rem;
+            border-radius: 12px;
+            cursor: pointer;
+            font-size: 0.95rem;
+            font-weight: 600;
+            transition: all 0.3s ease;
+            letter-spacing: 1px;
+        }
+
+        .btn-primary {
+            background-color: #000;
+            color: #fff;
+        }
+
+        .btn-primary:hover {
+            background-color: #333;
+            transform: translateY(-3px);
+            box-shadow: 0 10px 30px rgba(0,0,0,0.3);
+        }
+
+        .btn-secondary {
+            background-color: #fff;
+            color: #000;
+            border: 2px solid #000;
+        }
+
+        .btn-secondary:hover {
+            background-color: #000;
+            color: #fff;
+            transform: translateY(-3px);
+        }
+
+        /* ================================
+           CATEGORIES SECTION
+        ================================ */
+        .categories {
+            min-height: 100vh;
+            width: 100%;
+            padding: 8rem 2rem;
+            background: #0a0a0a;
+        }
+
+        .categories h1 {
+            font-size: clamp(2rem, 4vw, 3.5rem);
+            text-align: center;
+            margin-bottom: 5rem;
+            font-weight: 300;
+            letter-spacing: 5px;
+            text-transform: uppercase;
+            color: #fff;
+        }
+
+        .category-card {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(280px, 1fr));
+            gap: 2rem;
+            max-width: 1400px;
+            margin: 0 auto;
+        }
+
+        .category-card-item {
+            position: relative;
+            aspect-ratio: 3/4;
+            cursor: pointer;
+            overflow: hidden;
+            border-radius: 16px;
+            transition: all 0.5s cubic-bezier(0.4, 0, 0.2, 1);
+            opacity: 0;
+            transform: translateY(50px);
+        }
+
+        .category-card-item.animate {
+            opacity: 1;
+            transform: translateY(0);
+        }
+
+        .category-card-item:hover {
+            transform: translateY(-15px) scale(1.02);
+        }
+
+        .category-card-item img {
+            width: 100%;
+            height: 100%;
+            object-fit: cover;
+            transition: all 0.7s cubic-bezier(0.4, 0, 0.2, 1);
+        }
+
+        .category-card-item:hover img {
+            transform: scale(1.15);
+            filter: brightness(1.1);
+        }
+
+        .category-card-item h2 {
+            position: absolute;
+            bottom: 0;
+            left: 0;
+            right: 0;
+            font-size: 1.3rem;
+            font-weight: 400;
+            padding: 2rem;
+            text-align: center;
+            background: linear-gradient(to top, rgba(0,0,0,0.9), transparent);
+            color: #fff;
+            letter-spacing: 2px;
+            text-transform: uppercase;
+            transform: translateY(20px);
+            opacity: 0;
+            transition: all 0.5s ease;
+        }
+
+        .category-card-item:hover h2 {
+            transform: translateY(0);
+            opacity: 1;
+        }
+
+        /* ================================
+           ARRIVALS SLIDER
+        ================================ */
+        .arrivals {
+            min-height: 100vh;
+            padding: 8rem 2rem;
+            background: linear-gradient(135deg, #0a0a0a 0%, #1a1a1a 100%);
+        }
+
+        .arrivals-header {
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            margin-bottom: 4rem;
+            max-width: 1400px;
+            margin-left: auto;
+            margin-right: auto;
+        }
+
+        .arrivals h1 {
+            font-size: clamp(2rem, 4vw, 3.5rem);
+            color: #fff;
+            letter-spacing: 5px;
+            font-weight: 300;
+            text-transform: uppercase;
+            position: relative;
+        }
+
+        .arrivals h1::after {
+            content: '';
+            position: absolute;
+            bottom: -15px;
+            left: 0;
+            width: 100px;
+            height: 3px;
+            background: #fff;
+        }
+
+        .slider-controls {
+            display: flex;
+            gap: 1rem;
+        }
+
+        .slider-btn {
+            width: 55px;
+            height: 55px;
+            border: 2px solid rgba(255, 255, 255, 0.3);
+            background: rgba(255, 255, 255, 0.05);
+            backdrop-filter: blur(10px);
+            border-radius: 50%;
+            cursor: pointer;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            transition: all 0.3s ease;
+            color: #fff;
+            font-size: 1.2rem;
+        }
+
+        .slider-btn:hover {
+            background: #fff;
+            color: #000;
+            transform: scale(1.1);
+        }
+
+        .arrival-container {
+            position: relative;
+            overflow: hidden;
+            padding: 2rem 0;
+            max-width: 1400px;
+            margin: 0 auto;
+        }
+
+        .arrival-track {
+            display: flex;
+            gap: 2rem;
+            transition: transform 0.7s cubic-bezier(0.4, 0, 0.2, 1);
+        }
+
+        .arrival-items {
+            min-width: 340px;
+            height: 480px;
+            background: #fff;
+            border-radius: 20px;
+            overflow: hidden;
+            box-shadow: 0 10px 40px rgba(0, 0, 0, 0.3);
+            transition: all 0.5s cubic-bezier(0.4, 0, 0.2, 1);
+            cursor: pointer;
+            flex-shrink: 0;
+        }
+
+        .arrival-items:hover {
+            transform: translateY(-15px);
+            box-shadow: 0 20px 60px rgba(0, 0, 0, 0.4);
+        }
+
+        .image-scale {
+            height: 75%;
+            width: 100%;
+            overflow: hidden;
+        }
+
+        .arrival-items img {
+            height: 100%;
+            width: 100%;
+            object-fit: cover;
+            transition: transform 0.7s cubic-bezier(0.4, 0, 0.2, 1);
+        }
+
+        .arrival-items:hover img {
+            transform: scale(1.1);
+        }
+
+        .arrival-info {
+            padding: 2rem;
+            background: #fff;
+        }
+
+        .arrival-items h2 {
+            font-size: 1.3rem;
+            color: #000;
+            font-weight: 500;
+            margin-bottom: 0.5rem;
+            letter-spacing: 1px;
+        }
+
+        .arrival-items h4 {
+            font-size: 1.1rem;
+            color: #000;
+            font-weight: 600;
+        }
+
+        .slider-dots {
+            display: flex;
+            justify-content: center;
+            gap: 1rem;
+            margin-top: 3rem;
+        }
+
+        .dot {
+            width: 12px;
+            height: 12px;
+            border-radius: 50%;
+            background: rgba(255, 255, 255, 0.3);
+            cursor: pointer;
+            transition: all 0.4s ease;
+        }
+
+        .dot.active {
+            background: #fff;
+            width: 40px;
+            border-radius: 6px;
+        }
+
+        .arrivals-bottom-texts {
+            text-align: center;
+            margin-top: 5rem;
+            color: #fff;
+        }
+
+        .arrivals-bottom-texts h1 {
+            font-size: clamp(1.8rem, 4vw, 3.5rem);
+            font-weight: 300;
+            letter-spacing: 3px;
+            line-height: 1.4;
+        }
+
+        /* ================================
+           GRID SECTION
+        ================================ */
+        .section-grid {
+            min-height: 100vh;
+            display: grid;
+            grid-template-columns: 500px 1fr;
+            grid-template-rows: repeat(2, 450px);
+            grid-template-areas: 
+                'left right'
+                'bottom right';
+            gap: 2rem;
+            padding: 2rem;
+            background: #fff;
+        }
+
+        .grid-column {
+            position: relative;
+            overflow: hidden;
+            border-radius: 20px;
+            transition: all 0.5s ease;
+            opacity: 0;
+            transform: scale(0.95);
+        }
+
+        .grid-column.animate {
+            opacity: 1;
+            transform: scale(1);
+        }
+
+        .grid-column:hover {
+            transform: scale(1.02);
+            box-shadow: 0 20px 60px rgba(0,0,0,0.15);
+        }
+
+        .image-content {
+            height: 100%;
+            width: 100%;
+            position: relative;
+            display: flex;
+            align-items: flex-start;
+            padding: 2rem;
+        }
+
+        .image-content h1 {
+            color: #000;
+            text-transform: uppercase;
+            position: relative;
+            z-index: 2;
+            font-size: 1.8rem;
+            font-weight: 400;
+            letter-spacing: 3px;
+        }
+
+        .image-content1 img,
+        .image-content3 img {
+            position: absolute;
+            height: 90%;
+            width: auto;
+            object-fit: contain;
+            transition: all 0.7s ease;
+        }
+
+        .image-content1 img {
+            bottom: 0;
+            right: 0;
+        }
+
+        .image-content3 img {
+            top: 50%;
+            left: 50%;
+            transform: translate(-50%, -50%);
+        }
+
+        .grid-column:hover .image-content1 img,
+        .grid-column:hover .image-content3 img {
+            transform: scale(1.05);
+        }
+
+        .grid-column:hover .image-content3 img {
+            transform: translate(-50%, -50%) scale(1.05);
+        }
+
+        .grid-column:nth-child(1) {
+            background: linear-gradient(135deg, #ffe9e9, #fdf1ee, #fffdfd);
+            grid-area: left;
+        }
+
+        .grid-column:nth-child(2) {
+            background: linear-gradient(135deg, #d9f8fe, #eaf6fe, #f8fafc);
+            grid-area: right;
+        }
+
+        .grid-column:nth-child(2) video {
+            width: 100%;
+            height: 100%;
+            position: absolute;
+            top: 0;
+            left: 0;
+            object-fit: cover;
+        }
+
+        .grid-column:nth-child(3) {
+            background: linear-gradient(135deg, #a4d9ff, #b9e2ff, #f2faff);
+            grid-area: bottom;
+        }
+
+        /* ================================
+           JACKETS SECTION
+        ================================ */
+        .jackets {
+            min-height: 100vh;
+            padding: 8rem 2rem;
+            background: #0a0a0a;
+        }
+
+        .jackets h2 {
+            font-size: clamp(3rem, 6vw, 5rem);
+            text-align: center;
+            margin-bottom: 5rem;
+            font-weight: 700;
+            letter-spacing: 10px;
+            text-transform: uppercase;
+            color: #fff;
+        }
+
+        .jacket-items {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(220px, 1fr));
+            gap: 2rem;
+            max-width: 1400px;
+            margin: 0 auto;
+        }
+
+        .jacket-item {
+            aspect-ratio: 4/5;
+            cursor: pointer;
+            overflow: hidden;
+            border-radius: 16px;
+            transition: all 0.5s cubic-bezier(0.4, 0, 0.2, 1);
+            position: relative;
+            opacity: 0;
+            transform: translateY(50px);
+        }
+
+        .jacket-item.animate {
+            opacity: 1;
+            transform: translateY(0);
+        }
+
+        .jacket-item::after {
+            content: '';
+            position: absolute;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 100%;
+            background: linear-gradient(to top, rgba(0,0,0,0.5), transparent);
+            opacity: 0;
+            transition: opacity 0.5s ease;
+        }
+
+        .jacket-item:hover::after {
+            opacity: 1;
+        }
+
+        .jacket-item:hover {
+            transform: translateY(-10px) scale(1.03);
+            box-shadow: 0 20px 50px rgba(255,255,255,0.1);
+        }
+
+        .jacket-item img {
+            height: 100%;
+            width: 100%;
+            object-fit: cover;
+            transition: transform 0.7s cubic-bezier(0.4, 0, 0.2, 1);
+        }
+
+        .jacket-item:hover img {
+            transform: scale(1.15);
+        }
+
+        /* ================================
+           SHOES SLIDER
+        ================================ */
+        .shoes-slider {
+            min-height: 100vh;
+            padding: 8rem 2rem;
+            background: linear-gradient(135deg, #0a0a0a 0%, #1a1a1a 100%);
+        }
+
+        .shoes-slider-header {
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            margin-bottom: 4rem;
+            max-width: 1400px;
+            margin-left: auto;
+            margin-right: auto;
+        }
+
+        .shoes-slider-header h1 {
+            font-size: clamp(2rem, 4vw, 3.5rem);
+            color: #fff;
+            letter-spacing: 5px;
+            font-weight: 300;
+            text-transform: uppercase;
+            position: relative;
+        }
+
+        .shoes-slider-header h1::after {
+            content: '';
+            position: absolute;
+            bottom: -15px;
+            left: 0;
+            width: 100px;
+            height: 3px;
+            background: #fff;
+        }
+
+        .shoes-controls {
+            display: flex;
+            gap: 1rem;
+        }
+
+        .shoes-control-btn {
+            width: 55px;
+            height: 55px;
+            border: 2px solid rgba(255, 255, 255, 0.3);
+            background: rgba(255, 255, 255, 0.05);
+            backdrop-filter: blur(10px);
+            border-radius: 50%;
+            cursor: pointer;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            transition: all 0.3s ease;
+            color: #fff;
+            font-size: 1.2rem;
+        }
+
+        .shoes-control-btn:hover {
+            background: #fff;
+            color: #000;
+            transform: scale(1.1);
+        }
+
+        .shoes-slider-container {
+            position: relative;
+            overflow: hidden;
+            padding: 2rem 0;
+            max-width: 1400px;
+            margin: 0 auto;
+        }
+
+        .shoes-track {
+            display: flex;
+            gap: 2rem;
+            transition: transform 0.7s cubic-bezier(0.4, 0, 0.2, 1);
+        }
+
+        .shoes-item {
+            min-width: 340px;
+            height: 480px;
+            background: #fff;
+            border-radius: 20px;
+            overflow: hidden;
+            position: relative;
+            flex-shrink: 0;
+            cursor: pointer;
+            transition: all 0.5s cubic-bezier(0.4, 0, 0.2, 1);
+            box-shadow: 0 10px 40px rgba(0, 0, 0, 0.3);
+        }
+
+        .shoes-item:hover {
+            transform: translateY(-15px);
+            box-shadow: 0 25px 70px rgba(255, 255, 255, 0.15);
+        }
+
+        .shoes-image-wrapper {
+            height: 70%;
+            width: 100%;
+            overflow: hidden;
+            background: linear-gradient(135deg, #f5f5f5 0%, #e0e0e0 100%);
+        }
+
+        .shoes-item img {
+            height: 100%;
+            width: 100%;
+            object-fit: cover;
+            transition: transform 0.7s cubic-bezier(0.4, 0, 0.2, 1);
+        }
+
+        .shoes-item:hover img {
+            transform: scale(1.15) rotate(3deg);
+        }
+
+        .shoes-info {
+            padding: 2rem;
+            background: #fff;
+        }
+
+        .shoes-category {
+            font-size: 0.75rem;
+            text-transform: uppercase;
+            letter-spacing: 2px;
+            color: #999;
+            margin-bottom: 0.5rem;
+            font-weight: 500;
+        }
+
+        .shoes-item h2 {
+            font-size: 1.3rem;
+            color: #000;
+            font-weight: 500;
+            margin-bottom: 0.5rem;
+            letter-spacing: 1px;
+        }
+
+        .shoes-price-row {
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+        }
+
+        .shoes-item h4 {
+            font-size: 1.1rem;
+            color: #000;
+            font-weight: 600;
+        }
+
+        /* ================================
+           FOOTER SECTION
+        ================================ */
+        .page6 {
+            min-height: 60vh;
+            padding: 8rem 2rem;
+            background: #fff;
+            max-width: 1200px;
+            margin: 0 auto;
+        }
+
+        .page6 h2 {
+            font-weight: 700;
+            text-transform: uppercase;
+            font-size: 2rem;
+            margin-bottom: 2rem;
+            color: #000;
+            letter-spacing: 3px;
+        }
+
+        .page6 p {
+            font-weight: 300;
+            line-height: 2;
+            color: #333;
+            font-size: 1.1rem;
+        }
+
+        .page6 span a {
+            color: #000;
+            text-decoration: underline;
+            transition: color 0.3s ease;
+        }
+
+        .page6 span a:hover {
+            color: #666;
+        }
+
+        /* ================================
+           RESPONSIVE DESIGN
+        ================================ */
+        @media (max-width: 1024px) {
+            .section-grid {
+                grid-template-columns: 1fr;
+                grid-template-rows: repeat(3, 400px);
+                grid-template-areas: 
+                    'left'
+                    'bottom'
+                    'right';
+            }
+        }
+
+        @media (max-width: 768px) {
+            .luxurious h1.stylish {
+                font-size: clamp(4rem, 12vw, 8rem);
+                letter-spacing: 8px;
+            }
+
+            .luxurious h1.lux {
+                font-size: clamp(2rem, 5vw, 3.5rem);
+            }
+
+            .page3-images {
+                grid-template-columns: 1fr;
+            }
+
+            .page3-image {
+                min-height: 500px;
+            }
+
+            .arrivals-header,
+            .shoes-slider-header {
+                flex-direction: column;
+                gap: 2rem;
+                align-items: flex-start;
+            }
+
+            .slider-controls,
+            .shoes-controls {
+                align-self: flex-end;
+            }
+
+            .section-grid {
+                grid-template-rows: repeat(3, 350px);
+                padding: 1rem;
+                gap: 1rem;
+            }
+
+            .arrival-items,
+            .shoes-item {
+                min-width: 300px;
+            }
+        }
+
+        @media (max-width: 480px) {
+            .gradient-container img {
+                height: 80%;
+            }
+
+            .luxurious {
+                top: 5%;
+                left: 3%;
+            }
+
+            .luxurious h1.stylish {
+                font-size: clamp(3rem, 10vw, 5rem);
+                letter-spacing: 5px;
+            }
+
+            .left-text,
+            .right-text {
+                font-size: 0.9rem;
+            }
+
+            .arrival-items,
+            .shoes-item {
+                min-width: 280px;
+                height: 420px;
+            }
+
+            .category-card {
+                grid-template-columns: repeat(2, 1fr);
+                gap: 1rem;
+            }
+
+            .jacket-items {
+                grid-template-columns: repeat(2, 1fr);
+                gap: 1rem;
+            }
+        }
+    </style>
+</head>
+<body>
+    <!-- PAGE LOADER -->
+    <div class="page-loader">
+        <div class="loader-content">
+            <div class="loader-text">DRIP SPACE</div>
+            <div class="loader-bar">
+                <div class="loader-progress"></div>
+            </div>
+        </div>
+    </div>
+
+    <!-- CUSTOM CURSOR -->
+    <div class="custom-cursor"></div>
+    <div class="cursor-follower"></div>
+
+    <!-- HERO SECTION -->
+    <main id="main">
+        <div class="gradient-container">
+            <img src="https://raw.githubusercontent.com/Rakesh07778777/Drip-Space/main/Adobe%20Express%20-%20file%20(9).png" 
+                 alt="Fashion Model">
+            
+            <div class="luxurious">
+                <h1 class="lux">Luxurious</h1>
+                <h1 class="stylish">Stylish Life</h1>
+            </div>
+            
+            <div class="left-text hero-text">
+                All time best offer
+            </div>
+            
+            <div class="right-text hero-text">
+                celebrate individuality <br> with unique outfit
+            </div>
+
+            <div class="scroll-indicator">
+                <span>Scroll</span>
+                <div class="scroll-line"></div>
+            </div>
+        </div>
+    </main>
+
+    <!-- VIDEO SECTION -->
+    <div class="video-section">
+        <video playsinline autoplay muted loop 
+               src="https://raw.githubusercontent.com/Rakesh07778777/Drip-Space/main/1470984_People_Fashion_3840x2160.mp4">
+        </video>
+        <div class="video-overlay"></div>
+        <div class="video-headings">
+            <h1>Don't fit the vibe</h1>
+            <h1>Become the vibe</h1>
+        </div>
+    </div>
+
+    <!-- PAGE 3 - COLLECTIONS -->
+    <section class="page3">
+        <div class="page3-images">
+            <div class="page3-image">
+                <div class="page3-box">
+                    <div class="hover-section">
+                        <div class="section-header">
+                            <span>•</span>
+                            <h3>Collections</h3>
+                            <span>→</span>
+                        </div>
+                        <div class="section-content">
+                            <div class="content-inner">
+                                <p>Browse our latest seasonal collections featuring trending designs.</p>
+                                <div class="button-container">
+                                    <button class="btn btn-primary">View Collection</button>
+                                    <button class="btn btn-secondary">New Arrivals</button>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+
+            <div class="page3-image">
+                <div class="page3-box">
+                    <div class="hover-section">
+                        <div class="section-header">
+                            <span>•</span>
+                            <h3>Collections</h3>
+                            <span>→</span>
+                        </div>
+                        <div class="section-content">
+                            <div class="content-inner">
+                                <p>Discover exclusive collections from top designers and emerging brands.</p>
+                                <div class="button-container">
+                                    <button class="btn btn-primary">Shop Collection</button>
+                                    <button class="btn btn-secondary">Featured Items</button>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+
+            <div class="page3-image">
+                <div class="page3-box">
+                    <div class="hover-section">
+                        <div class="section-header">
+                            <span>•</span>
+                            <h3>Collections</h3>
+                            <span>→</span>
+                        </div>
+                        <div class="section-content">
+                            <div class="content-inner">
+                                <p>Access premium collections with limited edition exclusive pieces.</p>
+                                <div class="button-container">
+                                    <button class="btn btn-primary">Browse Now</button>
+                                    <button class="btn btn-secondary">Premium Access</button>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- CATEGORIES SECTION -->
+    <section class="categories">
+        <h1>Explore the Drip-Space all collections</h1>
+        <div class="category-card">
+            <div class="category-card-item">
+                <img src="https://raw.githubusercontent.com/Rakesh07778777/Drip-Space/main/image%20copy%2042.png" alt="Men Jackets">
+                <h2>Men Jackets</h2>
+            </div>
+            <div class="category-card-item">
+                <img src="https://raw.githubusercontent.com/Rakesh07778777/Drip-Space/main/image%20copy%2044.png" alt="Men Jackets">
+                <h2>Men Jackets</h2>
+            </div>
+            <div class="category-card-item">
+                <img src="https://raw.githubusercontent.com/Rakesh07778777/Drip-Space/main/image%20copy%2045.png" alt="Men Jackets">
+                <h2>Men Jackets</h2>
+            </div>
+            <div class="category-card-item">
+                <img src="https://raw.githubusercontent.com/Rakesh07778777/Drip-Space/main/image%20copy%2046.png" alt="Men Jackets">
+                <h2>Men Jackets</h2>
+            </div>
+            <div class="category-card-item">
+                <img src="https://raw.githubusercontent.com/Rakesh07778777/Drip-Space/main/image%20copy%2047.png" alt="Men Jackets">
+                <h2>Men Jackets</h2>
+            </div>
+            <div class="category-card-item">
+                <img src="https://raw.githubusercontent.com/Rakesh07778777/Drip-Space/main/image%20copy%2048.png" alt="Men Jackets">
+                <h2>Men Jackets</h2>
+            </div>
+            <div class="category-card-item">
+                <img src="https://raw.githubusercontent.com/Rakesh07778777/Drip-Space/main/image%20copy%2049.png" alt="Men Jackets">
+                <h2>Men Jackets</h2>
+            </div>
+            <div class="category-card-item">
+                <img src="https://raw.githubusercontent.com/Rakesh07778777/Drip-Space/main/image%20copy%2050.png" alt="Men Jackets">
+                <h2>Men Jackets</h2>
+            </div>
+        </div>
+    </section>
+
+    <!-- NEW ARRIVALS SLIDER -->
+    <section class="arrivals">
+        <div class="arrivals-header">
+            <h1 class="arrivals-h1">New Arrivals</h1>
+            <div class="slider-controls">
+                <button class="slider-btn" id="prevBtn" aria-label="Previous">
+                    <i class="fas fa-chevron-left"></i>
+                </button>
+                <button class="slider-btn" id="nextBtn" aria-label="Next">
+                    <i class="fas fa-chevron-right"></i>
+                </button>
+            </div>
+        </div>
+
+        <div class="arrival-container">
+            <div class="arrival-track" id="sliderTrack">
+                <div class="arrival-items">
+                    <div class="image-scale">
+                        <img src="https://raw.githubusercontent.com/Rakesh07778777/Drip-Space/main/image%20copy%202.png" alt="Track Jacket">
+                    </div>
+                    <div class="arrival-info">
+                        <h2>Track Jackets</h2>
+                        <h4>$99.99</h4>
+                    </div>
+                </div>
+                <div class="arrival-items">
+                    <div class="image-scale">
+                        <img src="https://raw.githubusercontent.com/Rakesh07778777/Drip-Space/main/image%20copy%203.png" alt="Casual Wear">
+                    </div>
+                    <div class="arrival-info">
+                        <h2>Casual Wear</h2>
+                        <h4>$79.99</h4>
+                    </div>
+                </div>
+                <div class="arrival-items">
+                    <div class="image-scale">
+                        <img src="https://raw.githubusercontent.com/Rakesh07778777/Drip-Space/main/image%20copy%204.png" alt="Sports Collection">
+                    </div>
+                    <div class="arrival-info">
+                        <h2>Sports Collection</h2>
+                        <h4>$129.99</h4>
+                    </div>
+                </div>
+                <div class="arrival-items">
+                    <div class="image-scale">
+                        <img src="https://raw.githubusercontent.com/Rakesh07778777/Drip-Space/main/image%20copy%205.png" alt="Premium Jacket">
+                    </div>
+                    <div class="arrival-info">
+                        <h2>Premium Jacket</h2>
+                        <h4>$149.99</h4>
+                    </div>
+                </div>
+                <div class="arrival-items">
+                    <div class="image-scale">
+                        <img src="https://raw.githubusercontent.com/Rakesh07778777/Drip-Space/main/image%20copy%207.png" alt="Urban Style">
+                    </div>
+                    <div class="arrival-info">
+                        <h2>Urban Style</h2>
+                        <h4>$89.99</h4>
+                    </div>
+                </div>
+                <div class="arrival-items">
+                    <div class="image-scale">
+                        <img src="https://raw.githubusercontent.com/Rakesh07778777/Drip-Space/main/image%20copy.png" alt="Classic Design">
+                    </div>
+                    <div class="arrival-info">
+                        <h2>Classic Design</h2>
+                        <h4>$99.99</h4>
+                    </div>
+                </div>
+                <div class="arrival-items">
+                    <div class="image-scale">
+                        <img src="https://raw.githubusercontent.com/Rakesh07778777/Drip-Space/main/image.png" alt="Classic Design">
+                    </div>
+                    <div class="arrival-info">
+                        <h2>Classic Design</h2>
+                        <h4>$99.99</h4>
+                    </div>
+                </div>
+            </div>
+        </div>
+
+        <div class="slider-dots" id="sliderDots"></div>
+        
+        <div class="arrivals-bottom-texts">
+            <h1>Here every click is a step <br> towards a more stylish you</h1>
+        </div>
+    </section>
+
+    <!-- GRID SECTION -->
+    <section class="section-grid">
+        <div class="grid-column">
+            <div class="image-content image-content1">
+                <h1>nike solo swoosh</h1>
+                <img src="https://raw.githubusercontent.com/Rakesh07778777/Drip-Space/main/image-removebg-preview%20(5).png" alt="Nike Solo Swoosh">
+            </div>
+        </div>
+        <div class="grid-column">
+            <div class="image-content image-content2">
+                <h1>jordan flight fleece</h1>
+                <video autoplay playsinline muted loop 
+                       src="https://raw.githubusercontent.com/Rakesh07778777/Drip-Space/main/From%20KlickPin%20CF%20Pinterest%20Pin-11610911541550627.mp4">
+                </video>
+            </div>
+        </div>
+        <div class="grid-column">
+            <div class="image-content image-content3">
+                <h1>nike sportwear therma</h1>
+                <img src="https://raw.githubusercontent.com/Rakesh07778777/Drip-Space/main/image-removebg-preview%20(6).png" alt="Nike Sportswear">
+            </div>
+        </div>
+    </section>
+
+    <!-- JACKETS GALLERY -->
+    <section class="jackets">
+        <h2>Drip</h2>
+        <div class="jacket-items">
+            <div class="jacket-item">
+                <img src="https://raw.githubusercontent.com/Rakesh07778777/Drip-Space/main/image%20copy%2026.png" alt="Jacket">
+            </div>
+            <div class="jacket-item">
+                <img src="https://raw.githubusercontent.com/Rakesh07778777/Drip-Space/main/image%20copy%2025.png" alt="Jacket">
+            </div>
+            <div class="jacket-item">
+                <img src="https://raw.githubusercontent.com/Rakesh07778777/Drip-Space/main/image%20copy%2024.png" alt="Jacket">
+            </div>
+            <div class="jacket-item">
+                <img src="https://raw.githubusercontent.com/Rakesh07778777/Drip-Space/main/image%20copy%2023.png" alt="Jacket">
+            </div>
+            <div class="jacket-item">
+                <img src="https://raw.githubusercontent.com/Rakesh07778777/Drip-Space/main/image%20copy%2024.png" alt="Jacket">
+            </div>
+            <div class="jacket-item">
+                <img src="https://raw.githubusercontent.com/Rakesh07778777/Drip-Space/main/image%20copy%2025.png" alt="Jacket">
+            </div>
+            <div class="jacket-item">
+                <img src="https://raw.githubusercontent.com/Rakesh07778777/Drip-Space/main/image%20copy%2026.png" alt="Jacket">
+            </div>
+            <div class="jacket-item">
+                <img src="https://raw.githubusercontent.com/Rakesh07778777/Drip-Space/main/image%20copy%2024.png" alt="Jacket">
+            </div>
+            <div class="jacket-item">
+                <img src="https://raw.githubusercontent.com/Rakesh07778777/Drip-Space/main/image%20copy%2026.png" alt="Jacket">
+            </div>
+            <div class="jacket-item">
+                <img src="https://raw.githubusercontent.com/Rakesh07778777/Drip-Space/main/image%20copy%2026.png" alt="Jacket">
+            </div>
+            <div class="jacket-item">
+                <img src="https://raw.githubusercontent.com/Rakesh07778777/Drip-Space/main/image%20copy%2026.png" alt="Jacket">
+            </div>
+            <div class="jacket-item">
+                <img src="https://raw.githubusercontent.com/Rakesh07778777/Drip-Space/main/image%20copy%2025.png" alt="Jacket">
+            </div>
+        </div>
+    </section>
+
+    <!-- SHOES SLIDER -->
+    <section class="shoes-slider">
+        <div class="shoes-slider-header">
+            <h1>Footwear Collection</h1>
+            <div class="shoes-controls">
+                <button class="shoes-control-btn" id="shoesPrevBtn" aria-label="Previous">
+                    <i class="fas fa-chevron-left"></i>
+                </button>
+                <button class="shoes-control-btn" id="shoesNextBtn" aria-label="Next">
+                    <i class="fas fa-chevron-right"></i>
+                </button>
+            </div>
+        </div>
+
+        <div class="shoes-slider-container">
+            <div class="shoes-track" id="shoesTrack">
+                <div class="shoes-item">
+                    <div class="shoes-image-wrapper">
+                        <img src="https://raw.githubusercontent.com/Rakesh07778777/Drip-Space/main/image%20copy%2032.png" alt="Nike Air Max">
+                    </div>
+                    <div class="shoes-info">
+                        <div class="shoes-category">Sneakers</div>
+                        <h2>Nike Air Max</h2>
+                        <div class="shoes-price-row">
+                            <h4>$159.99</h4>
+                        </div>
+                    </div>
+                </div>
+                <div class="shoes-item">
+                    <div class="shoes-image-wrapper">
+                        <img src="https://raw.githubusercontent.com/Rakesh07778777/Drip-Space/main/image%20copy%2033.png" alt="Classic Runners">
+                    </div>
+                    <div class="shoes-info">
+                        <div class="shoes-category">Premium</div>
+                        <h2>Classic Runners</h2>
+                        <div class="shoes-price-row">
+                            <h4>$189.99</h4>
+                        </div>
+                    </div>
+                </div>
+                <div class="shoes-item">
+                    <div class="shoes-image-wrapper">
+                        <img src="https://raw.githubusercontent.com/Rakesh07778777/Drip-Space/main/image%20copy%2034.png" alt="Performance Pro">
+                    </div>
+                    <div class="shoes-info">
+                        <div class="shoes-category">Sport</div>
+                        <h2>Performance Pro</h2>
+                        <div class="shoes-price-row">
+                            <h4>$199.99</h4>
+                        </div>
+                    </div>
+                </div>
+                <div class="shoes-item">
+                    <div class="shoes-image-wrapper">
+                        <img src="https://raw.githubusercontent.com/Rakesh07778777/Drip-Space/main/image%20copy%2035.png" alt="Ultra Boost">
+                    </div>
+                    <div class="shoes-info">
+                        <div class="shoes-category">Running</div>
+                        <h2>Ultra Boost</h2>
+                        <div class="shoes-price-row">
+                            <h4>$179.99</h4>
+                        </div>
+                    </div>
+                </div>
+                <div class="shoes-item">
+                    <div class="shoes-image-wrapper">
+                        <img src="https://raw.githubusercontent.com/Rakesh07778777/Drip-Space/main/image%20copy%2036.png" alt="Street Style">
+                    </div>
+                    <div class="shoes-info">
+                        <div class="shoes-category">Casual</div>
+                        <h2>Street Style</h2>
+                        <div class="shoes-price-row">
+                            <h4>$149.99</h4>
+                        </div>
+                    </div>
+                </div>
+                <div class="shoes-item">
+                    <div class="shoes-image-wrapper">
+                        <img src="https://raw.githubusercontent.com/Rakesh07778777/Drip-Space/main/image%20copy%2037.png" alt="Limited Edition">
+                    </div>
+                    <div class="shoes-info">
+                        <div class="shoes-category">Designer</div>
+                        <h2>Limited Edition</h2>
+                        <div class="shoes-price-row">
+                            <h4>$249.99</h4>
+                        </div>
+                    </div>
+                </div>
+                <div class="shoes-item">
+                    <div class="shoes-image-wrapper">
+                        <img src="https://raw.githubusercontent.com/Rakesh07778777/Drip-Space/main/image%20copy%2038.png" alt="Urban Classic">
+                    </div>
+                    <div class="shoes-info">
+                        <div class="shoes-category">High Top</div>
+                        <h2>Urban Classic</h2>
+                        <div class="shoes-price-row">
+                            <h4>$169.99</h4>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- FOOTER CONTENT -->
+    <div class="page6">
+        <h2>mens clothing</h2>
+        <p>
+            Check out all the freshest styles your closet needs in our men's clothing range. You'll find a roundup of everyday essentials, including tops and T-Shirts, as well as comfy lounge sets and underwear. Formal event coming up? Scroll no further than our men's blazers and suits for the sharpest looks and nail the dress code. When it comes to men's pants, there's chinos, joggers and cargo styles in all the staple colors. dreaming of denim? our <span><a href="#">men's jeans</a></span> offer a range of fits to suit your style, including skinny, straight and tapered, to name just a few. Wear yours with a trendy oversized shirt or a classic denim number from our men's shirts edit. and when it comes to chilly weather, our men's jackets and coats have you covered – we've got puffer jackets and trench coats, as well as leather jackets and bomber jackets in year-round colors.
+        </p>
+    </div>
+
+    <!-- GSAP LIBRARY -->
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/gsap/3.12.5/gsap.min.js"></script>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/gsap/3.12.5/ScrollTrigger.min.js"></script>
+
+    <script>
+        'use strict';
+
+        // PAGE LOADER
+        window.addEventListener('load', function() {
+            setTimeout(function() {
+                document.querySelector('.page-loader').classList.add('hidden');
+            }, 2000);
+        });
+
+        // CUSTOM CURSOR
+        (function initCursor() {
+            const cursor = document.querySelector('.custom-cursor');
+            const cursorFollower = document.querySelector('.cursor-follower');
+
+            if (window.innerWidth < 1024) return;
+
+            let mouseX = 0, mouseY = 0;
+            let followerX = 0, followerY = 0;
+
+            document.addEventListener('mousemove', function(e) {
+                mouseX = e.clientX;
+                mouseY = e.clientY;
+                
+                cursor.style.left = mouseX + 'px';
+                cursor.style.top = mouseY + 'px';
+            });
+
+            function animateFollower() {
+                const distX = mouseX - followerX;
+                const distY = mouseY - followerY;
+                
+                followerX += distX * 0.1;
+                followerY += distY * 0.1;
+                
+                cursorFollower.style.left = followerX + 'px';
+                cursorFollower.style.top = followerY + 'px';
+                
+                requestAnimationFrame(animateFollower);
+            }
+            animateFollower();
+
+            const hoverElements = document.querySelectorAll('a, button, .arrival-items, .shoes-item, .jacket-item, .category-card-item');
+            
+            hoverElements.forEach(el => {
+                el.addEventListener('mouseenter', function() {
+                    cursor.style.transform = 'scale(1.5)';
+                    cursorFollower.style.transform = 'scale(1.5)';
+                });
+                
+                el.addEventListener('mouseleave', function() {
+                    cursor.style.transform = 'scale(1)';
+                    cursorFollower.style.transform = 'scale(1)';
+                });
+            });
+        })();
+
+        // GSAP SCROLL ANIMATIONS
+        gsap.registerPlugin(ScrollTrigger);
+
+        // Video Headings Animation with Apple-style reveal
+        gsap.utils.toArray('.video-headings h1').forEach((heading, index) => {
+            ScrollTrigger.create({
+                trigger: '.video-section',
+                start: 'top center',
+                onEnter: () => {
+                    heading.classList.add('animate');
+                }
+            });
+        });
+
+        // Page3 Images Staggered Animation
+        gsap.utils.toArray('.page3-image').forEach((image, index) => {
+            gsap.to(image, {
+                scrollTrigger: {
+                    trigger: image,
+                    start: 'top 80%',
+                    toggleActions: 'play none none reverse'
+                },
+                opacity: 1,
+                y: 0,
+                duration: 1,
+                delay: index * 0.2,
+                ease: 'power3.out'
+            });
+        });
+
+        // Categories Title with Word-by-Word reveal
+        gsap.to('.categories h1', {
+            scrollTrigger: {
+                trigger: '.categories h1',
+                start: 'top 80%',
+                toggleActions: 'play none none reverse'
+            },
+            opacity: 1,
+            y: 0,
+            duration: 1.2,
+            ease: 'power3.out'
+        });
+
+        // Category Cards with Stagger Effect
+        gsap.utils.toArray('.category-card-item').forEach((item, index) => {
+            gsap.to(item, {
+                scrollTrigger: {
+                    trigger: item,
+                    start: 'top 85%',
+                    toggleActions: 'play none none reverse'
+                },
+                opacity: 1,
+                y: 0,
+                duration: 0.8,
+                delay: (index % 4) * 0.1,
+                ease: 'power2.out'
+            });
+        });
+
+        // Grid Columns Scale Animation
+        gsap.utils.toArray('.grid-column').forEach((col, index) => {
+            gsap.to(col, {
+                scrollTrigger: {
+                    trigger: col,
+                    start: 'top 80%',
+                    toggleActions: 'play none none reverse'
+                },
+                opacity: 1,
+                scale: 1,
+                duration: 1,
+                delay: index * 0.15,
+                ease: 'power2.out'
+            });
+        });
+
+        // Jackets Title with Scale Effect
+        gsap.to('.jackets h2', {
+            scrollTrigger: {
+                trigger: '.jackets',
+                start: 'top 70%',
+                toggleActions: 'play none none reverse'
+            },
+            opacity: 1,
+            scale: 1,
+            duration: 1.2,
+            ease: 'back.out(1.7)'
+        });
+
+        // Jacket Items Wave Animation
+        gsap.utils.toArray('.jacket-item').forEach((item, index) => {
+            gsap.to(item, {
+                scrollTrigger: {
+                    trigger: item,
+                    start: 'top 90%',
+                    toggleActions: 'play none none reverse'
+                },
+                opacity: 1,
+                y: 0,
+                duration: 0.8,
+                delay: (index % 6) * 0.08,
+                ease: 'power2.out'
+            });
+        });
+
+        // Arrivals Bottom Text Reveal
+        gsap.to('.arrivals-bottom-texts', {
+            scrollTrigger: {
+                trigger: '.arrivals-bottom-texts',
+                start: 'top 85%',
+                toggleActions: 'play none none reverse'
+            },
+            opacity: 1,
+            y: 0,
+            duration: 1.2,
+            ease: 'power3.out'
+        });
+
+        // Footer Fade In
+        gsap.to('.page6', {
+            scrollTrigger: {
+                trigger: '.page6',
+                start: 'top 80%',
+                toggleActions: 'play none none reverse'
+            },
+            opacity: 1,
+            y: 0,
+            duration: 1.2,
+            ease: 'power3.out'
+        });
+
+        // ARRIVALS SLIDER
+        (function initArrivalsSlider() {
+            const sliderTrack = document.getElementById('sliderTrack');
+            const prevBtn = document.getElementById('prevBtn');
+            const nextBtn = document.getElementById('nextBtn');
+            const dotsContainer = document.getElementById('sliderDots');
+            const arrivalItems = document.querySelectorAll('.arrival-items');
+
+            let currentSlideIndex = 0;
+            let itemsToShow = getItemsToShow();
+
+            function getItemsToShow() {
+                const width = window.innerWidth;
+                if (width < 480) return 1;
+                if (width < 768) return 2;
+                return 3;
+            }
+
+            function getTotalSlides() {
+                return Math.ceil(arrivalItems.length / itemsToShow);
+            }
+
+            function createDots() {
+                dotsContainer.innerHTML = '';
+                const totalSlides = getTotalSlides();
+
+                for (let i = 0; i < totalSlides; i++) {
+                    const dot = document.createElement('div');
+                    dot.classList.add('dot');
+                    if (i === 0) dot.classList.add('active');
+                    dot.addEventListener('click', () => goToSlide(i));
+                    dotsContainer.appendChild(dot);
+                }
+            }
+
+            function updateDots() {
+                const dots = document.querySelectorAll('.dot');
+                dots.forEach((dot, index) => {
+                    dot.classList.toggle('active', index === currentSlideIndex);
+                });
+            }
+
+            function moveSlider() {
+                const itemWidth = arrivalItems[0].offsetWidth + 32;
+                sliderTrack.style.transform = `translateX(-${currentSlideIndex * itemsToShow * itemWidth}px)`;
+                updateDots();
+            }
+
+            function nextSlide() {
+                if (currentSlideIndex < getTotalSlides() - 1) {
+                    currentSlideIndex++;
+                } else {
+                    currentSlideIndex = 0;
+                }
+                moveSlider();
+            }
+
+            function prevSlide() {
+                if (currentSlideIndex > 0) {
+                    currentSlideIndex--;
+                } else {
+                    currentSlideIndex = getTotalSlides() - 1;
+                }
+                moveSlider();
+            }
+
+            function goToSlide(index) {
+                currentSlideIndex = index;
+                moveSlider();
+            }
+
+            nextBtn.addEventListener('click', nextSlide);
+            prevBtn.addEventListener('click', prevSlide);
+
+            let autoPlayInterval = setInterval(nextSlide, 5000);
+
+            sliderTrack.addEventListener('mouseenter', () => clearInterval(autoPlayInterval));
+            sliderTrack.addEventListener('mouseleave', () => {
+                autoPlayInterval = setInterval(nextSlide, 5000);
+            });
+
+            window.addEventListener('resize', debounce(function() {
+                itemsToShow = getItemsToShow();
+                createDots();
+                moveSlider();
+            }, 250));
+
+            createDots();
+            moveSlider();
+        })();
+
+        // SHOES SLIDER
+        (function initShoesSlider() {
+            const shoesTrack = document.getElementById('shoesTrack');
+            const shoesPrevBtn = document.getElementById('shoesPrevBtn');
+            const shoesNextBtn = document.getElementById('shoesNextBtn');
+            const shoesItems = document.querySelectorAll('.shoes-item');
+
+            let shoesIndex = 0;
+            let shoesToShow = getShoesItemsToShow();
+
+            function getShoesItemsToShow() {
+                const width = window.innerWidth;
+                if (width < 480) return 1;
+                if (width < 768) return 2;
+                return 3;
+            }
+
+            function moveShoesSlider() {
+                const itemWidth = shoesItems[0].offsetWidth + 32;
+                shoesTrack.style.transform = `translateX(-${shoesIndex * shoesToShow * itemWidth}px)`;
+            }
+
+            function nextShoes() {
+                const totalSlides = Math.ceil(shoesItems.length / shoesToShow);
+                shoesIndex = (shoesIndex + 1) % totalSlides;
+                moveShoesSlider();
+            }
+
+            function prevShoes() {
+                const totalSlides = Math.ceil(shoesItems.length / shoesToShow);
+                if (shoesIndex > 0) {
+                    shoesIndex--;
+                } else {
+                    shoesIndex = totalSlides - 1;
+                }
+                moveShoesSlider();
+            }
+
+            shoesNextBtn.addEventListener('click', nextShoes);
+            shoesPrevBtn.addEventListener('click', prevShoes);
+
+            let autoPlayInterval = setInterval(nextShoes, 5000);
+
+            shoesTrack.addEventListener('mouseenter', () => clearInterval(autoPlayInterval));
+            shoesTrack.addEventListener('mouseleave', () => {
+                autoPlayInterval = setInterval(nextShoes, 5000);
+            });
+
+            window.addEventListener('resize', debounce(function() {
+                shoesToShow = getShoesItemsToShow();
+                moveShoesSlider();
+            }, 250));
+        })();
+
+        // PARALLAX EFFECT
+        window.addEventListener('scroll', function() {
+            const scrolled = window.pageYOffset;
+            
+            const heroImg = document.querySelector('.gradient-container img');
+            if (heroImg && scrolled < window.innerHeight) {
+                heroImg.style.transform = `translate(-50%, -50%) translateY(${scrolled * 0.3}px)`;
+            }
+        });
+
+        // MAGNETIC BUTTON EFFECT
+        (function initMagneticButtons() {
+            const buttons = document.querySelectorAll('.btn, .slider-btn, .shoes-control-btn');
+            
+            buttons.forEach(button => {
+                button.addEventListener('mousemove', function(e) {
+                    const rect = button.getBoundingClientRect();
+                    const x = e.clientX - rect.left - rect.width / 2;
+                    const y = e.clientY - rect.top - rect.height / 2;
+                    
+                    button.style.transform = `translate(${x * 0.3}px, ${y * 0.3}px)`;
+                });
+                
+                button.addEventListener('mouseleave', function() {
+                    button.style.transform = 'translate(0, 0)';
+                });
+            });
+        })();
+
+        // VIDEO AUTO PLAY ON SCROLL
+        (function initVideoObserver() {
+            const videos = document.querySelectorAll('video');
+            
+            const videoObserver = new IntersectionObserver((entries) => {
+                entries.forEach(entry => {
+                    if (entry.isIntersecting) {
+                        entry.target.play();
+                    } else {
+                        entry.target.pause();
+                    }
+                });
+            }, {
+                threshold: 0.5
+            });
+            
+            videos.forEach(video => videoObserver.observe(video));
+        })();
+
+        // SMOOTH SCROLL FOR ANCHORS
+        document.querySelectorAll('a[href^="#"]').forEach(anchor => {
+            anchor.addEventListener('click', function (e) {
+                e.preventDefault();
+                const target = document.querySelector(this.getAttribute('href'));
+                if (target) {
+                    target.scrollIntoView({
+                        behavior: 'smooth',
+                        block: 'start'
+                    });
+                }
+            });
+        });
+
+        // DEBOUNCE UTILITY
+        function debounce(func, wait) {
+            let timeout;
+            return function executedFunction(...args) {
+                const later = () => {
+                    clearTimeout(timeout);
+                    func(...args);
+                };
+                clearTimeout(timeout);
+                timeout = setTimeout(later, wait);
+            };
+        }
+
+        // LAZY LOADING IMAGES
+        (function initLazyLoading() {
+            const images = document.querySelectorAll('img[src]');
+            
+            const imageObserver = new IntersectionObserver((entries) => {
+                entries.forEach(entry => {
+                    if (entry.isIntersecting) {
+                        const img = entry.target;
+                        img.style.opacity = '0';
+                        img.style.transition = 'opacity 0.6s ease';
+                        
+                        if (img.complete) {
+                            img.style.opacity = '1';
+                        } else {
+                            img.onload = function() {
+                                img.style.opacity = '1';
+                            };
+                        }
+                        
+                        imageObserver.unobserve(img);
+                    }
+                });
+            }, {
+                rootMargin: '50px'
+            });
+            
+            images.forEach(img => imageObserver.observe(img));
+        })();
+
+        // SCROLL TO TOP ON REFRESH
+        window.addEventListener('beforeunload', function() {
+            window.scrollTo(0, 0);
+        });
+
+        // REFRESH SCROLLTRIGGER
+        window.addEventListener('load', function() {
+            ScrollTrigger.refresh();
+        });
+
+        // PERFORMANCE OPTIMIZATION
+        if (window.matchMedia('(prefers-reduced-motion: reduce)').matches) {
+            gsap.globalTimeline.timeScale(10);
+        }
+
+        // FINAL INITIALIZATION
+        console.log('%c🎨 Drip-Space Enhanced Website Loaded! ', 'background: #000; color: #fff; padding: 10px; font-size: 16px; font-weight: bold;');
+    </script>
+</body>
+</html>
