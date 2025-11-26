@@ -92,29 +92,68 @@
 
 
         .video-section{
-            height: 100vh;
+            padding: 2rem;
+            min-height: 100vh;
             width: 100vw;
-            padding: 2.5rem 0;
-            position: relative;
-            video{
+            display: grid;
+            grid-template-columns: repeat(4, 1fr);
+            grid-template-areas: 
+            'first-left   second-center     second-center         third-right'
+            'fourth-left   second-center    second-center         fift-right'
+            ;
+            grid-template-rows: repeat(2, 350px);
+            gap: 2rem;
+        }
+
+        .grid-items{
+            img{
+                height: 100%;
+                width: 100%;
+            }
+        }
+
+        .grid-items:nth-child(1){
+            grid-area: first-left;
+            background: red;
+            img{
                 height: 100%;
                 width: 100%;
                 object-fit: cover;
             }
         }
+        .grid-items:nth-child(2){
+            grid-area: second-center ;
+            display: flex;
+            flex-direction: column;
+            justify-content: space-evenly;
+            align-items: center;
+            h1{
+                text-align: center;
+                font-size: 2.4rem;
+                font-weight: 500;
+            }
 
-        .video-headings{
-            position: absolute;
-            bottom: 12%;
-            left: 50%;
-            transform: translateX(-50%);
-            color: #fff;
+            img{
+                height: 220px;
+                width: 80%;
+            }
         }
-
-        .video-headings h1{
-            font-size: clamp(2.4rem , 7vw , 4.4rem);
+        .grid-items:nth-child(3){
+            grid-area: third-right;
+            background: rgb(204, 255, 0);
         }
-
+        .grid-items:nth-child(4){
+            grid-area: fourth-left ;
+            background: rgb(0, 255, 0);
+        }
+        .grid-items:nth-child(5){
+            grid-area: fift-right;
+            background: red;
+        }
+        .grid-items:nth-child(6){
+            grid-area: sixth-box;
+            background: red;
+        }
         /* Page 3 */
         .page3 {
             min-height: 100vh;
