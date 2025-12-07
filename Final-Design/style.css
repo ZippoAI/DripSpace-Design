@@ -108,12 +108,13 @@
 
 
         .dripspace-hero-main-heading {
-            font-size: 76px;
+            font-size: clamp(4rem , 8rem , 7.4vw);
             font-weight: 600;
             color: #2d2d2d;
             margin-bottom: 30px;
             width: 100%;
             letter-spacing: -1px;
+            line-height: clamp(2rem, 6rem, 7vw);
         }
 
         .dripspace-hero-main-heading-char {
