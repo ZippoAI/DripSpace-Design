@@ -59,8 +59,8 @@
         .dripspace-hero-content-section {
             flex: 0 0 60%;
             padding-left: 60px 0;
-            max-width: 700px;
-            width: 700px;
+            max-width: 1024px;
+            /* width: 700px; */
         }
 
         .dripspace-hero-brand-name {
@@ -114,7 +114,7 @@
             margin-bottom: 30px;
             width: 100%;
             letter-spacing: -1px;
-            line-height: clamp(2rem, 6rem, 7vw);
+            line-height: clamp(2rem, 6rem, 8vw);
         }
 
         .dripspace-hero-main-heading-char {
